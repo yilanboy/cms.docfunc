@@ -1,0 +1,3 @@
+# docFunc CMS
+
+A CMS for my blog project. WIP...
