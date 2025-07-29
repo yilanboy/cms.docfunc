@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
+use App\Http\Controllers\TagController;
 use App\Http\Middleware\InertiaAuthenticateMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,10 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 
 Route::get('/links', [LinkController::class, 'index'])
     ->name('links.index')
+    ->middleware([InertiaAuthenticateMiddleware::class, 'verified']);
+
+Route::get('/tags', [TagController::class, 'index'])
+    ->name('tags.index')
     ->middleware([InertiaAuthenticateMiddleware::class, 'verified']);
 
 Route::get('/settings/profile', [ProfileController::class, 'edit'])

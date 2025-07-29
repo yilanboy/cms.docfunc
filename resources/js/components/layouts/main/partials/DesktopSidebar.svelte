@@ -4,6 +4,8 @@
   import { inertia, page } from "@inertiajs/svelte";
   import DashboardController from "@/actions/App/Http/Controllers/DashboardController";
   import LinkController from "@/actions/App/Http/Controllers/LinkController";
+  import TagController from "@/actions/App/Http/Controllers/TagController";
+  import Tag from "@/components/icons/Tag.svelte";
 </script>
 
 <!-- Static sidebar for desktop -->
@@ -50,6 +52,23 @@
               >
                 <Link className="size-6 shrink-0" />
                 Links
+              </a>
+            </li>
+
+            <li>
+              <a
+                use:inertia
+                href={TagController.index().url}
+                class={{
+                  "bg-zinc-100 text-blue-600":
+                    $page.url === TagController.index().url,
+                  "text-zinc-700 hover:bg-zinc-100 hover:text-blue-600":
+                    $page.url !== TagController.index().url,
+                  "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold": true,
+                }}
+              >
+                <Tag className="size-6 shrink-0" />
+                Tags
               </a>
             </li>
           </ul>
