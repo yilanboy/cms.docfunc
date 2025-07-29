@@ -14,7 +14,7 @@ class LinkFactory extends Factory
     {
         return [
             'title' => $this->faker->word(),
-            'link' => $this->faker->word(),
+            'link' => $this->faker->url(),
             'description' => $this->faker->text(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
