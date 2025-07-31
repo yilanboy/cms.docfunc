@@ -14,30 +14,25 @@ require __DIR__.'/auth.php';
 Route::get('/', [HomeController::class, 'index'])
     ->name('home');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->name('dashboard')
-    ->middleware([InertiaAuthenticateMiddleware::class, 'verified']);
+Route::middleware([InertiaAuthenticateMiddleware::class, 'verified'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
 
-Route::get('/links', [LinkController::class, 'index'])
-    ->name('links.index')
-    ->middleware([InertiaAuthenticateMiddleware::class, 'verified']);
+    Route::get('/links', [LinkController::class, 'index'])
+        ->name('links.index');
 
-Route::get('/tags', [TagController::class, 'index'])
-    ->name('tags.index')
-    ->middleware([InertiaAuthenticateMiddleware::class, 'verified']);
+    Route::get('/tags', [TagController::class, 'index'])
+        ->name('tags.index');
 
-Route::get('/settings/profile', [ProfileController::class, 'edit'])
-    ->name('settings.profile.edit')
-    ->middleware([InertiaAuthenticateMiddleware::class, 'verified']);
+    Route::get('/settings/profile', [ProfileController::class, 'edit'])
+        ->name('settings.profile.edit');
 
-Route::patch('/settings/profile', [ProfileController::class, 'update'])
-    ->name('settings.profile.update')
-    ->middleware([InertiaAuthenticateMiddleware::class, 'verified']);
+    Route::patch('/settings/profile', [ProfileController::class, 'update'])
+        ->name('settings.profile.update');
 
-Route::get('/settings/password', [PasswordController::class, 'edit'])
-    ->name('settings.password.edit')
-    ->middleware([InertiaAuthenticateMiddleware::class, 'verified']);
+    Route::get('/settings/password', [PasswordController::class, 'edit'])
+        ->name('settings.password.edit');
 
-Route::put('/settings/password', [PasswordController::class, 'update'])
-    ->name('settings.password.update')
-    ->middleware([InertiaAuthenticateMiddleware::class, 'verified']);
+    Route::put('/settings/password', [PasswordController::class, 'update'])
+        ->name('settings.password.update');
+});
