@@ -25,7 +25,7 @@
 </svelte:head>
 
 <div
-  class="font-source-sans-3 relative flex min-h-screen w-full flex-col bg-zinc-50"
+  class="font-source-sans-3 relative flex min-h-screen w-full flex-col bg-white"
 >
   {#if $page.props.flash.success}
     <div

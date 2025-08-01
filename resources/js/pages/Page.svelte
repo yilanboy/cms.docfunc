@@ -14,7 +14,7 @@
   <title>{title}</title>
 </svelte:head>
 
-<div class="font-source-sans-3 flex min-h-screen w-full flex-col bg-zinc-50">
+<div class="font-source-sans-3 flex min-h-screen w-full flex-col bg-white">
   <header class="flex w-full items-center justify-end gap-6 p-6">
     <a
       use:inertia
