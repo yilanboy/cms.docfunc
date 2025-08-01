@@ -49,7 +49,7 @@
 
 <div class="sticky top-0 z-40 w-full lg:mx-auto lg:px-8">
   <div
-    class="flex h-16 items-center gap-x-4 border-b border-zinc-200 bg-zinc-50 px-4 shadow-xs sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none"
+    class="flex h-16 items-center gap-x-4 border-b border-zinc-200 bg-white px-4 shadow-xs sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none"
   >
     <button
       onclick={openSidebar}
@@ -86,7 +86,7 @@
           >
             <span class="sr-only">Open user menu</span>
             <span
-              class="flex size-8 items-center justify-center rounded-full bg-zinc-100 bg-zinc-200 text-zinc-900"
+              class="flex size-8 items-center justify-center rounded-full bg-zinc-100 text-zinc-900"
             >
               {$page.props.auth.user.name.charAt(0).toUpperCase()}
             </span>
@@ -103,7 +103,7 @@
           {#if dropdownIsOpen}
             <div
               transition:scaleFromTopRight={{ delay: 0, duration: 100 }}
-              class="absolute right-0 z-10 mt-2.5 w-32 rounded-md bg-zinc-50 py-2 shadow-lg ring-1 ring-zinc-900/5 focus:outline-hidden"
+              class="absolute right-0 z-10 mt-2.5 w-32 rounded-md bg-white py-2 shadow-lg ring-1 ring-zinc-900/5 focus:outline-hidden"
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="user-menu-button"

@@ -11,6 +11,7 @@ class TagController extends Controller
     {
         $tags = Tag::all();
 
+
         return Inertia::render('tags/Page', [
             'title' => 'Tags',
             'tags'  => $tags,

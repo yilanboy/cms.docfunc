@@ -13,14 +13,12 @@
   let { children }: Props = $props();
 </script>
 
-<div
-  class="font-source-sans-3 relative flex min-h-screen w-full flex-col bg-zinc-50"
->
+<div class="font-source-sans-3">
   <MobileSidebar bind:sidebarIsOpen />
 
   <DesktopSidebar />
 
-  <div class="flex min-h-screen flex-col lg:pl-72">
+  <div class="min-h-screen bg-white lg:pl-72">
     <Header bind:sidebarIsOpen />
 
     {@render children?.()}

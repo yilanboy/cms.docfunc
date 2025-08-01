@@ -77,7 +77,7 @@
         <button
           onclick={resend}
           type="button"
-          class="inline-flex cursor-pointer items-center rounded-md bg-blue-600 px-3 py-2 text-base font-semibold text-zinc-50 shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 disabled:cursor-default disabled:bg-zinc-400"
+          class="inline-flex cursor-pointer items-center rounded-md bg-blue-600 px-3 py-2 text-base font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 disabled:cursor-default disabled:bg-zinc-400"
           disabled={showCountdown}
         >
           {showCountdown ? countdownMessage : "Resend"}
