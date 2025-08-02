@@ -7,7 +7,6 @@
       id: number;
       title: string;
       link: string;
-      description: string;
       created_at: string;
       updated_at: string;
     }[];
@@ -65,12 +64,6 @@
                   >
                     Link
                   </th>
-                  <th
-                    scope="col"
-                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Description
-                  </th>
                   <th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-0">
                     <span class="sr-only">Edit</span>
                   </th>
@@ -93,11 +86,6 @@
                       class="max-w-16 truncate px-3 py-4 text-sm whitespace-nowrap text-gray-500"
                     >
                       {link.link}
-                    </td>
-                    <td
-                      class="max-w-16 truncate px-3 py-4 text-sm whitespace-nowrap text-gray-500"
-                    >
-                      {link.description}
                     </td>
                     <td
                       class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0"

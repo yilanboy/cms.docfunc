@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->id();
             $table->string('title')->comment('Title of suggested resource')->index();
             $table->string('link')->comment('Link of suggested resource')->index();
-            $table->string('description')->comment('Description of suggested resource');
             $table->timestamps();
         });
     }

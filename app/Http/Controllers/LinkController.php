@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\LinkResource;
 use App\Models\Link;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,7 +14,7 @@ class LinkController extends Controller
      */
     public function index()
     {
-        $links = Link::all();
+        $links = LinkResource::collection(Link::all());
 
         return Inertia::render('links/Page', [
             'title' => 'Links',
