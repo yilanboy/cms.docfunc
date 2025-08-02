@@ -10,8 +10,9 @@ class TagController extends Controller
 {
     public function index()
     {
-        $tags = Tag::paginate(10)
-            ->through(fn($tag) => new TagResource($tag));
+        $tags = TagResource::collection(
+            Tag::paginate(10)
+        );
 
         return Inertia::render('tags/Page', [
             'title' => 'Tags',

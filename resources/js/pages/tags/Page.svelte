@@ -13,18 +13,22 @@
         created_at: string;
         updated_at: string;
       }[];
-      links: {
-        url: string;
-        label: string;
-        active: boolean;
-      }[];
-      prev_page_url: string | null;
-      next_page_url: string | null;
-      per_page: number;
+      meta: {
+        current_page: number;
+        last_page: number;
+        links: {
+          url: string;
+          label: string;
+          active: boolean;
+        }[];
+        per_page: number;
+      };
     };
   }
 
   let { title, tags }: Props = $props();
+
+  console.log(tags);
 </script>
 
 <svelte:head>
@@ -105,10 +109,10 @@
           class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0"
         >
           <div class="-mt-px flex w-0 flex-1">
-            {#if tags.prev_page_url}
+            {#if tags.meta.links.length > 1 && tags.meta.current_page > 1}
               <a
                 use:inertia
-                href={tags.prev_page_url}
+                href={tags.meta.links[0].url}
                 class="inline-flex items-center border-t-2 border-transparent pt-4 pr-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
               >
                 <ArrowLeft className="mr-3 size-5 text-gray-400" />
@@ -124,7 +128,7 @@
             {/if}
           </div>
           <div class="hidden md:-mt-px md:flex">
-            {#each tags.links.slice(1, tags.per_page + 1) as link}
+            {#each tags.meta.links.slice(1, tags.meta.per_page + 1) as link}
               <a
                 use:inertia
                 href={link.url}
@@ -144,10 +148,10 @@
             <!--            >-->
           </div>
           <div class="-mt-px flex w-0 flex-1 justify-end">
-            {#if tags.next_page_url}
+            {#if tags.meta.links.length > 1 && tags.meta.current_page < tags.meta.last_page}
               <a
                 use:inertia
-                href={tags.next_page_url}
+                href={tags.meta.links[tags.meta.links.length - 1].url}
                 class="inline-flex items-center border-t-2 border-transparent pt-4 pr-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
               >
                 Next
