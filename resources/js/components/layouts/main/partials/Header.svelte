@@ -10,6 +10,7 @@
   import AuthenticatedSessionController from "@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController";
   import Search from "@/components/icons/Search.svelte";
   import { preventDefault } from "@/helpers.js";
+  import { onMount } from "svelte";
 
   interface Props {
     sidebarIsOpen: boolean;
@@ -56,6 +57,11 @@
       { preserveState: true },
     );
   }
+
+  onMount(() => {
+    const url = new URL(window.location.href);
+    search = url.searchParams.get("search") ?? "";
+  });
 </script>
 
 <svelte:window onclick={closeDropdown} />
