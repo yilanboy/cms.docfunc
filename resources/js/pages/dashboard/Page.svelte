@@ -3,11 +3,11 @@
 
   interface Props {
     title: string;
-    totalLinks: number;
-    totalTags: number;
+    linkCount: number;
+    tagCount: number;
   }
 
-  let { title, totalLinks, totalTags }: Props = $props();
+  let { title, linkCount, tagCount }: Props = $props();
 </script>
 
 <svelte:head>
@@ -23,13 +23,13 @@
         class="flex flex-col items-center justify-center rounded-xl bg-zinc-100 p-12"
       >
         <div>Links count:</div>
-        <div class="text-2xl">{totalLinks}</div>
+        <div class="text-2xl">{linkCount}</div>
       </div>
       <div
         class="flex flex-col items-center justify-center rounded-xl bg-zinc-100 p-12"
       >
         <div>Tags count:</div>
-        <div class="text-2xl">{totalTags}</div>
+        <div class="text-2xl">{tagCount}</div>
       </div>
     </div>
   </main>

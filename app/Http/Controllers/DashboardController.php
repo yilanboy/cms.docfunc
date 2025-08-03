@@ -13,13 +13,13 @@ class DashboardController extends Controller
 {
     public function index(): Response
     {
-        $totalLinks = Link::count();
-        $totalTags = Tag::count();
+        $linkCount = Link::count();
+        $tagCount = Tag::count();
 
         return Inertia::render('dashboard/Page', [
-            'title'      => 'Dashboard',
-            'totalLinks' => $totalLinks,
-            'totalTags'  => $totalTags,
+            'title'     => 'Dashboard',
+            'linkCount' => $linkCount,
+            'tagCount'  => $tagCount,
         ]);
     }
 }
