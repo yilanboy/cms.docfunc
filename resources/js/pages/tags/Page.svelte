@@ -31,7 +31,7 @@
   <title>{title}</title>
 </svelte:head>
 
-<LayoutMain>
+<LayoutMain searchIsEnabled={true}>
   <main class="flex grow py-10">
     <div class="w-full px-4 sm:px-6 lg:px-8">
       <div class="sm:flex sm:items-center">

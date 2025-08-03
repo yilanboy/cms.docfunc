@@ -7,10 +7,11 @@
   let sidebarIsOpen = $state(false);
 
   interface Props {
+    searchIsEnabled?: boolean;
     children: Snippet;
   }
 
-  let { children }: Props = $props();
+  let { searchIsEnabled = false, children }: Props = $props();
 </script>
 
 <div class="font-source-sans-3">
@@ -19,7 +20,7 @@
   <DesktopSidebar />
 
   <div class="min-h-screen bg-white lg:pl-72">
-    <Header bind:sidebarIsOpen />
+    <Header bind:sidebarIsOpen {searchIsEnabled} />
 
     {@render children?.()}
   </div>

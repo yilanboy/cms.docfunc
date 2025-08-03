@@ -4,18 +4,23 @@
   import ChevronDown from "@/components/icons/ChevronDown.svelte";
   import Settings from "@/components/icons/Settings.svelte";
   import AlignJustify from "@/components/icons/AlignJustify.svelte";
-  import { inertia, page } from "@inertiajs/svelte";
+  import { inertia, page, router } from "@inertiajs/svelte";
   import { cubicOut } from "svelte/easing";
   import ProfileController from "@/actions/App/Http/Controllers/Settings/ProfileController";
   import AuthenticatedSessionController from "@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController";
+  import Search from "@/components/icons/Search.svelte";
+  import { preventDefault } from "@/helpers.js";
 
   interface Props {
     sidebarIsOpen: boolean;
+    searchIsEnabled?: boolean;
   }
 
-  let { sidebarIsOpen = $bindable(false) }: Props = $props();
+  let { sidebarIsOpen = $bindable(false), searchIsEnabled = false }: Props =
+    $props();
 
   let dropdownIsOpen = $state(false);
+  let search = $state("");
 
   function toggleDropdown() {
     dropdownIsOpen = !dropdownIsOpen;
@@ -43,6 +48,14 @@
         transform-origin: top right;`,
     };
   }
+
+  function searchOnSubmit() {
+    router.get(
+      window.location.pathname,
+      { search: search },
+      { preserveState: true },
+    );
+  }
 </script>
 
 <svelte:window onclick={closeDropdown} />
@@ -64,9 +77,26 @@
     <div class="h-6 w-px bg-zinc-200 lg:hidden" aria-hidden="true"></div>
 
     <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-      <div class="flex-1">
-        <!-- Left side of header -->
-      </div>
+      {#if searchIsEnabled}
+        <form
+          class="grid flex-1 grid-cols-1"
+          onsubmit={preventDefault(searchOnSubmit)}
+        >
+          <input
+            type="search"
+            name="search"
+            bind:value={search}
+            placeholder="Search"
+            aria-label="Search"
+            class="col-start-1 row-start-1 block size-full bg-white pl-8 text-base text-gray-900 outline-hidden placeholder:text-gray-400"
+          />
+          <Search
+            className="pointer-events-none col-start-1 row-start-1 size-5 self-center text-gray-400"
+          />
+        </form>
+      {:else}
+        <div class="flex-1"></div>
+      {/if}
       <div class="flex items-center gap-x-4 lg:gap-x-6">
         <!-- Separator -->
         <div
