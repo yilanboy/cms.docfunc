@@ -1,10 +1,18 @@
 <?php
 
 describe('page test', function () {
-    test('smoke test', function () {
+    test('if user is not login, redirect to login page', function () {
         $response = $this->get('/');
 
-        $response->assertStatus(200);
+        $response->assertRedirect('/login');
+    });
+
+    test('if user is login, redirect to dashboard page', function () {
+        loginAsUser();
+
+        $response = $this->get('/');
+
+        $response->assertRedirect('/dashboard');
     });
 
     test('guest can visit login page', function () {
