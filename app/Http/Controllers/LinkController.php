@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Resources\LinkResource;
@@ -14,7 +16,7 @@ class LinkController extends Controller
      */
     public function index()
     {
-        $links = LinkResource::collection(Link::all());
+        $links = LinkResource::collection(Link::orderBy('id')->get());
 
         return Inertia::render('links/Page', [
             'title' => 'Links',

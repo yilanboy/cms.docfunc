@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Resources\TagResource;
@@ -11,7 +13,7 @@ class TagController extends Controller
     public function index()
     {
         $tags = TagResource::collection(
-            Tag::paginate(10)
+            Tag::orderBy('id')->paginate(10)->onEachSide(1)
         );
 
         return Inertia::render('tags/Page', [
