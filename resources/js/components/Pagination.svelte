@@ -8,7 +8,7 @@
       current_page: number;
       last_page: number;
       links: {
-        url: string;
+        url: string | null;
         label: string;
         active: boolean;
       }[];
@@ -23,7 +23,7 @@
   class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0"
 >
   <div class="-mt-px flex w-0 flex-1">
-    {#if meta.links.length > 1 && meta.current_page > 1}
+    {#if meta.links[0].url}
       <a
         use:inertia
         href={meta.links[0].url}
@@ -68,7 +68,7 @@
     {/each}
   </div>
   <div class="-mt-px flex w-0 flex-1 justify-end">
-    {#if meta.links.length > 1 && meta.current_page < meta.last_page}
+    {#if meta.links[meta.links.length - 1].url}
       <a
         use:inertia
         href={meta.links[meta.links.length - 1].url}
