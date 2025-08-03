@@ -37,7 +37,7 @@
       <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
           <h1 class="text-base font-semibold text-gray-900">Tags</h1>
-          <p class="mt-2 text-sm text-gray-700">Manage your tags here.</p>
+          <p class="mt-2 text-sm text-gray-700">Manage post tags here.</p>
         </div>
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
           <button

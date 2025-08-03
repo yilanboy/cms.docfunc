@@ -43,10 +43,11 @@
                 use:inertia
                 href={LinkController.index().url}
                 class={{
-                  "bg-zinc-100 text-blue-600":
-                    $page.url === LinkController.index().url,
+                  "bg-zinc-100 text-blue-600": $page.url.startsWith(
+                    LinkController.index().url,
+                  ),
                   "text-zinc-700 hover:bg-zinc-100 hover:text-blue-600":
-                    $page.url !== LinkController.index().url,
+                    !$page.url.startsWith(LinkController.index().url),
                   "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold": true,
                 }}
               >
@@ -60,10 +61,11 @@
                 use:inertia
                 href={TagController.index().url}
                 class={{
-                  "bg-zinc-100 text-blue-600":
-                    $page.url === TagController.index().url,
+                  "bg-zinc-100 text-blue-600": $page.url.startsWith(
+                    TagController.index().url,
+                  ),
                   "text-zinc-700 hover:bg-zinc-100 hover:text-blue-600":
-                    $page.url !== TagController.index().url,
+                    !$page.url.startsWith(TagController.index().url),
                   "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold": true,
                 }}
               >
