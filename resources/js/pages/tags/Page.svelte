@@ -1,6 +1,7 @@
 <script lang="ts">
   import LayoutMain from "@/components/layouts/main/LayoutMain.svelte";
   import Pagination from "@/components/Pagination.svelte";
+  import EditDialog from "@/pages/tags/partials/EditDialog.svelte";
 
   interface Props {
     title: string;
@@ -25,6 +26,19 @@
   }
 
   let { title, tags }: Props = $props();
+
+  let editTag: { id: number; name: string } | null = $state(null);
+
+  function openEditDialog(tagId: number, tagName: string) {
+    const editDialog = document.getElementById("dialog") as HTMLDialogElement;
+
+    editTag = {
+      id: tagId,
+      name: tagName,
+    };
+
+    editDialog.show();
+  }
 </script>
 
 <svelte:head>
@@ -32,6 +46,8 @@
 </svelte:head>
 
 <LayoutMain searchIsEnabled={true}>
+  <EditDialog tag={editTag} />
+
   <main class="flex grow py-10">
     <div class="w-full px-4 sm:px-6 lg:px-8">
       <div class="sm:flex sm:items-center">
@@ -89,9 +105,14 @@
                     <td
                       class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0"
                     >
-                      <a href="#" class="text-blue-600 hover:text-blue-900">
+                      <button
+                        onclick={() => {
+                          openEditDialog(tag.id, tag.name);
+                        }}
+                        class="cursor-pointer text-blue-600 hover:text-blue-900"
+                      >
                         Edit
-                      </a>
+                      </button>
                     </td>
                   </tr>
                 {/each}

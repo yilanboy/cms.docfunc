@@ -1,5 +1,6 @@
 import { createInertiaApp, type ResolvedComponent } from "@inertiajs/svelte";
 import { hydrate, mount } from "svelte";
+import "@tailwindplus/elements";
 
 createInertiaApp({
     resolve: (name) => {

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LinkController;
+use App\Http\Controllers\RootController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use App\Http\Controllers\TagController;
@@ -10,13 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
 
-Route::get('/', function () {
-    if (auth()->check()) {
-        return redirect()->route('dashboard');
-    } else {
-        return redirect()->route('login');
-    }
-})->name('root');
+Route::get('/', RootController::class)->name('root');
 
 Route::middleware([InertiaAuthenticateMiddleware::class, 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
