@@ -45,7 +45,7 @@
     <div class="hidden md:-mt-px md:flex">
       <!-- Remove the first and last links,  -->
       <!-- which are previous page and next page links -->
-      {#each meta.links.slice(1, meta.links.length - 1) as link (link.url)}
+      {#each meta.links.slice(1, meta.links.length - 1) as link, index (index)}
         {#if link.url !== null}
           <a
             use:inertia
