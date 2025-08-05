@@ -29,6 +29,17 @@ class TagController extends Controller
         ]);
     }
 
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        Tag::create($validated);
+
+        return to_route('tags.index');
+    }
+
     public function update(Request $request, Tag $tag)
     {
         $validated = $request->validate([

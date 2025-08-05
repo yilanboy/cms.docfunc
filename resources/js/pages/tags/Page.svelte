@@ -1,7 +1,9 @@
 <script lang="ts">
   import LayoutMain from "@/components/layouts/main/LayoutMain.svelte";
   import Pagination from "@/components/Pagination.svelte";
-  import EditDialog from "@/pages/tags/partials/EditDialog.svelte";
+  import TagFormDialog from "@/pages/tags/partials/TagFormDialog.svelte";
+
+  interface TailwindDialogElement extends HTMLDialogElement {}
 
   interface Props {
     title: string;
@@ -27,22 +29,32 @@
 
   let { title, tags }: Props = $props();
 
-  let editTag: { id: number; name: string } | null = $state(null);
+  let tagFormData: { id: number; name: string } | null = $state(null);
 
-  const EDIT_TAG_DIALOG_WRAPPER_ID = "edit-tag-dialog-wrapper";
-  const EDIT_TAG_DIALOG_ID = "edit-tag-dialog";
+  const TAG_FORM_DIALOG_WRAPPER_ID = "tag-form-dialog-wrapper";
+  const TAG_FORM_DIALOG_ID = "tag-form-dialog";
 
   function openEditDialog(tagId: number, tagName: string) {
-    const editDialog = document.getElementById(
-      EDIT_TAG_DIALOG_WRAPPER_ID,
-    ) as HTMLDialogElement;
+    const dialog = document.getElementById(
+      TAG_FORM_DIALOG_WRAPPER_ID,
+    ) as TailwindDialogElement;
 
-    editTag = {
+    tagFormData = {
       id: tagId,
       name: tagName,
     };
 
-    editDialog.open = true;
+    dialog.open = true;
+  }
+
+  function openCreateDialog() {
+    const dialog = document.getElementById(
+      TAG_FORM_DIALOG_WRAPPER_ID,
+    ) as TailwindDialogElement;
+
+    tagFormData = null;
+
+    dialog.open = true;
   }
 </script>
 
@@ -51,10 +63,10 @@
 </svelte:head>
 
 <LayoutMain searchIsEnabled={true}>
-  <EditDialog
-    dialogWrapperId={EDIT_TAG_DIALOG_WRAPPER_ID}
-    dialogId={EDIT_TAG_DIALOG_ID}
-    tag={editTag}
+  <TagFormDialog
+    dialogWrapperId={TAG_FORM_DIALOG_WRAPPER_ID}
+    dialogId={TAG_FORM_DIALOG_ID}
+    tag={tagFormData}
   />
 
   <main class="flex grow py-10">
@@ -67,7 +79,8 @@
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
           <button
             type="button"
-            class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            onclick={openCreateDialog}
+            class="block cursor-pointer rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
           >
             Add Tag
           </button>
@@ -99,7 +112,7 @@
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200">
-                {#each tags.data as tag (tag.id)}
+                {#each tags.data as tag (tag.id + tag.name)}
                   <tr>
                     <td
                       class="max-w-16 truncate py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0"

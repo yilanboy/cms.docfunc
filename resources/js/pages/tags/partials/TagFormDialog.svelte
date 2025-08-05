@@ -11,7 +11,16 @@
     } | null;
   }
 
+  interface TailwindDialogElement extends HTMLDialogElement {}
+
   let { dialogWrapperId, dialogId, tag }: Props = $props();
+
+  // Computed property to determine if we're creating or editing
+  const isEditing = $derived(tag !== null);
+  const dialogTitle = $derived(
+    isEditing ? "Update Tag Name" : "Create New Tag",
+  );
+  const submitButtonText = $derived(isEditing ? "Update" : "Create");
 
   const form = useForm({
     name: "",
@@ -22,16 +31,24 @@
 
     const dialog = document.getElementById(
       dialogWrapperId,
-    ) as HTMLDialogElement;
+    ) as TailwindDialogElement;
 
-    if (tag && tag.name !== $form.name) {
-      $form.submit(TagController.update(tag.id), {
+    if (isEditing && tag) {
+      if (tag.name !== $form.name) {
+        $form.submit(TagController.update(tag.id), {
+          onSuccess: () => {
+            dialog.open = false;
+          },
+        });
+      } else {
+        dialog.open = false;
+      }
+    } else {
+      $form.submit(TagController.store(), {
         onSuccess: () => {
           dialog.open = false;
         },
       });
-    } else {
-      dialog.open = false;
     }
   }
 
@@ -63,7 +80,7 @@
                 for="new-tag-name"
                 class="text-base font-semibold text-gray-900"
               >
-                Update Tag Name
+                {dialogTitle}
               </label>
               <div class="mt-2">
                 <input
@@ -86,7 +103,7 @@
               type="submit"
               class="inline-flex w-full cursor-pointer justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-blue-500 sm:ml-3 sm:w-auto"
             >
-              Save
+              {submitButtonText}
             </button>
             <button
               type="button"
