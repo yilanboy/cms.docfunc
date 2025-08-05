@@ -20,16 +20,18 @@
   function submit(event: SubmitEvent) {
     event.preventDefault();
 
-    if (tag) {
+    const dialog = document.getElementById(
+      dialogWrapperId,
+    ) as HTMLDialogElement;
+
+    if (tag && tag.name !== $form.name) {
       $form.submit(TagController.update(tag.id), {
         onSuccess: () => {
-          const dialog = document.getElementById(
-            dialogWrapperId,
-          ) as HTMLDialogElement;
-
           dialog.open = false;
         },
       });
+    } else {
+      dialog.open = false;
     }
   }
 
@@ -73,6 +75,10 @@
                   class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
                 />
               </div>
+
+              {#if $form.errors.name}
+                <div class="mt-2 text-red-500">{$form.errors.name}</div>
+              {/if}
             </div>
           </div>
           <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
