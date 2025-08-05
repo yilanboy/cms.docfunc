@@ -45,7 +45,7 @@
     <div class="hidden md:-mt-px md:flex">
       <!-- Remove the first and last links,  -->
       <!-- which are previous page and next page links -->
-      {#each meta.links.slice(1, meta.links.length - 1) as link, index (index)}
+      {#each meta.links.slice(1, meta.links.length - 1) as link, index (index + link.label)}
         {#if link.url !== null}
           <a
             use:inertia
@@ -63,7 +63,7 @@
           <span
             class="inline-flex cursor-default items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500"
           >
-            ...
+            {link.label}
           </span>
         {/if}
       {/each}
