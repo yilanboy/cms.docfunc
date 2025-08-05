@@ -19,7 +19,7 @@
 
   <DesktopSidebar />
 
-  <div class="min-h-screen bg-white lg:pl-72">
+  <div class="flex min-h-screen flex-col bg-white lg:pl-72">
     <Header bind:sidebarIsOpen {searchIsEnabled} />
 
     {@render children?.()}
