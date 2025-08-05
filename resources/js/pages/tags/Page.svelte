@@ -67,6 +67,7 @@
     dialogWrapperId={TAG_FORM_DIALOG_WRAPPER_ID}
     dialogId={TAG_FORM_DIALOG_ID}
     tag={tagFormData}
+    lastPage={tags.meta.last_page}
   />
 
   <main class="flex grow py-10">

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useForm } from "@inertiajs/svelte";
+  import { router, useForm } from "@inertiajs/svelte";
   import TagController from "@/actions/App/Http/Controllers/TagController";
 
   interface Props {
@@ -9,11 +9,12 @@
       id: number;
       name: string;
     } | null;
+    lastPage: number;
   }
 
   interface TailwindDialogElement extends HTMLDialogElement {}
 
-  let { dialogWrapperId, dialogId, tag }: Props = $props();
+  let { dialogWrapperId, dialogId, tag, lastPage }: Props = $props();
 
   // Computed property to determine if we're creating or editing
   const isEditing = $derived(tag !== null);
@@ -47,6 +48,7 @@
       $form.submit(TagController.store(), {
         onSuccess: () => {
           dialog.open = false;
+          router.get(TagController.index({ query: { page: lastPage } }).url);
         },
       });
     }
