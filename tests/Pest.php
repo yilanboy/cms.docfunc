@@ -11,7 +11,7 @@
 |
 */
 
-use App\Models\User;
+use App\Models\Admin;
 
 pest()->extend(Tests\TestCase::class)
     // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
@@ -48,14 +48,14 @@ function something()
     // ..
 }
 
-function loginAsUser(null|User|int $user = null)
+function loginAsUser(null|Admin|int $user = null)
 {
     if (is_int($user)) {
-        $user = User::find($user);
+        $user = Admin::find($user);
     }
 
     if (is_null($user)) {
-        $user = User::factory()->create();
+        $user = Admin::factory()->create();
     }
 
     test()->actingAs($user);
