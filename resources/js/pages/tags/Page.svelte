@@ -29,15 +29,20 @@
 
   let editTag: { id: number; name: string } | null = $state(null);
 
+  const EDIT_TAG_DIALOG_WRAPPER_ID = "edit-tag-dialog-wrapper";
+  const EDIT_TAG_DIALOG_ID = "edit-tag-dialog";
+
   function openEditDialog(tagId: number, tagName: string) {
-    const editDialog = document.getElementById("dialog") as HTMLDialogElement;
+    const editDialog = document.getElementById(
+      EDIT_TAG_DIALOG_WRAPPER_ID,
+    ) as HTMLDialogElement;
 
     editTag = {
       id: tagId,
       name: tagName,
     };
 
-    editDialog.show();
+    editDialog.open = true;
   }
 </script>
 
@@ -46,7 +51,11 @@
 </svelte:head>
 
 <LayoutMain searchIsEnabled={true}>
-  <EditDialog tag={editTag} />
+  <EditDialog
+    dialogWrapperId={EDIT_TAG_DIALOG_WRAPPER_ID}
+    dialogId={EDIT_TAG_DIALOG_ID}
+    tag={editTag}
+  />
 
   <main class="flex grow py-10">
     <div class="w-full px-4 sm:px-6 lg:px-8">

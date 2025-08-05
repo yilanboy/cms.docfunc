@@ -28,4 +28,15 @@ class TagController extends Controller
             'tags'  => $tags,
         ]);
     }
+
+    public function update(Request $request, Tag $tag)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        $tag->update($validated);
+
+        return back();
+    }
 }
