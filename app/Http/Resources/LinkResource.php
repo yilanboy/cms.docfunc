@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 /**
  * @property int $id
  * @property string $title
- * @property string $link
+ * @property string $url
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
@@ -22,7 +22,7 @@ class LinkResource extends JsonResource
         return [
             'id'         => $this->id,
             'title'      => $this->title,
-            'link'       => $this->link,
+            'url'        => $this->url,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

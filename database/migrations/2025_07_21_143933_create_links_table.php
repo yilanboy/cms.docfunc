@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('links', function (Blueprint $table) {
             $table->id();
             $table->string('title')->comment('Title of suggested resource')->index();
-            $table->string('link')->comment('Link of suggested resource')->index();
+            $table->string('url')->comment('URL of suggested resource')->index();
             $table->timestamps();
         });
     }

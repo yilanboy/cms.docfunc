@@ -13,8 +13,8 @@ class LinkFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->word(),
-            'link' => $this->faker->url(),
+            'title'      => $this->faker->word(),
+            'url'        => $this->faker->url(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

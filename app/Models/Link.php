@@ -11,5 +11,5 @@ class Link extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'link'];
+    protected $fillable = ['title', 'url'];
 }

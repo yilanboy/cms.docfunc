@@ -10,7 +10,7 @@
     links: {
       id: number;
       title: string;
-      link: string;
+      url: string;
       created_at: string;
       updated_at: string;
     }[];
@@ -23,31 +23,31 @@
 
   let { title, links }: Props = $props();
   let dialog: TailwindDialogElement;
-  let originalLink: { id: number; title: string; link: string } | null =
+  let originalLink: { id: number; title: string; url: string } | null =
     $state(null);
 
   const isEditing = $derived(originalLink !== null);
   const submitButtonText = $derived(isEditing ? "Update" : "Create");
 
-  const form = useForm<{ title: string; link: string }>({
+  const form = useForm<{ title: string; url: string }>({
     title: "",
-    link: "",
+    url: "",
   });
 
   function openCreateDialog() {
     originalLink = null;
 
     $form.title = "";
-    $form.link = "";
+    $form.url = "";
 
     dialog.open = true;
   }
 
-  function openEditDialog(id: number, title: string, link: string) {
-    originalLink = { id, title, link };
+  function openEditDialog(id: number, title: string, url: string) {
+    originalLink = { id, title, url };
 
     $form.title = title;
-    $form.link = link;
+    $form.url = url;
 
     dialog.open = true;
   }
@@ -58,7 +58,7 @@
     if (originalLink) {
       if (
         originalLink.title === $form.title &&
-        originalLink.link === $form.link
+        originalLink.url === $form.url
       ) {
         dialog.open = false;
       }
@@ -119,21 +119,21 @@
         </div>
 
         <div class="w-full text-center sm:text-left">
-          <label for="link" class="block text-base font-medium text-gray-900">
-            Link
+          <label for="url" class="block text-base font-medium text-gray-900">
+            URL
           </label>
           <div class="mt-2">
             <input
-              id="link"
+              id="url"
               type="text"
               placeholder="Link URL"
-              bind:value={$form.link}
+              bind:value={$form.url}
               class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
             />
           </div>
 
-          {#if $form.errors.link}
-            <div class="mt-2 text-red-500">{$form.errors.link}</div>
+          {#if $form.errors.url}
+            <div class="mt-2 text-red-500">{$form.errors.url}</div>
           {/if}
         </div>
       </div>
@@ -199,7 +199,7 @@
                     scope="col"
                     class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
-                    Link
+                    URL
                   </th>
                   <th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-0">
                     <span class="sr-only">Edit</span>
@@ -207,7 +207,7 @@
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200">
-                {#each links as link (link.id + link.title + link.link)}
+                {#each links as link (link.id + link.title + link.url)}
                   <tr>
                     <td
                       class="max-w-16 truncate py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0"
@@ -222,14 +222,14 @@
                     <td
                       class="max-w-16 truncate px-3 py-4 text-sm whitespace-nowrap text-gray-500"
                     >
-                      {link.link}
+                      {link.url}
                     </td>
                     <td
                       class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0"
                     >
                       <button
                         onclick={() =>
-                          openEditDialog(link.id, link.title, link.link)}
+                          openEditDialog(link.id, link.title, link.url)}
                         class="cursor-pointer text-blue-600 hover:text-blue-900"
                       >
                         Edit
