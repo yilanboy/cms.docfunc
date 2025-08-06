@@ -35,28 +35,32 @@
 
   let { title, tags }: Props = $props();
   let dialog: TailwindDialogElement;
-  let formTagId: number | null = $state(null);
+  let originalTag: { id: number; name: string } | null = $state(null);
 
   const form = useForm<{ id: null | number; name: string }>({
     id: null,
     name: "",
   });
 
-  const isEditing = $derived(formTagId !== null);
+  const isEditing = $derived(originalTag !== null);
   const dialogTitle = $derived(
     isEditing ? "Update Tag Name" : "Create New Tag",
   );
   const submitButtonText = $derived(isEditing ? "Update" : "Create");
 
   function openEditDialog(tagId: number, tagName: string) {
-    formTagId = tagId;
+    originalTag = {
+      id: tagId,
+      name: tagName,
+    };
+
     $form.name = tagName;
 
     dialog.open = true;
   }
 
   function openCreateDialog() {
-    formTagId = null;
+    originalTag = null;
     $form.name = "";
 
     dialog.open = true;
@@ -65,8 +69,14 @@
   function submit(event: SubmitEvent) {
     event.preventDefault();
 
-    if (formTagId) {
-      $form.submit(TagController.update(formTagId), {
+    if (originalTag) {
+      if (originalTag.name === $form.name) {
+        dialog.open = false;
+
+        return;
+      }
+
+      $form.submit(TagController.update(originalTag.id), {
         onSuccess: () => {
           dialog.open = false;
         },
