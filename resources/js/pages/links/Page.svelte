@@ -2,7 +2,8 @@
   import LayoutMain from "@/components/layouts/main/LayoutMain.svelte";
   import Dialog from "@/components/Dialog.svelte";
   import { onMount } from "svelte";
-  import { useForm } from "@inertiajs/svelte";
+  import { router, useForm } from "@inertiajs/svelte";
+  import LinkController from "@/actions/App/Http/Controllers/LinkController";
 
   interface Props {
     title: string;
@@ -51,8 +52,33 @@
     dialog.open = true;
   }
 
-  function submit() {
-    console.log("todo");
+  function submit(event: SubmitEvent) {
+    event.preventDefault();
+
+    if (originalLink) {
+      if (
+        originalLink.title === $form.title &&
+        originalLink.link === $form.link
+      ) {
+        dialog.open = false;
+      }
+
+      $form.submit(LinkController.update(originalLink.id), {
+        onSuccess: () => {
+          dialog.open = false;
+        },
+      });
+
+      return;
+    } else {
+      $form.submit(LinkController.store(), {
+        onSuccess: () => {
+          dialog.open = false;
+
+          router.get(LinkController.index().url);
+        },
+      });
+    }
   }
 
   onMount(() => {
@@ -181,7 +207,7 @@
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200">
-                {#each links as link (link.id)}
+                {#each links as link (link.id + link.title + link.link)}
                   <tr>
                     <td
                       class="max-w-16 truncate py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0"

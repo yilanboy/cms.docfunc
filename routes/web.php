@@ -20,6 +20,12 @@ Route::middleware([InertiaAuthenticateMiddleware::class, 'verified'])->group(fun
     Route::get('/links', [LinkController::class, 'index'])
         ->name('links.index');
 
+    Route::post('/links', [LinkController::class, 'store'])
+        ->name('links.store');
+
+    Route::patch('/links/{link}', [LinkController::class, 'update'])
+        ->name('links.update');
+
     Route::get('/tags', [TagController::class, 'index'])
         ->name('tags.index');
 
