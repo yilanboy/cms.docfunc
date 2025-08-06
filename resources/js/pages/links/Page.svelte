@@ -1,5 +1,8 @@
 <script lang="ts">
   import LayoutMain from "@/components/layouts/main/LayoutMain.svelte";
+  import Dialog from "@/components/Dialog.svelte";
+  import { onMount } from "svelte";
+  import { useForm } from "@inertiajs/svelte";
 
   interface Props {
     title: string;
@@ -12,7 +15,51 @@
     }[];
   }
 
+  interface TailwindDialogElement extends HTMLDialogElement {}
+
+  const LINK_FORM_DIALOG_WRAPPER_ID = "link-form-dialog-wrapper";
+  const LINK_FORM_DIALOG_ID = "link-form-dialog";
+
   let { title, links }: Props = $props();
+  let dialog: TailwindDialogElement;
+  let originalLink: { id: number; title: string; link: string } | null =
+    $state(null);
+
+  const isEditing = $derived(originalLink !== null);
+  const submitButtonText = $derived(isEditing ? "Update" : "Create");
+
+  const form = useForm<{ title: string; link: string }>({
+    title: "",
+    link: "",
+  });
+
+  function openCreateDialog() {
+    originalLink = null;
+
+    $form.title = "";
+    $form.link = "";
+
+    dialog.open = true;
+  }
+
+  function openEditDialog(id: number, title: string, link: string) {
+    originalLink = { id, title, link };
+
+    $form.title = title;
+    $form.link = link;
+
+    dialog.open = true;
+  }
+
+  function submit() {
+    console.log("todo");
+  }
+
+  onMount(() => {
+    dialog = document.getElementById(
+      LINK_FORM_DIALOG_WRAPPER_ID,
+    ) as TailwindDialogElement;
+  });
 </script>
 
 <svelte:head>
@@ -20,6 +67,69 @@
 </svelte:head>
 
 <LayoutMain>
+  <Dialog
+    dialogWrapperId={LINK_FORM_DIALOG_WRAPPER_ID}
+    dialogId={LINK_FORM_DIALOG_ID}
+  >
+    <form onsubmit={submit}>
+      <div class="flex flex-col items-start gap-2">
+        <div class="w-full text-center sm:text-left">
+          <label for="title" class="block text-base font-medium text-gray-900">
+            Title
+          </label>
+          <div class="mt-2">
+            <input
+              id="title"
+              type="text"
+              placeholder="Link title"
+              bind:value={$form.title}
+              class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
+            />
+          </div>
+
+          {#if $form.errors.title}
+            <div class="mt-2 text-red-500">{$form.errors.title}</div>
+          {/if}
+        </div>
+
+        <div class="w-full text-center sm:text-left">
+          <label for="link" class="block text-base font-medium text-gray-900">
+            Link
+          </label>
+          <div class="mt-2">
+            <input
+              id="link"
+              type="text"
+              placeholder="Link URL"
+              bind:value={$form.link}
+              class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
+            />
+          </div>
+
+          {#if $form.errors.link}
+            <div class="mt-2 text-red-500">{$form.errors.link}</div>
+          {/if}
+        </div>
+      </div>
+      <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+        <button
+          type="submit"
+          class="inline-flex w-full cursor-pointer justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-blue-500 sm:ml-3 sm:w-auto"
+        >
+          {submitButtonText}
+        </button>
+        <button
+          type="button"
+          command="close"
+          commandfor={LINK_FORM_DIALOG_ID}
+          class="mt-3 inline-flex w-full cursor-pointer justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </Dialog>
+
   <main class="flex grow py-10">
     <div class="w-full px-4 sm:px-6 lg:px-8">
       <div class="sm:flex sm:items-center">
@@ -32,7 +142,8 @@
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
           <button
             type="button"
-            class="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            onclick={openCreateDialog}
+            class="block cursor-pointer rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
           >
             Add link
           </button>
@@ -90,9 +201,13 @@
                     <td
                       class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0"
                     >
-                      <a href="#" class="text-blue-600 hover:text-blue-900">
+                      <button
+                        onclick={() =>
+                          openEditDialog(link.id, link.title, link.link)}
+                        class="cursor-pointer text-blue-600 hover:text-blue-900"
+                      >
                         Edit
-                      </a>
+                      </button>
                     </td>
                   </tr>
                 {/each}

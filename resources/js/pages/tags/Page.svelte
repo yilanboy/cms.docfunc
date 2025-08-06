@@ -37,24 +37,17 @@
   let dialog: TailwindDialogElement;
   let originalTag: { id: number; name: string } | null = $state(null);
 
-  const form = useForm<{ id: null | number; name: string }>({
-    id: null,
+  const form = useForm<{ name: string }>({
     name: "",
   });
 
   const isEditing = $derived(originalTag !== null);
-  const dialogTitle = $derived(
-    isEditing ? "Update Tag Name" : "Create New Tag",
-  );
   const submitButtonText = $derived(isEditing ? "Update" : "Create");
 
-  function openEditDialog(tagId: number, tagName: string) {
-    originalTag = {
-      id: tagId,
-      name: tagName,
-    };
+  function openEditDialog(id: number, name: string) {
+    originalTag = { id, name };
 
-    $form.name = tagName;
+    $form.name = name;
 
     dialog.open = true;
   }
@@ -113,20 +106,16 @@
     <form onsubmit={submit}>
       <div class="sm:flex sm:items-start">
         <div class="w-full text-center sm:text-left">
-          <label
-            for="new-tag-name"
-            class="text-base font-semibold text-gray-900"
-          >
-            {dialogTitle}
+          <label for="name" class="block text-base font-medium text-gray-900">
+            Name
           </label>
           <div class="mt-2">
             <input
-              id="new-tag-name"
+              id="name"
               type="text"
-              name="new-tag-name"
-              placeholder="Type a new tag name"
+              placeholder="New tag name"
               bind:value={$form.name}
-              class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
+              class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
             />
           </div>
 
@@ -135,6 +124,7 @@
           {/if}
         </div>
       </div>
+
       <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
         <button
           type="submit"
