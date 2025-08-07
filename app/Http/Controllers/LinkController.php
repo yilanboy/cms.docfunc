@@ -26,6 +26,10 @@ class LinkController extends Controller
 
     public function store(Request $request)
     {
+        if (Link::count() >= 5) {
+            return back()->with('error', 'You have reached the maximum number of links.');
+        }
+
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'url'   => ['required', 'string', 'max:255'],
