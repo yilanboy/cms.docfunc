@@ -1,6 +1,5 @@
 <script lang="ts">
   import AuthenticatedSessionController from "@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController";
-  import RegisterController from "@/actions/App/Http/Controllers/Auth/RegisterController";
   import ForgotPasswordController from "@/actions/App/Http/Controllers/Auth/ForgotPasswordController";
   import { inertia, useForm } from "@inertiajs/svelte";
   import Check from "@/components/icons/Check.svelte";
@@ -131,17 +130,6 @@
           </button>
         </div>
       </form>
-
-      <p class="mt-10 text-center text-base text-gray-500">
-        Not a member?
-        <a
-          use:inertia
-          href={RegisterController.create().url}
-          class="font-semibold text-blue-600 hover:text-blue-500"
-        >
-          Become one!
-        </a>
-      </p>
     </div>
   </main>
 </div>

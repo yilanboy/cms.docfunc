@@ -2,14 +2,13 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Middleware\InertiaAuthenticateMiddleware;
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
     ->name('login')
-    ->middleware('guest');;
+    ->middleware('guest');
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])
     ->name('login.store')
@@ -18,14 +17,6 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store'])
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout')
     ->middleware(InertiaAuthenticateMiddleware::class);
-
-Route::get('/register', [RegisterController::class, 'create'])
-    ->name('register')
-    ->middleware('guest');
-
-Route::post('/register', [RegisterController::class, 'store'])
-    ->name('register.store')
-    ->middleware('guest');
 
 Route::get('/email/verify', [VerifyEmailController::class, 'show'])
     ->middleware(InertiaAuthenticateMiddleware::class)
