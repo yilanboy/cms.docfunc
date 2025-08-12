@@ -4,23 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
+return new class extends Migration
+{
     public function up(): void
     {
         Schema::create('links', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->comment('Title of suggested resource')->index();
-            $table->string('url')->comment('URL of suggested resource')->index();
+            $table->string('title')->comment('資源的描述')->index();
+            $table->string('link')->comment('資源的連結')->index();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('links');
