@@ -13,9 +13,14 @@ export interface Flash {
     error: string;
 }
 
+export interface App {
+    name: string;
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>,
 > = T & {
+    app: App;
     auth: Auth;
     flash: Flash;
 };

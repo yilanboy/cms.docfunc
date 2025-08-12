@@ -1,7 +1,7 @@
 <script lang="ts">
   import AuthenticatedSessionController from "@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController";
   import ForgotPasswordController from "@/actions/App/Http/Controllers/Auth/ForgotPasswordController";
-  import { inertia, useForm } from "@inertiajs/svelte";
+  import { inertia, page, useForm } from "@inertiajs/svelte";
   import Check from "@/components/icons/Check.svelte";
   import ChevronLeft from "@/components/icons/ChevronLeft.svelte";
   import { back } from "@/helpers";
@@ -38,7 +38,7 @@
   </header>
   <main class="flex w-full grow flex-col justify-center p-6">
     <h2 class="text-center text-2xl font-bold tracking-tight text-gray-900">
-      Sign in to your account
+      {$page.props.app.name}
     </h2>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
