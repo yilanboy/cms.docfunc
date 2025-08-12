@@ -148,7 +148,7 @@
               <a
                 use:inertia
                 href={ProfileController.edit().url}
-                class="flex w-full items-center gap-2 px-3 py-1 text-left text-base text-zinc-900 hover:bg-zinc-100"
+                class="flex w-full items-center gap-2 px-3 py-2 text-left text-base text-zinc-900 hover:bg-zinc-100"
                 role="menuitem"
                 tabindex="-1"
                 id="user-menu-item-0"
@@ -162,7 +162,7 @@
                   method: AuthenticatedSessionController.destroy().method,
                 }}
                 type="button"
-                class="flex w-full cursor-pointer items-center gap-2 px-3 py-1 text-left text-base text-zinc-900 hover:bg-zinc-100"
+                class="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-base text-zinc-900 hover:bg-zinc-100"
                 role="menuitem"
                 tabindex="-1"
                 id="user-menu-item-1"

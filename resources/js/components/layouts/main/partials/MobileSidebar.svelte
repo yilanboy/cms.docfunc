@@ -4,6 +4,10 @@
   import X from "@/components/icons/X.svelte";
   import { fly, fade } from "svelte/transition";
   import DashboardController from "@/actions/App/Http/Controllers/DashboardController";
+  import LinkController from "@/actions/App/Http/Controllers/LinkController";
+  import TagController from "@/actions/App/Http/Controllers/TagController";
+  import Link from "@/components/icons/Link.svelte";
+  import Tag from "@/components/icons/Tag.svelte";
 
   interface Props {
     sidebarIsOpen: boolean;
@@ -44,12 +48,7 @@
           class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4"
         >
           <div class="flex h-16 shrink-0 items-center text-xl font-semibold">
-            <div
-              class="flex size-8 items-center justify-center rounded-md bg-zinc-900 text-center text-zinc-50"
-            >
-              S
-            </div>
-            <span>Svelte Starter Kit</span>
+            <span>{$page.props.app.name}</span>
           </div>
 
           <nav class="flex flex-1 flex-col">
@@ -57,10 +56,6 @@
               <li>
                 <ul role="list" class="-mx-2 space-y-1">
                   <li>
-                    <!--
-                      Current: "bg-zinc-100 text-blue-600",
-                      Default: "text-zinc-700 hover:text-blue-600 hover:bg-zinc-100"
-                      -->
                     <a
                       use:inertia
                       href={DashboardController.index().url}
@@ -74,6 +69,40 @@
                     >
                       <Home className="size-6 shrink-0" />
                       Dashboard
+                    </a>
+                  </li>
+
+                  <li>
+                    <a
+                      use:inertia
+                      href={LinkController.index().url}
+                      class={{
+                        "bg-zinc-100 text-blue-600":
+                          $page.url === LinkController.index().url,
+                        "text-zinc-700 hover:bg-zinc-100 hover:text-blue-600":
+                          $page.url !== LinkController.index().url,
+                        "-mx-2 flex gap-x-3 rounded-md p-2 text-base font-semibold": true,
+                      }}
+                    >
+                      <Link className="size-6 shrink-0" />
+                      Link
+                    </a>
+                  </li>
+
+                  <li>
+                    <a
+                      use:inertia
+                      href={TagController.index().url}
+                      class={{
+                        "bg-zinc-100 text-blue-600":
+                          $page.url === TagController.index().url,
+                        "text-zinc-700 hover:bg-zinc-100 hover:text-blue-600":
+                          $page.url !== TagController.index().url,
+                        "-mx-2 flex gap-x-3 rounded-md p-2 text-base font-semibold": true,
+                      }}
+                    >
+                      <Tag className="size-6 shrink-0" />
+                      Tag
                     </a>
                   </li>
                 </ul>
