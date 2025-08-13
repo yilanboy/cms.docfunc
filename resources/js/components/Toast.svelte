@@ -1,31 +1,26 @@
-<script>
+<script lang="ts">
   import { page } from "@inertiajs/svelte";
   import CircleCheck from "@/components/icons/CircleCheck.svelte";
   import { fly } from "svelte/transition";
   import CircleX from "@/components/icons/CircleX.svelte";
 
   let showToast = $state(false);
+  let timeoutId: ReturnType<typeof setTimeout>;
 
   $effect(() => {
-    if ($page.props.flash.success) {
+    if ($page.props.flash.success || $page.props.flash.error) {
       showToast = true;
-      setTimeout(() => {
-        showToast = false;
-      }, 3000);
-    }
 
-    if ($page.props.flash.error) {
-      showToast = true;
-      setTimeout(() => {
+      clearTimeout(timeoutId);
+
+      timeoutId = setTimeout(() => {
         showToast = false;
       }, 3000);
     }
   });
 </script>
 
-<!-- TODO: improve the toast -->
-<!-- new toast can overlap the old one -->
-{#if $page.props.flash.success && showToast}
+{#if showToast && $page.props.flash.success}
   <div
     transition:fly={{ y: -100 }}
     class="fixed top-4 right-1/2 left-1/2 z-50 -translate-x-1/2 rounded-md bg-green-50 p-4 sm:w-full sm:max-w-sm"
@@ -43,7 +38,7 @@
   </div>
 {/if}
 
-{#if $page.props.flash.error && showToast}
+{#if showToast && $page.props.flash.error}
   <div
     transition:fly={{ y: -100 }}
     class="fixed top-4 right-1/2 left-1/2 z-50 -translate-x-1/2 rounded-md bg-red-50 p-4 sm:w-full sm:max-w-sm"
