@@ -23,6 +23,8 @@
   });
 </script>
 
+<!-- TODO: improve the toast -->
+<!-- new toast can overlap the old one -->
 {#if $page.props.flash.success && showToast}
   <div
     transition:fly={{ y: -100 }}
