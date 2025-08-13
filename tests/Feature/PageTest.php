@@ -15,13 +15,13 @@ describe('page test', function () {
         $response->assertRedirect('/dashboard');
     });
 
-    test('guest can visit login page', function () {
+    test('the guest can visit login page', function () {
         $response = $this->get(route('login'));
 
         $response->assertStatus(200);
     });
 
-    test('user can visit dashboard page', function () {
+    test('the user can visit dashboard page', function () {
         loginAsUser();
 
         $response = $this->get(route('dashboard'));
@@ -35,7 +35,7 @@ describe('page test', function () {
         $response->assertRedirect('/login');
     });
 
-    test('user can visit links page', function () {
+    test('the user can visit links page', function () {
         loginAsUser();
 
         $response = $this->get(route('links.index'));
@@ -49,7 +49,7 @@ describe('page test', function () {
         $response->assertRedirect('/login');
     });
 
-    test('user can visit tags page', function () {
+    test('the user can visit tags page', function () {
         loginAsUser();
 
         $response = $this->get(route('tags.index'));
