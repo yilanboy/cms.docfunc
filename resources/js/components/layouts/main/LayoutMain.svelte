@@ -3,6 +3,7 @@
   import MobileSidebar from "@/components/layouts/main/partials/MobileSidebar.svelte";
   import DesktopSidebar from "@/components/layouts/main/partials/DesktopSidebar.svelte";
   import Header from "@/components/layouts/main/partials/Header.svelte";
+  import Toast from "@/components/Toast.svelte";
 
   let sidebarIsOpen = $state(false);
 
@@ -15,6 +16,8 @@
 </script>
 
 <div class="font-source-sans-3">
+  <Toast />
+
   <MobileSidebar bind:sidebarIsOpen />
 
   <DesktopSidebar />

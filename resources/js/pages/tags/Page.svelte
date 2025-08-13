@@ -78,10 +78,6 @@
       $form.submit(TagController.store(), {
         onSuccess: () => {
           dialog.open = false;
-
-          router.get(
-            TagController.index({ query: { page: tags.meta.last_page } }).url,
-          );
         },
       });
     }

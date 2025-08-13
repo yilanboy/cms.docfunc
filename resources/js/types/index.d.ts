@@ -9,8 +9,8 @@ export interface User {
 }
 
 export interface Flash {
-    success: string;
-    error: string;
+    success: string | null;
+    error: string | null;
 }
 
 export interface App {

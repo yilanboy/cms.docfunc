@@ -27,7 +27,8 @@ class LinkController extends Controller
     public function store(Request $request)
     {
         if (Link::count() >= 5) {
-            return back()->with('error', 'You have reached the maximum number of links.');
+            return back()
+                ->with('error', 'You have reached the maximum number of links.');
         }
 
         $validated = $request->validate([
@@ -37,7 +38,8 @@ class LinkController extends Controller
 
         Link::create($validated);
 
-        return back();
+        return back()
+            ->with('success', 'Link created successfully.');
     }
 
     public function update(Request $request, Link $link)
@@ -49,6 +51,7 @@ class LinkController extends Controller
 
         $link->update($validated);
 
-        return back();
+        return back()
+            ->with('success', 'Link updated successfully.');
     }
 }

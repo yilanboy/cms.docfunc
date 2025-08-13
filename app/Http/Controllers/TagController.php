@@ -37,7 +37,10 @@ class TagController extends Controller
 
         Tag::create($validated);
 
-        return to_route('tags.index');
+        $lastPage = Tag::paginate(10)->lastPage();
+
+        return to_route('tags.index', ['page' => $lastPage])
+            ->with('success', 'Tag created successfully.');
     }
 
     public function update(Request $request, Tag $tag)
@@ -48,6 +51,7 @@ class TagController extends Controller
 
         $tag->update($validated);
 
-        return back();
+        return back()
+            ->with('success', 'Tag updated successfully.');
     }
 }
