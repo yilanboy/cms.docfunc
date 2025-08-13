@@ -1,13 +1,13 @@
 <?php
 
 describe('page test', function () {
-    test('if user is not login, redirect to login page', function () {
+    test('if the user is not login, redirect to login page', function () {
         $response = $this->get('/');
 
         $response->assertRedirect('/login');
     });
 
-    test('if user is login, redirect to dashboard page', function () {
+    test('if the user is login, redirect to dashboard page', function () {
         loginAsUser();
 
         $response = $this->get('/');
@@ -25,20 +25,35 @@ describe('page test', function () {
         loginAsUser();
 
         $response = $this->get(route('dashboard'));
+
         $response->assertStatus(200);
+    });
+
+    test('if the user is not login, he can not visit links page', function () {
+        $response = $this->get(route('links.index'));
+
+        $response->assertRedirect('/login');
     });
 
     test('user can visit links page', function () {
         loginAsUser();
 
         $response = $this->get(route('links.index'));
+
         $response->assertStatus(200);
+    });
+
+    test('if the user is not login, he can not visit tags page', function () {
+        $response = $this->get(route('tags.index'));
+
+        $response->assertRedirect('/login');
     });
 
     test('user can visit tags page', function () {
         loginAsUser();
 
         $response = $this->get(route('tags.index'));
+
         $response->assertStatus(200);
     });
 });
