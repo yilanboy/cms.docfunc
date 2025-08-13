@@ -21,9 +21,24 @@ describe('page test', function () {
         $response->assertStatus(200);
     });
 
-    test('guest can visit register page', function () {
-        $response = $this->get(route('register'));
+    test('user can visit dashboard page', function () {
+        loginAsUser();
 
+        $response = $this->get(route('dashboard'));
+        $response->assertStatus(200);
+    });
+
+    test('user can visit links page', function () {
+        loginAsUser();
+
+        $response = $this->get(route('links.index'));
+        $response->assertStatus(200);
+    });
+
+    test('user can visit tags page', function () {
+        loginAsUser();
+
+        $response = $this->get(route('tags.index'));
         $response->assertStatus(200);
     });
 });
