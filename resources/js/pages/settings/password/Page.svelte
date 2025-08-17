@@ -57,11 +57,11 @@
           </p>
         </div>
 
-        <div class="col-span-1">
+        <div class="col-span-4 lg:col-span-1">
           <Navigation />
         </div>
 
-        <div class="col-span-3">
+        <div class="col-span-4 lg:col-span-3">
           <div class="sm:w-full sm:max-w-sm">
             <form class="space-y-6" onsubmit={submit}>
               <div>

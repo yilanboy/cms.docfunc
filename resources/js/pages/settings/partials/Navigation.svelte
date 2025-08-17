@@ -4,7 +4,7 @@
   import PasswordController from "@/actions/App/Http/Controllers/Settings/PasswordController";
 </script>
 
-<ul class="flex flex-col gap-1">
+<ul class="flex flex-col gap-1 sm:w-full sm:max-w-sm">
   <li>
     <a
       use:inertia
