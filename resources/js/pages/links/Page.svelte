@@ -23,10 +23,10 @@
 
   let { title, links }: Props = $props();
   let dialog: TailwindDialogElement;
-  let originalLink: { id: number; title: string; url: string } | null =
+  let linkToEdit: { id: number; title: string; url: string } | null =
     $state(null);
 
-  const isEditing = $derived(originalLink !== null);
+  const isEditing = $derived(linkToEdit !== null);
   const submitButtonText = $derived(isEditing ? "Update" : "Create");
 
   const form = useForm<{ title: string; url: string }>({
@@ -35,7 +35,7 @@
   });
 
   function openCreateDialog() {
-    originalLink = null;
+    linkToEdit = null;
 
     $form.title = "";
     $form.url = "";
@@ -44,7 +44,7 @@
   }
 
   function openEditDialog(id: number, title: string, url: string) {
-    originalLink = { id, title, url };
+    linkToEdit = { id, title, url };
 
     $form.title = title;
     $form.url = url;
@@ -55,15 +55,13 @@
   function submit(event: SubmitEvent) {
     event.preventDefault();
 
-    if (originalLink) {
-      if (
-        originalLink.title === $form.title &&
-        originalLink.url === $form.url
-      ) {
+    if (linkToEdit) {
+      if (linkToEdit.title === $form.title && linkToEdit.url === $form.url) {
         dialog.open = false;
       }
 
-      $form.submit(LinkController.update(originalLink.id), {
+      $form.submit(LinkController.update(linkToEdit.id), {
+        preserveScroll: true,
         onSuccess: () => {
           dialog.open = false;
         },

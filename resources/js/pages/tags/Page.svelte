@@ -38,20 +38,19 @@
 
   let { title, tags }: Props = $props();
   let formDialog: TailwindDialogElement;
-  let originalTag: { id: number; name: string } | null = $state(null);
+  let tagToEdit: { id: number; name: string } | null = $state(null);
   let deleteDialog: TailwindDialogElement;
-  let deleteTagId: number | null = $state(null);
-  let deleteTagName: string | null = $state(null);
+  let tagToDelete: { id: number; name: string } | null = $state(null);
 
   const form = useForm<{ name: string }>({
     name: "",
   });
 
-  const isEditing = $derived(originalTag !== null);
+  const isEditing = $derived(tagToEdit !== null);
   const submitButtonText = $derived(isEditing ? "Update" : "Create");
 
   function openEditDialog(id: number, name: string) {
-    originalTag = { id, name };
+    tagToEdit = { id, name };
 
     $form.name = name;
 
@@ -59,16 +58,14 @@
   }
 
   function openCreateDialog() {
-    originalTag = null;
+    tagToEdit = null;
     $form.name = "";
 
     formDialog.open = true;
   }
 
   function openDeleteDialog(id: number, name: string) {
-    deleteTagId = id;
-    deleteTagName = name;
-
+    tagToDelete = { id, name };
     deleteDialog.open = true;
   }
 
@@ -86,14 +83,15 @@
   function submit(event: SubmitEvent) {
     event.preventDefault();
 
-    if (originalTag) {
-      if (originalTag.name === $form.name) {
+    if (tagToEdit) {
+      if (tagToEdit.name === $form.name) {
         formDialog.open = false;
 
         return;
       }
 
-      $form.submit(TagController.update(originalTag.id), {
+      $form.submit(TagController.update(tagToEdit.id), {
+        preserveScroll: true,
         onSuccess: () => {
           formDialog.open = false;
         },
@@ -180,7 +178,7 @@
       </div>
       <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
         <h3 id="dialog-title" class="text-base font-semibold text-gray-900">
-          Delete {deleteTagName}
+          Delete {tagToDelete ? tagToDelete.name : "Tag"}
         </h3>
         <div class="mt-2">
           <p class="text-sm text-gray-500">
@@ -193,7 +191,7 @@
     <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
       <button
         type="button"
-        onclick={() => destroyTag(deleteTagId)}
+        onclick={() => destroyTag(tagToDelete ? tagToDelete.id : null)}
         class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
       >
         Delete
