@@ -15,6 +15,7 @@
     class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-zinc-200 bg-white px-6 pb-4"
   >
     <div class="flex h-16 shrink-0 items-center gap-2 text-xl font-semibold">
+      <img src="/icons/logo.svg" alt="logo" class="size-10" />
       <span>{$page.props.app.name}</span>
     </div>
     <nav class="flex flex-1 flex-col">
