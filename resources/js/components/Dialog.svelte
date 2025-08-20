@@ -29,6 +29,7 @@
       >
         <div class="absolute top-0 right-0 hidden pt-4 pr-4 sm:block">
           <button
+            tabindex="-1"
             type="button"
             command="close"
             commandfor={dialogId}

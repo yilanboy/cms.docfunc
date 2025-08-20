@@ -51,7 +51,6 @@
 
   function openEditDialog(id: number, name: string) {
     tagToEdit = { id, name };
-
     $form.name = name;
 
     formDialog.open = true;
@@ -177,13 +176,15 @@
         <TriangleAlert className="size-6 text-red-600" />
       </div>
       <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-        <h3 id="dialog-title" class="text-base font-semibold text-gray-900">
-          Delete {tagToDelete ? tagToDelete.name : "Tag"}
+        <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">
+          Delete Tag
         </h3>
         <div class="mt-2">
-          <p class="text-sm text-gray-500">
-            Are you sure you want to delete this tag? This action cannot be
-            undone.
+          <p class=" text-gray-500">
+            Are you sure you want to delete the tag "<span
+              class="font-medium text-gray-900"
+              >{tagToDelete ? tagToDelete.name : ""}</span
+            >"? This action cannot be undone.
           </p>
         </div>
       </div>
@@ -248,7 +249,7 @@
                     Name
                   </th>
                   <th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-0">
-                    <span class="sr-only">Edit</span>
+                    <span class="sr-only">Edit and Delete</span>
                   </th>
                 </tr>
               </thead>
