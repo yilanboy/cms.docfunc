@@ -68,12 +68,13 @@
     deleteDialog.open = true;
   }
 
-  function destroyTag(id: number | null) {
-    if (id) {
-      router.delete(TagController.destroy(id), {
+  function destroyTag() {
+    if (tagToDelete) {
+      router.delete(TagController.destroy(tagToDelete.id), {
         preserveScroll: true,
         onSuccess: () => {
           deleteDialog.open = false;
+          tagToDelete = null;
         },
       });
     }
@@ -192,7 +193,7 @@
     <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
       <button
         type="button"
-        onclick={() => destroyTag(tagToDelete ? tagToDelete.id : null)}
+        onclick={destroyTag}
         class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
       >
         Delete

@@ -57,20 +57,21 @@
     formDialog.open = true;
   }
 
-  function destroyLink(id: number | null) {
-    if (id) {
-      router.delete(LinkController.destroy(id), {
-        preserveScroll: true,
-        onSuccess: () => {
-          deleteDialog.open = false;
-        },
-      });
-    }
-  }
-
   function openDeleteDialog(id: number, title: string) {
     linkToDelete = { id, title };
     deleteDialog.open = true;
+  }
+
+  function destroyLink() {
+    if (linkToDelete) {
+      router.delete(LinkController.destroy(linkToDelete.id), {
+        preserveScroll: true,
+        onSuccess: () => {
+          deleteDialog.open = false;
+          linkToDelete = null;
+        },
+      });
+    }
   }
 
   function submit(event: SubmitEvent) {
@@ -206,7 +207,7 @@
     <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
       <button
         type="button"
-        onclick={() => destroyLink(linkToDelete ? linkToDelete.id : null)}
+        onclick={destroyLink}
         class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
       >
         Delete
