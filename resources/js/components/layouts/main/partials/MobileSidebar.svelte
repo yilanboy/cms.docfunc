@@ -50,7 +50,11 @@
           <div
             class="flex h-16 shrink-0 items-center gap-2 text-xl font-semibold"
           >
-            <img src="/icons/logo.svg" alt="logo" class="size-10" />
+            <img
+              src="{$page.props.asset.url}/icons/logo.svg"
+              alt="logo"
+              class="size-10"
+            />
             <span>{$page.props.app.name}</span>
           </div>
 

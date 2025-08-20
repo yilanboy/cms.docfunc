@@ -39,6 +39,7 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'app.name'  => fn() => config('app.name'),
+            'asset.url' => fn() => config('asset.url'),
             'auth.user' => fn() => $request->user()
                 ? $request->user()->only('id', 'name', 'email')
                 : null,
