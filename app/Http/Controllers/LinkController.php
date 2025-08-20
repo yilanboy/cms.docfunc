@@ -33,7 +33,7 @@ class LinkController extends Controller
 
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'url'   => ['required', 'string', 'max:255'],
+            'url'   => ['required', 'string', 'url', 'max:255'],
         ]);
 
         Link::create($validated);
@@ -46,12 +46,20 @@ class LinkController extends Controller
     {
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'url'   => ['required', 'string', 'max:255'],
+            'url'   => ['required', 'string', 'url', 'max:255'],
         ]);
 
         $link->update($validated);
 
         return back()
             ->with('success', 'Link updated successfully.');
+    }
+
+    public function destroy(Link $link)
+    {
+        $link->delete();
+
+        return back()
+            ->with('success', 'Link deleted successfully.');
     }
 }

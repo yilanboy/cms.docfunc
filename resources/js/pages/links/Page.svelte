@@ -4,6 +4,7 @@
   import { onMount } from "svelte";
   import { router, useForm } from "@inertiajs/svelte";
   import LinkController from "@/actions/App/Http/Controllers/LinkController";
+  import TriangleAlert from "@/components/icons/TriangleAlert.svelte";
 
   interface Props {
     title: string;
@@ -20,11 +21,15 @@
 
   const LINK_FORM_DIALOG_WRAPPER_ID = "link-form-dialog-wrapper";
   const LINK_FORM_DIALOG_ID = "link-form-dialog";
+  const LINK_DELETE_DIALOG_WRAPPER_ID = "link-delete-dialog-wrapper";
+  const LINK_DELETE_DIALOG_ID = "link-delete-dialog";
 
   let { title, links }: Props = $props();
-  let dialog: TailwindDialogElement;
+  let formDialog: TailwindDialogElement;
   let linkToEdit: { id: number; title: string; url: string } | null =
     $state(null);
+  let deleteDialog: TailwindDialogElement;
+  let linkToDelete: { id: number; title: string } | null = $state(null);
 
   const isEditing = $derived(linkToEdit !== null);
   const submitButtonText = $derived(isEditing ? "Update" : "Create");
@@ -40,7 +45,7 @@
     $form.title = "";
     $form.url = "";
 
-    dialog.open = true;
+    formDialog.open = true;
   }
 
   function openEditDialog(id: number, title: string, url: string) {
@@ -49,7 +54,23 @@
     $form.title = title;
     $form.url = url;
 
-    dialog.open = true;
+    formDialog.open = true;
+  }
+
+  function destroyLink(id: number | null) {
+    if (id) {
+      router.delete(LinkController.destroy(id), {
+        preserveScroll: true,
+        onSuccess: () => {
+          deleteDialog.open = false;
+        },
+      });
+    }
+  }
+
+  function openDeleteDialog(id: number, title: string) {
+    linkToDelete = { id, title };
+    deleteDialog.open = true;
   }
 
   function submit(event: SubmitEvent) {
@@ -57,13 +78,13 @@
 
     if (linkToEdit) {
       if (linkToEdit.title === $form.title && linkToEdit.url === $form.url) {
-        dialog.open = false;
+        formDialog.open = false;
       }
 
       $form.submit(LinkController.update(linkToEdit.id), {
         preserveScroll: true,
         onSuccess: () => {
-          dialog.open = false;
+          formDialog.open = false;
         },
       });
 
@@ -71,7 +92,7 @@
     } else {
       $form.submit(LinkController.store(), {
         onSuccess: () => {
-          dialog.open = false;
+          formDialog.open = false;
 
           router.get(LinkController.index().url);
         },
@@ -80,8 +101,12 @@
   }
 
   onMount(() => {
-    dialog = document.getElementById(
+    formDialog = document.getElementById(
       LINK_FORM_DIALOG_WRAPPER_ID,
+    ) as TailwindDialogElement;
+
+    deleteDialog = document.getElementById(
+      LINK_DELETE_DIALOG_WRAPPER_ID,
     ) as TailwindDialogElement;
   });
 </script>
@@ -154,6 +179,49 @@
     </form>
   </Dialog>
 
+  <Dialog
+    dialogWrapperId={LINK_DELETE_DIALOG_WRAPPER_ID}
+    dialogId={LINK_DELETE_DIALOG_ID}
+  >
+    <div class="sm:flex sm:items-start">
+      <div
+        class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10"
+      >
+        <TriangleAlert className="size-6 text-red-600" />
+      </div>
+      <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+        <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">
+          Delete Link
+        </h3>
+        <div class="mt-2">
+          <p class=" text-gray-500">
+            Are you sure you want to delete the link "<span
+              class="font-medium text-gray-900"
+              >{linkToDelete ? linkToDelete.title : ""}</span
+            >"? This action cannot be undone.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+      <button
+        type="button"
+        onclick={() => destroyLink(linkToDelete ? linkToDelete.id : null)}
+        class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
+      >
+        Delete
+      </button>
+      <button
+        type="button"
+        command="close"
+        commandfor={LINK_DELETE_DIALOG_ID}
+        class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+      >
+        Cancel
+      </button>
+    </div>
+  </Dialog>
+
   <main class="flex grow py-10">
     <div class="w-full px-4 sm:px-6 lg:px-8">
       <div class="sm:flex sm:items-center">
@@ -201,7 +269,7 @@
                     URL
                   </th>
                   <th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-0">
-                    <span class="sr-only">Edit</span>
+                    <span class="sr-only">Edit and Delete</span>
                   </th>
                 </tr>
               </thead>
@@ -224,7 +292,7 @@
                       {link.url}
                     </td>
                     <td
-                      class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0"
+                      class="relative flex justify-end gap-2 py-4 pr-4 pl-3 text-sm font-medium whitespace-nowrap sm:pr-0"
                     >
                       <button
                         onclick={() =>
@@ -232,6 +300,13 @@
                         class="cursor-pointer text-blue-600 hover:text-blue-900"
                       >
                         Edit
+                      </button>
+
+                      <button
+                        onclick={() => openDeleteDialog(link.id, link.title)}
+                        class="cursor-pointer text-red-600 hover:text-red-900"
+                      >
+                        Delete
                       </button>
                     </td>
                   </tr>

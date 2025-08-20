@@ -26,6 +26,9 @@ Route::middleware([InertiaAuthenticateMiddleware::class, 'verified'])->group(fun
     Route::patch('/links/{link}', [LinkController::class, 'update'])
         ->name('links.update');
 
+    Route::delete('/links/{link}', [LinkController::class, 'destroy'])
+        ->name('links.destroy');
+
     Route::get('/tags', [TagController::class, 'index'])
         ->name('tags.index');
 
