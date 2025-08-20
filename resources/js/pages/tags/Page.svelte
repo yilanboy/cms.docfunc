@@ -5,6 +5,7 @@
   import { router, useForm } from "@inertiajs/svelte";
   import { onMount } from "svelte";
   import TagController from "@/actions/App/Http/Controllers/TagController";
+  import TriangleAlert from "@/components/icons/TriangleAlert.svelte";
 
   interface Props {
     title: string;
@@ -32,10 +33,15 @@
 
   const TAG_FORM_DIALOG_WRAPPER_ID = "tag-form-dialog-wrapper";
   const TAG_FORM_DIALOG_ID = "tag-form-dialog";
+  const TAG_DELETE_DIALOG_WRAPPER_ID = "tag-delete-dialog-wrapper";
+  const TAG_DELETE_DIALOG_ID = "tag-delete-dialog";
 
   let { title, tags }: Props = $props();
-  let dialog: TailwindDialogElement;
+  let formDialog: TailwindDialogElement;
   let originalTag: { id: number; name: string } | null = $state(null);
+  let deleteDialog: TailwindDialogElement;
+  let deleteTagId: number | null = $state(null);
+  let deleteTagName: string | null = $state(null);
 
   const form = useForm<{ name: string }>({
     name: "",
@@ -49,14 +55,32 @@
 
     $form.name = name;
 
-    dialog.open = true;
+    formDialog.open = true;
   }
 
   function openCreateDialog() {
     originalTag = null;
     $form.name = "";
 
-    dialog.open = true;
+    formDialog.open = true;
+  }
+
+  function openDeleteDialog(id: number, name: string) {
+    deleteTagId = id;
+    deleteTagName = name;
+
+    deleteDialog.open = true;
+  }
+
+  function destroyTag(id: number | null) {
+    if (id) {
+      router.delete(TagController.destroy(id), {
+        preserveScroll: true,
+        onSuccess: () => {
+          deleteDialog.open = false;
+        },
+      });
+    }
   }
 
   function submit(event: SubmitEvent) {
@@ -64,28 +88,32 @@
 
     if (originalTag) {
       if (originalTag.name === $form.name) {
-        dialog.open = false;
+        formDialog.open = false;
 
         return;
       }
 
       $form.submit(TagController.update(originalTag.id), {
         onSuccess: () => {
-          dialog.open = false;
+          formDialog.open = false;
         },
       });
     } else {
       $form.submit(TagController.store(), {
         onSuccess: () => {
-          dialog.open = false;
+          formDialog.open = false;
         },
       });
     }
   }
 
   onMount(() => {
-    dialog = document.getElementById(
+    formDialog = document.getElementById(
       TAG_FORM_DIALOG_WRAPPER_ID,
+    ) as TailwindDialogElement;
+
+    deleteDialog = document.getElementById(
+      TAG_DELETE_DIALOG_WRAPPER_ID,
     ) as TailwindDialogElement;
   });
 </script>
@@ -138,6 +166,47 @@
         </button>
       </div>
     </form>
+  </Dialog>
+
+  <Dialog
+    dialogWrapperId={TAG_DELETE_DIALOG_WRAPPER_ID}
+    dialogId={TAG_DELETE_DIALOG_ID}
+  >
+    <div class="sm:flex sm:items-start">
+      <div
+        class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10"
+      >
+        <TriangleAlert className="size-6 text-red-600" />
+      </div>
+      <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+        <h3 id="dialog-title" class="text-base font-semibold text-gray-900">
+          Delete {deleteTagName}
+        </h3>
+        <div class="mt-2">
+          <p class="text-sm text-gray-500">
+            Are you sure you want to delete this tag? This action cannot be
+            undone.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+      <button
+        type="button"
+        onclick={() => destroyTag(deleteTagId)}
+        class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
+      >
+        Delete
+      </button>
+      <button
+        type="button"
+        command="close"
+        commandfor={TAG_DELETE_DIALOG_ID}
+        class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+      >
+        Cancel
+      </button>
+    </div>
   </Dialog>
 
   <main class="flex grow py-10">
@@ -199,13 +268,19 @@
                       {tag.name}
                     </td>
                     <td
-                      class="relative py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0"
+                      class="relative flex justify-end gap-4 py-4 pr-4 pl-3 text-sm font-medium whitespace-nowrap sm:pr-0"
                     >
                       <button
                         onclick={() => openEditDialog(tag.id, tag.name)}
                         class="cursor-pointer text-blue-600 hover:text-blue-900"
                       >
                         Edit
+                      </button>
+                      <button
+                        onclick={() => openDeleteDialog(tag.id, tag.name)}
+                        class="cursor-pointer text-red-600 hover:text-red-900"
+                      >
+                        Delete
                       </button>
                     </td>
                   </tr>

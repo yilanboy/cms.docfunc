@@ -35,6 +35,9 @@ Route::middleware([InertiaAuthenticateMiddleware::class, 'verified'])->group(fun
     Route::patch('/tags/{tag}', [TagController::class, 'update'])
         ->name('tags.update');
 
+    Route::delete('/tags/{tag}', [TagController::class, 'destroy'])
+        ->name('tags.destroy');
+
     Route::get('/settings/profile', [ProfileController::class, 'edit'])
         ->name('settings.profile.edit');
 

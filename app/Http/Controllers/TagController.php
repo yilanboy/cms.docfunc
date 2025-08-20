@@ -54,4 +54,12 @@ class TagController extends Controller
         return back()
             ->with('success', 'Tag updated successfully.');
     }
+
+    public function destroy(Tag $tag)
+    {
+        $tag->delete();
+
+        return back()
+            ->with('success', 'Tag deleted successfully.');
+    }
 }
