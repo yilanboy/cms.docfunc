@@ -15,7 +15,7 @@ use App\Models\Admin;
 
 pest()->extend(Tests\TestCase::class)
     // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature');
+    ->in('Feature', 'Browser');
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +48,7 @@ function something()
     // ..
 }
 
-function loginAsUser(null|Admin|int $user = null)
+function loginAsUser(null|Admin|int $user = null): Admin
 {
     if (is_int($user)) {
         $user = Admin::find($user);
