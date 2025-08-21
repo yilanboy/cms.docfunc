@@ -33,7 +33,7 @@
             type="button"
             command="close"
             commandfor={dialogId}
-            class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600"
+            class="cursor-pointer rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600"
           >
             <span class="sr-only">Close</span>
             <X />
