@@ -39,7 +39,7 @@ describe('link feature', function () {
         ]);
     });
 
-    test("if links count is over 5, user can't create link", function () {
+    test("if links count is over 5, user can't create a link", function () {
         // Arrange
         loginAsUser();
         // Reset links and seed exactly 5
@@ -83,6 +83,25 @@ describe('link feature', function () {
             'id'    => $link->id,
             'title' => 'Updated Title',
             'url'   => 'https://updated.example.com',
+        ]);
+    });
+
+    test('delete link', function () {
+        // Arrange
+        loginAsUser();
+        $link = Link::factory()->create([
+            'title' => 'Title',
+            'url'   => 'https://example.com',
+        ]);
+
+        // Act
+        $response = $this->delete(route('links.destroy', $link));
+
+        // Assert
+        $response->assertRedirect();
+        $response->assertSessionHas('success');
+        $this->assertDatabaseMissing('links', [
+            'id' => $link->id,
         ]);
     });
 });

@@ -55,4 +55,22 @@ describe('tag feature', function () {
             'name' => 'Updated Name',
         ]);
     });
+
+    test('delete tag', function () {
+        // Arrange
+        loginAsUser();
+        $tag = Tag::factory()->create([
+            'name' => 'Name',
+        ]);
+
+        // Act
+        $response = $this->delete(route('tags.destroy', $tag));
+
+        // Assert
+        $response->assertRedirect();
+        $response->assertSessionHas('success');
+        $this->assertDatabaseMissing('links', [
+            'id' => $tag->id,
+        ]);
+    });
 });
