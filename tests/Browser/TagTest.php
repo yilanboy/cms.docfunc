@@ -21,5 +21,8 @@ it('can add tag', function () {
     $page->click('Create');
 
     $page->assertSee('Tag created successfully.');
-    // $page->assertSee('New Tag');
+
+    $this->assertDatabaseHas('tags', [
+        'name' => 'New Tag',
+    ]);
 });
