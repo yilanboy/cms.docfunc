@@ -94,8 +94,6 @@
       $form.submit(LinkController.store(), {
         onSuccess: () => {
           formDialog.open = false;
-
-          router.get(LinkController.index().url);
         },
       });
     }
