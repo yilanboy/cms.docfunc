@@ -86,7 +86,9 @@ jobs:
         run: vendor/bin/phpstan analyse --memory-limit=2G
 
       - name: Test with pest
-        run: vendor/bin/pest --coverage-clover ./coverage.xml
+        run: |
+          npx playwright install
+          vendor/bin/pest --coverage-clover ./coverage.xml
         env:
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
