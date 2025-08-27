@@ -48,11 +48,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate vite manifest
-        run: |
-          npm install
-          npm run build
-
       # Docs: https://github.com/shivammathur/setup-php
       - name: Setup php
         uses: shivammathur/setup-php@v2
@@ -76,6 +71,11 @@ jobs:
 
       - name: Install composer dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Generate vite manifest
+        run: |
+          npm install
+          npm run build
 
       - name: Prepare the application
         run: |
