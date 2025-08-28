@@ -3,17 +3,15 @@
   import CircleCheck from "@/components/icons/CircleCheck.svelte";
   import { fly } from "svelte/transition";
   import CircleX from "@/components/icons/CircleX.svelte";
+  import debounce from "@/helpers";
 
   let showToast = $state(false);
-  let timeoutId: ReturnType<typeof setTimeout>;
 
   $effect(() => {
     if ($page.props.flash.success || $page.props.flash.error) {
       showToast = true;
 
-      clearTimeout(timeoutId);
-
-      timeoutId = setTimeout(() => {
+      debounce(() => {
         showToast = false;
       }, 3000);
     }
