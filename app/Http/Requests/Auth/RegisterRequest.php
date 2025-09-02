@@ -18,7 +18,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => [
-                'required', 'string', 'regex:/^[A-Za-z0-9\-\_\s]+$/u', 'between:3,25', 'unique:users'
+                'required', 'string', 'regex:/^[A-Za-z0-9\-\_\s]+$/u', 'between:3,25', 'unique:users',
             ],
             'email' => ['required', 'string', 'email', 'unique:users'],
             'password' => ['required', 'confirmed', Password::min(8)->letters()->mixedCase()->numbers()],

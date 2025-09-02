@@ -87,7 +87,7 @@ return [
             'attributes' => [
                 'key'        => 'id',
                 'expiration' => 'ttl',
-            ]
+            ],
         ],
 
         'octane' => [

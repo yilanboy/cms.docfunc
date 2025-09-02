@@ -57,6 +57,11 @@ jobs:
           extensions: redis
           coverage: xdebug
 
+      - name: Setup node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24.7.0"
+
       - name: Get composer cache directory
         id: composer-cache
         run: |
@@ -85,10 +90,13 @@ jobs:
       - name: Run the static analysis
         run: vendor/bin/phpstan analyse --memory-limit=2G
 
+      - name: Run Laravel pint
+        run: vendor/bin/pint --test
+
       - name: Test with pest
         run: |
-          npx playwright install
-          vendor/bin/pest --coverage-clover ./coverage.xml
+          npx playwright install --with-deps
+          vendor/bin/pest --parallel --coverage-clover ./coverage.xml
         env:
           REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
 
