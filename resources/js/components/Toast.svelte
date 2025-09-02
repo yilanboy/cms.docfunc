@@ -3,17 +3,18 @@
   import CircleCheck from "@/components/icons/CircleCheck.svelte";
   import { fly } from "svelte/transition";
   import CircleX from "@/components/icons/CircleX.svelte";
-  import debounce from "@/helpers";
+  import { debounce } from "@/helpers";
 
   let showToast = $state(false);
+
+  const debouncedHideToast = debounce(() => {
+    showToast = false;
+  }, 3000);
 
   $effect(() => {
     if ($page.props.flash.success || $page.props.flash.error) {
       showToast = true;
-
-      debounce(() => {
-        showToast = false;
-      }, 3000);
+      debouncedHideToast();
     }
   });
 </script>

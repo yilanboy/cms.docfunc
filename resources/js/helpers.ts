@@ -23,7 +23,7 @@ export function stopPropagation(fn: (event: Event) => void) {
     };
 }
 
-export default function debounce<T extends (...args: unknown[]) => void>(
+export function debounce<T extends (...args: unknown[]) => void>(
     callback: T,
     delay: number,
 ): (...args: Parameters<T>) => void {
