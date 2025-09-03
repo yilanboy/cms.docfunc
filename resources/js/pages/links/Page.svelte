@@ -162,7 +162,8 @@
       <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
         <button
           type="submit"
-          class="inline-flex w-full cursor-pointer justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-blue-500 sm:ml-3 sm:w-auto"
+          disabled={$form.processing}
+          class="inline-flex w-full cursor-pointer justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-blue-500 sm:ml-3 sm:w-auto disabled:pointer-events-none disabled:opacity-50"
         >
           {submitButtonText}
         </button>
