@@ -2,9 +2,10 @@
   import LayoutMain from "@/components/layouts/main/LayoutMain.svelte";
   import Dialog from "@/components/Dialog.svelte";
   import { onMount } from "svelte";
-  import { router, useForm } from "@inertiajs/svelte";
+  import { useForm } from "@inertiajs/svelte";
   import LinkController from "@/actions/App/Http/Controllers/LinkController";
   import TriangleAlert from "@/components/icons/TriangleAlert.svelte";
+  import { preventDefault } from "@/helpers";
 
   interface Props {
     title: string;
@@ -39,6 +40,8 @@
     url: "",
   });
 
+  const destroyForm = useForm<{}>({});
+
   function openCreateDialog() {
     linkToEdit = null;
 
@@ -62,21 +65,7 @@
     deleteDialog.open = true;
   }
 
-  function destroyLink() {
-    if (linkToDelete) {
-      router.delete(LinkController.destroy(linkToDelete.id), {
-        preserveScroll: true,
-        onSuccess: () => {
-          deleteDialog.open = false;
-          linkToDelete = null;
-        },
-      });
-    }
-  }
-
-  function submit(event: SubmitEvent) {
-    event.preventDefault();
-
+  function submit() {
     if (linkToEdit) {
       if (linkToEdit.title === $form.title && linkToEdit.url === $form.url) {
         formDialog.open = false;
@@ -94,6 +83,18 @@
       $form.submit(LinkController.store(), {
         onSuccess: () => {
           formDialog.open = false;
+        },
+      });
+    }
+  }
+
+  function destroySubmit() {
+    if (linkToDelete) {
+      $destroyForm.submit(LinkController.destroy(linkToDelete.id), {
+        preserveScroll: true,
+        onSuccess: () => {
+          deleteDialog.open = false;
+          linkToDelete = null;
         },
       });
     }
@@ -119,7 +120,7 @@
     dialogWrapperId={LINK_FORM_DIALOG_WRAPPER_ID}
     dialogId={LINK_FORM_DIALOG_ID}
   >
-    <form onsubmit={submit}>
+    <form onsubmit={preventDefault(submit)}>
       <div class="flex flex-col items-start gap-2">
         <div class="w-full text-center sm:text-left">
           <label for="title" class="block text-base font-medium text-gray-900">
@@ -163,7 +164,7 @@
         <button
           type="submit"
           disabled={$form.processing}
-          class="inline-flex w-full cursor-pointer justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-blue-500 sm:ml-3 sm:w-auto disabled:pointer-events-none disabled:opacity-50"
+          class="inline-flex w-full cursor-pointer justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:ml-3 sm:w-auto"
         >
           {submitButtonText}
         </button>
@@ -183,43 +184,46 @@
     dialogWrapperId={LINK_DELETE_DIALOG_WRAPPER_ID}
     dialogId={LINK_DELETE_DIALOG_ID}
   >
-    <div class="sm:flex sm:items-start">
-      <div
-        class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10"
-      >
-        <TriangleAlert className="size-6 text-red-600" />
-      </div>
-      <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-        <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">
-          Delete Link
-        </h3>
-        <div class="mt-2">
-          <p class=" text-gray-500">
-            Are you sure you want to delete the link "<span
-              class="font-medium text-gray-900"
-              >{linkToDelete ? linkToDelete.title : ""}</span
-            >"? This action cannot be undone.
-          </p>
+    <form onsubmit={preventDefault(destroySubmit)}>
+      <div class="sm:flex sm:items-start">
+        <div
+          class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10"
+        >
+          <TriangleAlert className="size-6 text-red-600" />
+        </div>
+        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+          <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">
+            Delete Link
+          </h3>
+          <div class="mt-2">
+            <p class=" text-gray-500">
+              Are you sure you want to delete the link "<span
+                class="font-medium text-gray-900"
+                >{linkToDelete ? linkToDelete.title : ""}</span
+              >"? This action cannot be undone.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-      <button
-        type="button"
-        onclick={destroyLink}
-        class="inline-flex w-full cursor-pointer justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
-      >
-        Delete
-      </button>
-      <button
-        type="button"
-        command="close"
-        commandfor={LINK_DELETE_DIALOG_ID}
-        class="mt-3 inline-flex w-full cursor-pointer justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-      >
-        Cancel
-      </button>
-    </div>
+      <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+        <button
+          id="delete-link-confirmation"
+          type="submit"
+          disabled={$destroyForm.processing}
+          class="inline-flex w-full cursor-pointer justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 disabled:pointer-events-none disabled:opacity-50 sm:ml-3 sm:w-auto"
+        >
+          {$destroyForm.processing ? "Deleting..." : "Delete"}
+        </button>
+        <button
+          type="button"
+          command="close"
+          commandfor={LINK_DELETE_DIALOG_ID}
+          class="mt-3 inline-flex w-full cursor-pointer justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
   </Dialog>
 
   <main class="flex grow py-10">
@@ -303,6 +307,7 @@
                       </button>
 
                       <button
+                        id={`delete-link-${link.id}`}
                         onclick={() => openDeleteDialog(link.id, link.title)}
                         class="cursor-pointer text-red-600 hover:text-red-900"
                       >

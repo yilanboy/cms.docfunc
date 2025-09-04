@@ -43,6 +43,28 @@ it('can add link', function () {
 
     $this->assertDatabaseHas('links', [
         'title' => 'New Link',
-        'url'   => 'https://example.com',
+        'url' => 'https://example.com',
+    ]);
+});
+
+it('can delete link', function () {
+    loginAsUser();
+
+    $link = Link::factory()->create([
+        'title' => 'Title',
+        'url' => 'https://example.com',
+    ]);
+
+    $page = visit('/links');
+
+    $deleteDialogId = "delete-link-{$link->id}";
+    $deleteConfirmationId = "delete-link-confirmation";
+
+    $page->click($deleteDialogId);
+    $page->click($deleteConfirmationId);
+
+    $page->assertSee('Link deleted successfully.');
+    $this->assertDatabaseMissing('links', [
+        'id' => $link->id,
     ]);
 });

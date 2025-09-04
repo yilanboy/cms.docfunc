@@ -2,10 +2,11 @@
   import LayoutMain from "@/components/layouts/main/LayoutMain.svelte";
   import Pagination from "@/components/Pagination.svelte";
   import Dialog from "@/components/Dialog.svelte";
-  import { router, useForm } from "@inertiajs/svelte";
+  import { useForm } from "@inertiajs/svelte";
   import { onMount } from "svelte";
   import TagController from "@/actions/App/Http/Controllers/TagController";
   import TriangleAlert from "@/components/icons/TriangleAlert.svelte";
+  import { preventDefault } from "@/helpers";
 
   interface Props {
     title: string;
@@ -46,6 +47,8 @@
     name: "",
   });
 
+  const destroyForm = useForm<{}>({});
+
   const isEditing = $derived(tagToEdit !== null);
   const submitButtonText = $derived(isEditing ? "Update" : "Create");
 
@@ -68,9 +71,9 @@
     deleteDialog.open = true;
   }
 
-  function destroyTag() {
+  function destroySubmit() {
     if (tagToDelete) {
-      router.delete(TagController.destroy(tagToDelete.id), {
+      $destroyForm.submit(TagController.destroy(tagToDelete.id), {
         preserveScroll: true,
         onSuccess: () => {
           deleteDialog.open = false;
@@ -80,9 +83,7 @@
     }
   }
 
-  function submit(event: SubmitEvent) {
-    event.preventDefault();
-
+  function submit() {
     if (tagToEdit) {
       if (tagToEdit.name === $form.name) {
         formDialog.open = false;
@@ -125,7 +126,7 @@
     dialogWrapperId={TAG_FORM_DIALOG_WRAPPER_ID}
     dialogId={TAG_FORM_DIALOG_ID}
   >
-    <form onsubmit={submit}>
+    <form onsubmit={preventDefault(submit)}>
       <div class="sm:flex sm:items-start">
         <div class="w-full text-center sm:text-left">
           <label for="name" class="block text-base font-medium text-gray-900">
@@ -151,7 +152,7 @@
         <button
           type="submit"
           disabled={$form.processing}
-          class="inline-flex w-full cursor-pointer justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-blue-500 sm:ml-3 sm:w-auto disabled:pointer-events-none disabled:opacity-50"
+          class="inline-flex w-full cursor-pointer justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:ml-3 sm:w-auto"
         >
           {submitButtonText}
         </button>
@@ -171,43 +172,46 @@
     dialogWrapperId={TAG_DELETE_DIALOG_WRAPPER_ID}
     dialogId={TAG_DELETE_DIALOG_ID}
   >
-    <div class="sm:flex sm:items-start">
-      <div
-        class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10"
-      >
-        <TriangleAlert className="size-6 text-red-600" />
-      </div>
-      <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-        <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">
-          Delete Tag
-        </h3>
-        <div class="mt-2">
-          <p class=" text-gray-500">
-            Are you sure you want to delete the tag "<span
-              class="font-medium text-gray-900"
-              >{tagToDelete ? tagToDelete.name : ""}</span
-            >"? This action cannot be undone.
-          </p>
+    <form onsubmit={preventDefault(destroySubmit)}>
+      <div class="sm:flex sm:items-start">
+        <div
+          class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10"
+        >
+          <TriangleAlert className="size-6 text-red-600" />
+        </div>
+        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+          <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">
+            Delete Tag
+          </h3>
+          <div class="mt-2">
+            <p class=" text-gray-500">
+              Are you sure you want to delete the tag "<span
+                class="font-medium text-gray-900"
+                >{tagToDelete ? tagToDelete.name : ""}</span
+              >"? This action cannot be undone.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-      <button
-        type="button"
-        onclick={destroyTag}
-        class="inline-flex w-full cursor-pointer justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
-      >
-        Delete
-      </button>
-      <button
-        type="button"
-        command="close"
-        commandfor={TAG_DELETE_DIALOG_ID}
-        class="mt-3 inline-flex w-full cursor-pointer justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-      >
-        Cancel
-      </button>
-    </div>
+      <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+        <button
+          id="delete-tag-confirmation"
+          type="submit"
+          disabled={$destroyForm.processing}
+          class="inline-flex w-full cursor-pointer justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 disabled:pointer-events-none disabled:opacity-50 sm:ml-3 sm:w-auto"
+        >
+          {$destroyForm.processing ? "Deleting..." : "Delete"}
+        </button>
+        <button
+          type="button"
+          command="close"
+          commandfor={TAG_DELETE_DIALOG_ID}
+          class="mt-3 inline-flex w-full cursor-pointer justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
   </Dialog>
 
   <main class="flex grow py-10">
@@ -278,6 +282,7 @@
                         Edit
                       </button>
                       <button
+                        id={`delete-tag-${tag.id}`}
                         onclick={() => openDeleteDialog(tag.id, tag.name)}
                         class="cursor-pointer text-red-600 hover:text-red-900"
                       >
