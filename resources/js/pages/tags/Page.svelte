@@ -270,11 +270,7 @@
                     <td
                       class="max-w-16 truncate px-3 py-4 text-sm whitespace-nowrap text-gray-500"
                     >
-                      <div
-                        class="inline-flex items-center rounded-md bg-emerald-100 px-2 py-1 font-medium text-emerald-700 hover:bg-emerald-200"
-                      >
-                        {tag.name}
-                      </div>
+                      {tag.name}
                     </td>
                     <td
                       class="relative flex justify-end gap-4 py-4 pr-4 pl-3 text-sm font-medium whitespace-nowrap sm:pr-0"
