@@ -56,4 +56,12 @@ describe('page test', function () {
 
         $response->assertStatus(200);
     });
+
+    test('the user can visit passkeys page', function () {
+        loginAsUser();
+
+        $response = $this->get(route('settings.passkey.index'));
+
+        $response->assertStatus(200);
+    });
 });

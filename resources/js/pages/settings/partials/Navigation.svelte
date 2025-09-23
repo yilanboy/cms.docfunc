@@ -2,6 +2,7 @@
   import { inertia, page } from "@inertiajs/svelte";
   import ProfileController from "@/actions/App/Http/Controllers/Settings/ProfileController";
   import PasswordController from "@/actions/App/Http/Controllers/Settings/PasswordController";
+  import PasskeyController from "@/actions/App/Http/Controllers/Settings/PasskeyController";
 </script>
 
 <ul class="flex flex-col gap-1 sm:w-full sm:max-w-sm">
@@ -29,6 +30,20 @@
       }}
     >
       Password
+    </a>
+  </li>
+
+  <li>
+    <a
+      use:inertia
+      href={PasskeyController.index().url}
+      class={{
+        "bg-zinc-100": $page.url === PasskeyController.index().url,
+        "hover:bg-zinc-100": $page.url !== PasskeyController.index().url,
+        "block rounded-md px-4 py-2 ": true,
+      }}
+    >
+      Passkeys
     </a>
   </li>
 </ul>

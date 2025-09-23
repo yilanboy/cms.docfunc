@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\RootController;
+use App\Http\Controllers\Settings\PasskeyController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use App\Http\Controllers\TagController;
@@ -52,4 +53,7 @@ Route::middleware([InertiaAuthenticateMiddleware::class, 'verified'])->group(fun
 
     Route::put('/settings/password', [PasswordController::class, 'update'])
         ->name('settings.password.update');
+
+    Route::get('/settings/passkeys', [PasskeyController::class, 'index'])
+        ->name('settings.passkey.index');
 });
