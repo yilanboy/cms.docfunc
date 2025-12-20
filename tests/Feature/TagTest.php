@@ -29,7 +29,6 @@ describe('tag feature', function () {
 
         // Assert
         $response->assertRedirect();
-        $response->assertSessionHas('success');
         $this->assertDatabaseHas('tags', [
             'name' => 'New Tag',
         ]);
@@ -49,7 +48,6 @@ describe('tag feature', function () {
 
         // Assert
         $response->assertRedirect();
-        $response->assertSessionHas('success');
         $this->assertDatabaseHas('tags', [
             'id'   => $tag->id,
             'name' => 'Updated Name',
@@ -68,7 +66,6 @@ describe('tag feature', function () {
 
         // Assert
         $response->assertRedirect();
-        $response->assertSessionHas('success');
         $this->assertDatabaseMissing('links', [
             'id' => $tag->id,
         ]);

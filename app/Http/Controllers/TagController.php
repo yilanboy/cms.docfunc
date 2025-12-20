@@ -39,8 +39,12 @@ class TagController extends Controller
 
         $lastPage = Tag::paginate(10)->lastPage();
 
-        return to_route('tags.index', ['page' => $lastPage])
-            ->with('success', 'Tag created successfully.');
+        Inertia::flash('toast', [
+            'type'    => 'success',
+            'message' => 'Tag created successfully.',
+        ]);
+
+        return to_route('tags.index', ['page' => $lastPage]);
     }
 
     public function update(Request $request, Tag $tag)
@@ -51,15 +55,20 @@ class TagController extends Controller
 
         $tag->update($validated);
 
-        return back()
-            ->with('success', 'Tag updated successfully.');
+
+        return Inertia::flash('toast', [
+            'type'    => 'success',
+            'message' => 'Tag updated successfully.',
+        ])->back();
     }
 
     public function destroy(Tag $tag)
     {
         $tag->delete();
 
-        return back()
-            ->with('success', 'Tag deleted successfully.');
+        return Inertia::flash('toast', [
+            'type'    => 'success',
+            'message' => 'Tag deleted successfully.',
+        ])->back();
     }
 }

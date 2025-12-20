@@ -38,8 +38,10 @@ class LinkController extends Controller
 
         Link::create($validated);
 
-        return back()
-            ->with('success', 'Link created successfully.');
+        return Inertia::flash('toast', [
+            'type'    => 'success',
+            'message' => 'Link created successfully.',
+        ])->back();
     }
 
     public function update(Request $request, Link $link)
@@ -51,15 +53,19 @@ class LinkController extends Controller
 
         $link->update($validated);
 
-        return back()
-            ->with('success', 'Link updated successfully.');
+        return Inertia::flash('toast', [
+            'type'    => 'success',
+            'message' => 'Link updated successfully.',
+        ])->back();
     }
 
     public function destroy(Link $link)
     {
         $link->delete();
 
-        return back()
-            ->with('success', 'Link deleted successfully.');
+        return Inertia::flash('toast', [
+            'type'    => 'success',
+            'message' => 'Link deleted successfully.',
+        ])->back();
     }
 }

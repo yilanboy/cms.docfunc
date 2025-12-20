@@ -27,7 +27,15 @@ class ForgotPasswordController extends Controller
         );
 
         return $status === Password::ResetLinkSent
-            ? back()->with('success', __($status))
-            : back()->with('error', __($status));
+            ? Inertia::flash('toast', [
+                'type'        => 'success',
+                'message'     => 'Reset link sent',
+                'description' => __($status)
+            ])->back()
+            : Inertia::flash('toast', [
+                'type'        => 'danger',
+                'message'     => 'Failed to send reset link',
+                'description' => __($status)
+            ])->back();
     }
 }

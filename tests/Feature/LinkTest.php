@@ -32,7 +32,6 @@ describe('link feature', function () {
 
         // Assert
         $response->assertRedirect();
-        $response->assertSessionHas('success');
         $this->assertDatabaseHas('links', [
             'title' => 'New Link',
             'url'   => 'https://example.com',
@@ -54,7 +53,6 @@ describe('link feature', function () {
 
         // Assert
         $response->assertRedirect();
-        $response->assertSessionHas('error');
         $this->assertDatabaseCount('links', 5);
         $this->assertDatabaseMissing('links', [
             'title' => 'Should Not Create',
@@ -78,7 +76,6 @@ describe('link feature', function () {
 
         // Assert
         $response->assertRedirect();
-        $response->assertSessionHas('success');
         $this->assertDatabaseHas('links', [
             'id'    => $link->id,
             'title' => 'Updated Title',
@@ -99,7 +96,6 @@ describe('link feature', function () {
 
         // Assert
         $response->assertRedirect();
-        $response->assertSessionHas('success');
         $this->assertDatabaseMissing('links', [
             'id' => $link->id,
         ]);

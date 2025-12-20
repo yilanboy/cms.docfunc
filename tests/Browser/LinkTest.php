@@ -43,7 +43,7 @@ it('can add link', function () {
 
     $this->assertDatabaseHas('links', [
         'title' => 'New Link',
-        'url' => 'https://example.com',
+        'url'   => 'https://example.com',
     ]);
 });
 
@@ -52,7 +52,7 @@ it('can delete link', function () {
 
     $link = Link::factory()->create([
         'title' => 'Title',
-        'url' => 'https://example.com',
+        'url'   => 'https://example.com',
     ]);
 
     $page = visit('/links');

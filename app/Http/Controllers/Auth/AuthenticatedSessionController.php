@@ -27,6 +27,14 @@ class AuthenticatedSessionController extends Controller
 
         Inertia::clearHistory();
 
+        Inertia::flash([
+            'toast' => [
+                'type'        => 'success',
+                'message'     => 'Welcome back!',
+                'description' => 'You have successfully logged in.'
+            ]
+        ]);
+
         return redirect()->intended(route('dashboard'));
     }
 
@@ -39,6 +47,14 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         Inertia::clearHistory();
+
+        Inertia::flash([
+            'toast' => [
+                'type'        => 'success',
+                'message'     => 'Logged out!',
+                'description' => 'You have successfully logged out.'
+            ]
+        ]);
 
         return redirect(route('login'));
     }

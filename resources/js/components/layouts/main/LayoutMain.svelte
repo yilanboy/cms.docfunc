@@ -1,30 +1,31 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
-  import MobileSidebar from "@/components/layouts/main/partials/MobileSidebar.svelte";
-  import DesktopSidebar from "@/components/layouts/main/partials/DesktopSidebar.svelte";
+  import Sidebar from "@/components/layouts/main/partials/Sidebar.svelte";
   import Header from "@/components/layouts/main/partials/Header.svelte";
-  import Toast from "@/components/Toast.svelte";
-
-  let sidebarIsOpen = $state(false);
+  import Toasts from "@/components/Toasts.svelte";
 
   interface Props {
-    searchIsEnabled?: boolean;
     children: Snippet;
   }
 
-  let { searchIsEnabled = false, children }: Props = $props();
+  let { children }: Props = $props();
+
+  let sidebarIsOpen = $state(true);
 </script>
 
-<div class="font-source-sans-3">
-  <Toast />
+<div class="font-source-sans-3 relative min-h-screen w-full bg-zinc-50">
+  <Header bind:sidebarIsOpen />
 
-  <MobileSidebar bind:sidebarIsOpen />
+  <Sidebar bind:isOpen={sidebarIsOpen} />
 
-  <DesktopSidebar />
-
-  <div class="flex min-h-screen flex-col bg-white lg:pl-72">
-    <Header bind:sidebarIsOpen {searchIsEnabled} />
-
+  <div
+    class={{
+      "lg:pl-72": sidebarIsOpen,
+      "transition-all duration-300 ease-in-out": true,
+    }}
+  >
     {@render children?.()}
   </div>
+
+  <Toasts />
 </div>

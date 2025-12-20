@@ -35,7 +35,7 @@ class ResetPasswordController extends Controller
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function (Admin $user, string $password) {
                 $user->forceFill([
-                    'password' => Hash::make($password),
+                    'password' => Hash::make($password)
                 ])->setRememberToken(Str::random(60));
 
                 $user->save();
@@ -45,8 +45,12 @@ class ResetPasswordController extends Controller
 
         );
 
-        return $status === Password::PasswordReset
-            ? redirect()->route('login')->with('success', __($status))
-            : back()->with('error', __($status));
+        if ($status === Password::PasswordReset) {
+            Inertia::flash('toast', ['type' => 'success', 'message' => __($status)])->back();
+
+            return redirect()->route('login');
+        }
+
+        return Inertia::flash('toast', ['type' => 'danger', 'message' => __($status)])->back();
     }
 }

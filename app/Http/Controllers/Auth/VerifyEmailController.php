@@ -22,7 +22,7 @@ class VerifyEmailController extends Controller
         return Inertia::render('verify/email/Page');
     }
 
-    public function create(Request $request): RedirectResponse|Response
+    public function create(Request $request)
     {
         if ($request->user()->hasVerifiedEmail()) {
             return back();
@@ -30,7 +30,11 @@ class VerifyEmailController extends Controller
 
         $request->user()->sendEmailVerificationNotification();
 
-        return back()->with('success', 'Email verification link sent!');
+        return Inertia::flash('toast', [
+            'type'        => 'success',
+            'message'     => 'Verification link sent!',
+            'description' => 'Please check your email to verify your account.',
+        ])->back();
     }
 
     public function store(EmailVerificationRequest $request): RedirectResponse
