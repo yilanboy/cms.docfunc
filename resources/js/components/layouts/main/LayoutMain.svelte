@@ -13,7 +13,7 @@
   let sidebarIsOpen = $state(true);
 </script>
 
-<div class="font-source-sans-3 relative min-h-screen w-full bg-zinc-50">
+<div class="font-source-sans-3 relative min-h-screen w-full">
   <Header bind:sidebarIsOpen />
 
   <Sidebar bind:isOpen={sidebarIsOpen} />

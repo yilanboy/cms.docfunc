@@ -28,14 +28,14 @@
         <a
           use:inertia
           href={meta.links[0].url}
-          class="inline-flex items-center border-t-2 border-transparent pt-4 pr-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+          class="inline-flex items-center border-t-2 border-transparent pt-4 pr-1 text-base font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
         >
           <ArrowLeft className="mr-3 size-5 text-gray-400" />
           Previous
         </a>
       {:else}
         <span
-          class="inline-flex cursor-default items-center border-t-2 border-transparent pt-4 pr-1 text-sm font-medium text-gray-500"
+          class="inline-flex cursor-default items-center border-t-2 border-transparent pt-4 pr-1 text-base font-medium text-gray-500"
         >
           <ArrowLeft className="mr-3 size-5 text-gray-400" />
           Previous
@@ -54,14 +54,14 @@
               "border-blue-500 text-blue-600": link.active,
               "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700":
                 !link.active,
-              "inline-flex items-center border-t-2 px-4 pt-4 text-sm font-medium": true,
+              "inline-flex items-center border-t-2 px-4 pt-4 text-base font-medium": true,
             }}
           >
             {link.label}
           </a>
         {:else}
           <span
-            class="inline-flex cursor-default items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500"
+            class="inline-flex cursor-default items-center border-t-2 border-transparent px-4 pt-4 text-base font-medium text-gray-500"
           >
             {link.label}
           </span>
@@ -73,14 +73,14 @@
         <a
           use:inertia
           href={meta.links[meta.links.length - 1].url}
-          class="inline-flex items-center border-t-2 border-transparent pt-4 pr-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+          class="inline-flex items-center border-t-2 border-transparent pt-4 pr-1 text-base font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
         >
           Next
           <ArrowRight className="ml-3 size-5 text-gray-400" />
         </a>
       {:else}
         <span
-          class="inline-flex cursor-default items-center border-t-2 border-transparent pt-4 pr-1 text-sm font-medium text-gray-500"
+          class="inline-flex cursor-default items-center border-t-2 border-transparent pt-4 pr-1 text-base font-medium text-gray-500"
         >
           Next
           <ArrowRight className="ml-3 size-5 text-gray-400" />
