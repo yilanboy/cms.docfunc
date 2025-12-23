@@ -548,7 +548,7 @@
         class={{
           "p-4": !toast.html,
           "p-0": toast.html,
-          "group relative flex w-full flex-col items-start border border-gray-100 bg-white shadow-[0_5px_15px_-3px_rgb(0_0_0_/_0.08)] transition-all duration-300 ease-out sm:max-w-xs sm:rounded-md": true,
+          "group relative flex w-full flex-col items-start border border-gray-100 bg-white shadow-[0_5px_15px_-3px_rgb(0_0_0/0.08)] transition-all duration-300 ease-out sm:max-w-xs sm:rounded-md": true,
         }}
       >
         {#if toast.html}

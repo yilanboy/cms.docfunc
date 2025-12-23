@@ -4,10 +4,10 @@
   import { inertia, page, Form } from "@inertiajs/svelte";
   import ChevronLeft from "@/components/icons/ChevronLeft.svelte";
   import { back } from "@/helpers";
-  import Input from "@/components/forms/Input.svelte";
-  import Checkbox from "@/components/forms/Checkbox.svelte";
+  import InputWithLabel from "@/components/forms/InputWithLabel.svelte";
+  import CheckboxWithLabel from "@/components/forms/CheckboxWithLabel.svelte";
 
-  interface SlotProps {
+  interface SlotFormProps {
     errors: {
       email: string | null;
       password: string | null;
@@ -39,8 +39,8 @@
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <Form class="space-y-6" action={AuthenticatedSessionController.store()}>
-        {#snippet children({ errors }: SlotProps)}
-          <Input
+        {#snippet children({ errors }: SlotFormProps)}
+          <InputWithLabel
             label="Email address"
             name="email"
             type="email"
@@ -53,7 +53,7 @@
             <div class="text-red-500">{errors.email}</div>
           {/if}
 
-          <Input
+          <InputWithLabel
             label="Password"
             name="password"
             type="password"
@@ -67,7 +67,7 @@
           {/if}
 
           <div class="flex items-center justify-between">
-            <Checkbox label="Remember me" name="remember" id="remember" />
+            <CheckboxWithLabel label="Remember me" name="remember" id="remember" />
 
             <div class="text-base">
               <a

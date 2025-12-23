@@ -25,7 +25,7 @@
 {#if isOpen}
   <div
     transition:fly={{ x: slideOffset }}
-    class="fixed inset-y-0 top-16 z-40 flex h-dvh w-72 flex-col"
+    class="fixed inset-y-0 top-16 z-40 flex w-72 flex-col"
   >
     <div
       class="flex grow flex-col gap-y-5 overflow-y-auto border-r border-zinc-200 bg-white px-6 pb-4"

@@ -8,11 +8,6 @@ export interface User {
     email: string;
 }
 
-export interface Flash {
-    success: string | null;
-    error: string | null;
-}
-
 export interface App {
     name: string;
 }
@@ -26,6 +21,5 @@ export type PageProps<
 > = T & {
     app: App;
     auth: Auth;
-    flash: Flash;
     asset: Asset;
 };
