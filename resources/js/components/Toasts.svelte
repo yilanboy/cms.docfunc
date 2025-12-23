@@ -540,18 +540,18 @@
       }}
       id={toast.id}
       class={{
-        "toast-no-description": !toast.description,
+        "toast-no-description": !("description" in toast),
         "absolute w-full duration-300 ease-out select-none sm:max-w-xs": true,
       }}
     >
       <span
         class={{
-          "p-4": !toast.html,
-          "p-0": toast.html,
+          "p-4": !("html" in toast),
+          "p-0": "html" in toast,
           "group relative flex w-full flex-col items-start border border-gray-100 bg-white shadow-[0_5px_15px_-3px_rgb(0_0_0/0.08)] transition-all duration-300 ease-out sm:max-w-xs sm:rounded-md": true,
         }}
       >
-        {#if toast.html}
+        {#if "html" in toast}
           <div>{@html toast.html}</div>
         {:else}
           <div class="relative">
@@ -579,7 +579,7 @@
               </p>
             </div>
 
-            {#if toast.description}
+            {#if "description" in toast}
               <p
                 class={{
                   "pl-5.5": toast.type !== "default",
@@ -599,8 +599,9 @@
             burnToast(toast.id);
           }}
           class={{
-            "top-1/2 -translate-y-1/2": !toast.description && !toast.html,
-            "top-0 mt-2.5": toast.description || toast.html,
+            "top-1/2 -translate-y-1/2":
+              !("description" in toast) && !("html" in toast),
+            "top-0 mt-2.5": "description" in toast || "html" in toast,
             "absolute right-0 mr-2.5 cursor-pointer rounded-full p-1.5 text-gray-400 opacity-0 transition duration-100 ease-in-out group-hover:opacity-100 hover:bg-gray-50 hover:text-gray-500": true,
           }}
         >

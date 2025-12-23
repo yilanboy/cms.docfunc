@@ -67,7 +67,11 @@
           {/if}
 
           <div class="flex items-center justify-between">
-            <CheckboxWithLabel label="Remember me" name="remember" id="remember" />
+            <CheckboxWithLabel
+              label="Remember me"
+              name="remember"
+              id="remember"
+            />
 
             <div class="text-base">
               <a

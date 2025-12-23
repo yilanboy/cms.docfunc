@@ -3,6 +3,7 @@
   import { useForm } from "@inertiajs/svelte";
   import ChevronLeft from "@/components/icons/ChevronLeft.svelte";
   import { back } from "@/helpers";
+  import LayoutGuest from "@/components/layouts/guest/LayoutGuest.svelte";
 
   let title = "Forgot Password";
 
@@ -21,7 +22,7 @@
   <title>{title}</title>
 </svelte:head>
 
-<div class="font-source-sans-3 flex min-h-screen w-full flex-col bg-white">
+<LayoutGuest>
   <header class="flex w-full items-center justify-start p-4">
     <button
       type="button"
@@ -72,4 +73,4 @@
       </form>
     </div>
   </main>
-</div>
+</LayoutGuest>

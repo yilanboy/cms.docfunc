@@ -84,8 +84,7 @@
       </div>
     </div>
 
-    <div class="hidden lg:flex lg:gap-x-12">
-    </div>
+    <div class="hidden lg:flex lg:gap-x-12"></div>
 
     <div class="flex flex-1 items-center justify-end gap-x-4">
       <!-- Separator -->

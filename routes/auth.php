@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Middleware\InertiaAuthenticateMiddleware;
+use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
     ->name('login')
@@ -43,5 +44,5 @@ Route::get('/reset-password/{token}', [ResetPasswordController::class, 'edit'])
     ->name('password.reset');
 
 Route::post('/reset-password', [ResetPasswordController::class, 'update'])
-    ->middleware('guest')
+    ->middleware(['guest', HandlePrecognitiveRequests::class])
     ->name('password.update');

@@ -214,7 +214,7 @@
     </form>
   </Dialog>
 
-  <main class="py-10 bg-white">
+  <main class="bg-white py-10">
     <div
       class="flex w-full grow flex-col justify-between gap-8 px-4 sm:px-6 lg:px-8"
     >

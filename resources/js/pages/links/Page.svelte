@@ -226,7 +226,7 @@
     </form>
   </Dialog>
 
-  <main class="flex py-10 bg-white">
+  <main class="flex bg-white py-10">
     <div class="w-full px-4 sm:px-6 lg:px-8">
       <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">

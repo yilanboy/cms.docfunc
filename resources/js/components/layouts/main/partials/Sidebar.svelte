@@ -56,13 +56,13 @@
                   use:inertia
                   href={LinkController.index().url}
                   class={{
-                  "bg-zinc-100 text-blue-600": $page.url.startsWith(
-                    LinkController.index().url,
-                  ),
-                  "text-zinc-700 hover:bg-zinc-100 hover:text-blue-600":
-                    !$page.url.startsWith(LinkController.index().url),
-                  "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold": true,
-                }}
+                    "bg-zinc-100 text-blue-600": $page.url.startsWith(
+                      LinkController.index().url,
+                    ),
+                    "text-zinc-700 hover:bg-zinc-100 hover:text-blue-600":
+                      !$page.url.startsWith(LinkController.index().url),
+                    "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold": true,
+                  }}
                 >
                   <Link className="size-6 shrink-0" />
                   Links
@@ -74,13 +74,13 @@
                   use:inertia
                   href={TagController.index().url}
                   class={{
-                  "bg-zinc-100 text-blue-600": $page.url.startsWith(
-                    TagController.index().url,
-                  ),
-                  "text-zinc-700 hover:bg-zinc-100 hover:text-blue-600":
-                    !$page.url.startsWith(TagController.index().url),
-                  "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold": true,
-                }}
+                    "bg-zinc-100 text-blue-600": $page.url.startsWith(
+                      TagController.index().url,
+                    ),
+                    "text-zinc-700 hover:bg-zinc-100 hover:text-blue-600":
+                      !$page.url.startsWith(TagController.index().url),
+                    "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold": true,
+                  }}
                 >
                   <Tag className="size-6 shrink-0" />
                   Tags
