@@ -7,6 +7,7 @@
   import TagController from "@/actions/App/Http/Controllers/TagController";
   import TriangleAlert from "@/components/icons/TriangleAlert.svelte";
   import { preventDefault } from "@/helpers";
+  import InputWithLabel from "@/components/forms/InputWithLabel.svelte";
 
   interface Props {
     title: string;
@@ -129,18 +130,13 @@
     <form onsubmit={preventDefault(submit)}>
       <div class="sm:flex sm:items-start">
         <div class="w-full text-center sm:text-left">
-          <label for="name" class="block font-medium text-gray-900">
-            Name
-          </label>
-          <div class="mt-2">
-            <input
-              id="name"
-              type="text"
-              placeholder="New tag name"
-              bind:value={$form.name}
-              class="block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
-            />
-          </div>
+          <InputWithLabel
+            id="tag-name-input"
+            type="text"
+            placeholder="New tag name"
+            label="Name"
+            bind:value={$form.name}
+          />
 
           {#if $form.errors.name}
             <div class="mt-2 text-red-500">{$form.errors.name}</div>
