@@ -21,7 +21,7 @@
   <div
     class={{
       "lg:pl-72": sidebarIsOpen,
-      "transition-all duration-300 ease-in-out": true,
+      "text-base transition-all duration-300 ease-in-out": true,
     }}
   >
     {@render children?.()}

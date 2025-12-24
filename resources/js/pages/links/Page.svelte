@@ -123,7 +123,7 @@
     <form onsubmit={preventDefault(submit)}>
       <div class="flex flex-col items-start gap-2">
         <div class="w-full text-center sm:text-left">
-          <label for="title" class="block text-base font-medium text-gray-900">
+          <label for="title" class="block font-medium text-gray-900">
             Title
           </label>
           <div class="mt-2">
@@ -132,7 +132,7 @@
               type="text"
               placeholder="Link title"
               bind:value={$form.title}
-              class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
+              class="block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
             />
           </div>
 
@@ -142,16 +142,14 @@
         </div>
 
         <div class="w-full text-center sm:text-left">
-          <label for="url" class="block text-base font-medium text-gray-900">
-            URL
-          </label>
+          <label for="url" class="block font-medium text-gray-900"> URL </label>
           <div class="mt-2">
             <input
               id="url"
               type="text"
               placeholder="Link URL"
               bind:value={$form.url}
-              class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
+              class="block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
             />
           </div>
 
@@ -164,7 +162,7 @@
         <button
           type="submit"
           disabled={$form.processing}
-          class="inline-flex w-full cursor-pointer justify-center rounded-md bg-blue-600 px-3 py-2 text-base font-semibold text-white shadow-xs hover:bg-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:ml-3 sm:w-auto"
+          class="inline-flex w-full cursor-pointer justify-center rounded-md bg-blue-600 px-3 py-2 font-semibold text-white shadow-xs hover:bg-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:ml-3 sm:w-auto"
         >
           {submitButtonText}
         </button>
@@ -172,7 +170,7 @@
           type="button"
           command="close"
           commandfor={LINK_FORM_DIALOG_ID}
-          class="mt-3 inline-flex w-full cursor-pointer justify-center rounded-md bg-white px-3 py-2 text-base font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
+          class="mt-3 inline-flex w-full cursor-pointer justify-center rounded-md bg-white px-3 py-2 font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
         >
           Cancel
         </button>
@@ -210,7 +208,7 @@
           id="delete-link-confirmation"
           type="submit"
           disabled={$destroyForm.processing}
-          class="inline-flex w-full cursor-pointer justify-center rounded-md bg-red-600 px-3 py-2 text-base font-semibold text-white shadow-xs hover:bg-red-500 disabled:pointer-events-none disabled:opacity-50 sm:ml-3 sm:w-auto"
+          class="inline-flex w-full cursor-pointer justify-center rounded-md bg-red-600 px-3 py-2 font-semibold text-white shadow-xs hover:bg-red-500 disabled:pointer-events-none disabled:opacity-50 sm:ml-3 sm:w-auto"
         >
           {$destroyForm.processing ? "Deleting..." : "Delete"}
         </button>
@@ -218,7 +216,7 @@
           type="button"
           command="close"
           commandfor={LINK_DELETE_DIALOG_ID}
-          class="mt-3 inline-flex w-full cursor-pointer justify-center rounded-md bg-white px-3 py-2 text-base font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+          class="mt-3 inline-flex w-full cursor-pointer justify-center rounded-md bg-white px-3 py-2 font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
         >
           Cancel
         </button>
@@ -230,17 +228,15 @@
     <div class="w-full px-4 sm:px-6 lg:px-8">
       <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
-          <h1 class="text-base font-semibold text-gray-900">Links</h1>
-          <p class="mt-2 text-base text-gray-700">
-            Links to recommended resources
-          </p>
+          <h1 class=" font-semibold text-gray-900">Links</h1>
+          <p class="mt-2 text-gray-700">Links to recommended resources</p>
         </div>
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
           <button
             type="button"
             onclick={openCreateDialog}
             disabled={links.length >= 5}
-            class="block cursor-pointer rounded-md bg-blue-600 px-3 py-2 text-center text-base font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:pointer-events-none disabled:opacity-50"
+            class="block cursor-pointer rounded-md bg-blue-600 px-3 py-2 text-center font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:pointer-events-none disabled:opacity-50"
           >
             Add Link
           </button>
@@ -256,19 +252,19 @@
                 <tr>
                   <th
                     scope="col"
-                    class="py-3.5 pr-3 pl-4 text-left text-base font-semibold text-gray-900 sm:pl-0"
+                    class="py-3.5 pr-3 pl-4 text-left font-semibold text-gray-900 sm:pl-0"
                   >
                     ID
                   </th>
                   <th
                     scope="col"
-                    class="px-3 py-3.5 text-left text-base font-semibold text-gray-900"
+                    class="px-3 py-3.5 text-left font-semibold text-gray-900"
                   >
                     Title
                   </th>
                   <th
                     scope="col"
-                    class="px-3 py-3.5 text-left text-base font-semibold text-gray-900"
+                    class="px-3 py-3.5 text-left font-semibold text-gray-900"
                   >
                     URL
                   </th>
@@ -281,22 +277,22 @@
                 {#each links as link (link.id + link.title + link.url)}
                   <tr>
                     <td
-                      class="max-w-16 truncate py-4 pr-3 pl-4 text-base font-medium whitespace-nowrap text-gray-900 sm:pl-0"
+                      class="max-w-16 truncate py-4 pr-3 pl-4 font-medium whitespace-nowrap text-gray-900 sm:pl-0"
                     >
                       {link.id}
                     </td>
                     <td
-                      class="max-w-16 truncate px-3 py-4 text-base whitespace-nowrap text-gray-500"
+                      class="max-w-16 truncate px-3 py-4 whitespace-nowrap text-gray-500"
                     >
                       {link.title}
                     </td>
                     <td
-                      class="max-w-16 truncate px-3 py-4 text-base whitespace-nowrap text-gray-500"
+                      class="max-w-16 truncate px-3 py-4 whitespace-nowrap text-gray-500"
                     >
                       {link.url}
                     </td>
                     <td
-                      class="relative flex justify-end gap-2 py-4 pr-4 pl-3 text-base font-medium whitespace-nowrap sm:pr-0"
+                      class="relative flex justify-end gap-2 py-4 pr-4 pl-3 font-medium whitespace-nowrap sm:pr-0"
                     >
                       <button
                         onclick={() =>
