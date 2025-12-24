@@ -13,6 +13,7 @@
         "target": "esnext",
         "isolatedModules": true,
         "noEmit": true,
+        "verbatimModuleSyntax": true,
         "lib": [
             "esnext",
             "dom",
