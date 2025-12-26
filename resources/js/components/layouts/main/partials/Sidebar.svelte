@@ -23,8 +23,8 @@
 
 <!-- Desktop Sidebar -->
 {#if isOpen}
-  <div
-    transition:fly={{ x: slideOffset }}
+  <aside
+    transition:fly={{ x: slideOffset, duration: 300 }}
     class="fixed inset-y-0 top-16 z-40 flex w-72 flex-col"
   >
     <div
@@ -91,5 +91,5 @@
         </ul>
       </nav>
     </div>
-  </div>
+  </aside>
 {/if}

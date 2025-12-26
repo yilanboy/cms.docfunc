@@ -8,6 +8,8 @@
   import TriangleAlert from "@/components/icons/TriangleAlert.svelte";
   import { preventDefault } from "@/helpers";
   import InputWithLabel from "@/components/forms/InputWithLabel.svelte";
+  import Search from "@/components/icons/Search.svelte";
+  import { router } from "@inertiajs/svelte";
 
   interface Props {
     title: string;
@@ -43,6 +45,7 @@
   let tagToEdit: { id: number; name: string } | null = $state(null);
   let deleteDialog: TailwindDialogElement;
   let tagToDelete: { id: number; name: string } | null = $state(null);
+  let search = $state("");
 
   const form = useForm<{ name: string }>({
     name: "",
@@ -105,6 +108,14 @@
         },
       });
     }
+  }
+
+  function searchTags() {
+    router.get(
+      TagController.index().url,
+      { search: search },
+      { preserveState: true },
+    );
   }
 
   onMount(() => {
@@ -220,11 +231,30 @@
           <p class="mt-2 text-gray-700">Manage post tags here.</p>
         </div>
 
-        <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+        <div class="mt-4 flex gap-4 sm:mt-0 sm:ml-16 sm:flex-none">
+          <form onsubmit={preventDefault(searchTags)}>
+            <div>
+              <label for="search-tag" class="hidden">Search Tag</label>
+              <div class="grid grid-cols-1">
+                <input
+                  id="search-tag"
+                  type="text"
+                  name="search-tag"
+                  placeholder="Search tags..."
+                  bind:value={search}
+                  class="col-start-1 row-start-1 block w-full rounded-md bg-white py-1.5 pr-3 pl-10 text-base text-zinc-900 outline-1 -outline-offset-1 outline-zinc-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:pl-9"
+                />
+                <Search
+                  className="pointer-events-none col-start-1 row-start-1 ml-3 size-5 self-center text-gray-400 sm:size-4"
+                />
+              </div>
+            </div>
+          </form>
+
           <button
             type="button"
             onclick={openCreateDialog}
-            class="block cursor-pointer rounded-md bg-blue-600 px-3 py-2 text-center font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+            class="block cursor-pointer rounded-md bg-blue-600 px-3 py-1.5 text-center font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
           >
             Add Tag
           </button>

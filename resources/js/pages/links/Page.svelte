@@ -236,7 +236,7 @@
             type="button"
             onclick={openCreateDialog}
             disabled={links.length >= 5}
-            class="block cursor-pointer rounded-md bg-blue-600 px-3 py-2 text-center font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:pointer-events-none disabled:opacity-50"
+            class="block cursor-pointer rounded-md bg-blue-600 px-3 py-1.5 text-center font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:pointer-events-none disabled:opacity-50"
           >
             Add Link
           </button>
