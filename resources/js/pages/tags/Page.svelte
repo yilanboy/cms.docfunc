@@ -143,6 +143,7 @@
         <div class="w-full text-center sm:text-left">
           <InputWithLabel
             id="tag-name-input"
+            name="tag-name-input"
             type="text"
             placeholder="New tag name"
             label="Name"

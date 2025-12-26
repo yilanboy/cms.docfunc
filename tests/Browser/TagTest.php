@@ -17,7 +17,7 @@ it('can add tag', function () {
 
     $page->click('Add Tag');
 
-    $page->type('name', 'New Tag');
+    $page->type('tag-name-input', 'New Tag');
     $page->click('Create');
 
     $page->assertSee('Tag created successfully.');
