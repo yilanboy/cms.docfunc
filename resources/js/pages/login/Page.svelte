@@ -8,10 +8,7 @@
   import CheckboxWithLabel from "@/components/forms/CheckboxWithLabel.svelte";
 
   interface SlotFormProps {
-    errors: {
-      email: string | null;
-      password: string | null;
-    };
+    errors: Record<string, string>;
   }
 
   let title = "Login";

@@ -9,17 +9,12 @@
   import { inertia, page } from "@inertiajs/svelte";
   import AuthenticatedSessionController from "@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController";
   import ProfileController from "@/actions/App/Http/Controllers/Settings/ProfileController";
-
-  interface Props {
-    sidebarIsOpen: boolean;
-  }
-
-  let { sidebarIsOpen = $bindable() }: Props = $props();
+  import { sidebar } from "@/shared.svelte";
 
   let dropdownIsOpen = $state(false);
 
   function toggleSidebar() {
-    sidebarIsOpen = !sidebarIsOpen;
+    sidebar.isOpen = !sidebar.isOpen;
   }
 
   function toggleDropdown() {
@@ -61,7 +56,7 @@
       >
         <span class="sr-only">Toggle Sidebar</span>
 
-        {#if sidebarIsOpen}
+        {#if sidebar.isOpen}
           <SidebarClose />
         {:else}
           <SidebarOpen />

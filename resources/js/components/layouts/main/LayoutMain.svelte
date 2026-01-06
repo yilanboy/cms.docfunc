@@ -3,24 +3,23 @@
   import Sidebar from "@/components/layouts/main/partials/Sidebar.svelte";
   import Header from "@/components/layouts/main/partials/Header.svelte";
   import Toasts from "@/components/Toasts.svelte";
+  import { sidebar } from "@/shared.svelte";
 
   interface Props {
     children: Snippet;
   }
 
   let { children }: Props = $props();
-
-  let sidebarIsOpen = $state(true);
 </script>
 
 <div class="font-source-sans-3 relative min-h-screen w-full">
-  <Header bind:sidebarIsOpen />
+  <Header />
 
-  <Sidebar bind:isOpen={sidebarIsOpen} />
+  <Sidebar />
 
   <div
     class={{
-      "lg:pl-72": sidebarIsOpen,
+      "lg:pl-72": sidebar.isOpen,
       "text-base transition-all duration-300 ease-in-out": true,
     }}
   >

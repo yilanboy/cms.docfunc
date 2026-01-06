@@ -8,12 +8,8 @@
   import TagController from "@/actions/App/Http/Controllers/TagController";
   import Link from "@/components/icons/Link.svelte";
   import Tag from "@/components/icons/Tag.svelte";
+  import { sidebar } from "@/shared.svelte";
 
-  interface Props {
-    isOpen: boolean;
-  }
-
-  let { isOpen = $bindable() }: Props = $props();
   let slideOffset = $state(0);
 
   onMount(() => {
@@ -22,7 +18,7 @@
 </script>
 
 <!-- Desktop Sidebar -->
-{#if isOpen}
+{#if sidebar.isOpen}
   <aside
     transition:fly={{ x: slideOffset, duration: 300 }}
     class="fixed inset-y-0 top-16 z-40 flex w-72 flex-col"
