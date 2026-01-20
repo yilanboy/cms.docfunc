@@ -3,6 +3,7 @@
   import Navigation from "@/pages/settings/partials/Navigation.svelte";
   import PasswordController from "@/actions/App/Http/Controllers/Settings/PasswordController";
   import { useForm } from "@inertiajs/svelte";
+  import SubmitButton from "@/components/forms/SubmitButton.svelte";
 
   interface Props {
     title: string;
@@ -132,12 +133,10 @@
               </div>
 
               <div>
-                <button
-                  type="submit"
-                  class="flex cursor-pointer justify-center rounded-md bg-blue-600 px-3 py-1.5 text-base font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                >
-                  Save password
-                </button>
+                <SubmitButton
+                  label="Save password"
+                  processing={$form.processing}
+                />
               </div>
             </form>
           </div>

@@ -4,6 +4,7 @@
   import ChevronLeft from "@/components/icons/ChevronLeft.svelte";
   import { back } from "@/helpers";
   import LayoutGuest from "@/components/layouts/guest/LayoutGuest.svelte";
+  import SubmitButton from "@/components/forms/SubmitButton.svelte";
 
   let title = "Forgot Password";
 
@@ -63,12 +64,11 @@
         {/if}
 
         <div>
-          <button
-            type="submit"
-            class="flex w-full cursor-pointer justify-center rounded-md bg-blue-600 px-3 py-1.5 text-base font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-          >
-            Send Reset Link
-          </button>
+          <SubmitButton
+            label="Send Reset Link"
+            className="w-full"
+            processing={$form.processing}
+          />
         </div>
       </form>
     </div>

@@ -6,6 +6,7 @@
   import { back } from "@/helpers";
   import InputWithLabel from "@/components/forms/InputWithLabel.svelte";
   import CheckboxWithLabel from "@/components/forms/CheckboxWithLabel.svelte";
+  import SubmitButton from "@/components/forms/SubmitButton.svelte";
 
   interface SlotFormProps {
     errors: Record<string, string>;
@@ -82,12 +83,7 @@
           </div>
 
           <div>
-            <button
-              type="submit"
-              class="flex w-full cursor-pointer justify-center rounded-md bg-blue-600 px-3 py-1.5 text-base font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-            >
-              Sign in
-            </button>
+            <SubmitButton label="Sign in" className="w-full" />
           </div>
         {/snippet}
       </Form>

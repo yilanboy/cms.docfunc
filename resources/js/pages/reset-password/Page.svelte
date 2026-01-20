@@ -2,6 +2,7 @@
   import ResetPasswordController from "@/actions/App/Http/Controllers/Auth/ResetPasswordController";
   import { Form } from "@inertiajs/svelte";
   import InputWithLabel from "@/components/forms/InputWithLabel.svelte";
+  import SubmitButton from "@/components/forms/SubmitButton.svelte";
 
   interface Props {
     token: string;
@@ -64,12 +65,7 @@
           />
 
           <div>
-            <button
-              type="submit"
-              class="flex w-full cursor-pointer justify-center rounded-md bg-blue-600 px-3 py-1.5 text-base font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-            >
-              Update Password
-            </button>
+            <SubmitButton label="Update Password" className="w-full" />
           </div>
         {/snippet}
       </Form>

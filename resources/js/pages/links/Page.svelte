@@ -5,6 +5,7 @@
   import { useForm } from "@inertiajs/svelte";
   import LinkController from "@/actions/App/Http/Controllers/LinkController";
   import TriangleAlert from "@/components/icons/TriangleAlert.svelte";
+  import SubmitButton from "@/components/forms/SubmitButton.svelte";
   import { preventDefault } from "@/helpers";
 
   interface Props {
@@ -159,13 +160,11 @@
         </div>
       </div>
       <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-        <button
-          type="submit"
-          disabled={$form.processing}
-          class="inline-flex w-full cursor-pointer justify-center rounded-md bg-blue-600 px-3 py-2 font-semibold text-white shadow-xs hover:bg-blue-500 disabled:pointer-events-none disabled:opacity-50 sm:ml-3 sm:w-auto"
-        >
-          {submitButtonText}
-        </button>
+        <SubmitButton
+          label={submitButtonText}
+          processing={$form.processing}
+          className="sm:ml-3 sm:w-auto w-full"
+        />
         <button
           type="button"
           command="close"
@@ -204,14 +203,13 @@
         </div>
       </div>
       <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-        <button
-          id="delete-link-confirmation"
-          type="submit"
-          disabled={$destroyForm.processing}
-          class="inline-flex w-full cursor-pointer justify-center rounded-md bg-red-600 px-3 py-2 font-semibold text-white shadow-xs hover:bg-red-500 disabled:pointer-events-none disabled:opacity-50 sm:ml-3 sm:w-auto"
+        <SubmitButton
+          label="Delete"
+          processing={$destroyForm.processing}
+          className="bg-red-600 hover:bg-red-500 sm:ml-3 sm:w-auto w-full"
         >
           {$destroyForm.processing ? "Deleting..." : "Delete"}
-        </button>
+        </SubmitButton>
         <button
           type="button"
           command="close"
