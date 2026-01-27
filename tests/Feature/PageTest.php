@@ -58,10 +58,20 @@ describe('page test', function () {
     });
 
     test('the user can visit passkeys page', function () {
-        loginAsUser();
+        $user = loginAsUser();
+        $user->passkeys()->create([
+            'name'          => 'My Passkey',
+            'credential_id' => 'abc',
+            'data'          => [],
+        ]);
 
-        $response = $this->get(route('settings.passkey.index'));
+        $response = $this->get(route('settings.passkey.edit'));
 
         $response->assertStatus(200);
+        $response->assertInertia(fn($page) => $page
+            ->component('settings/passkeys/Page')
+            ->has('passkeys', 1)
+            ->where('passkeys.0.name', 'My Passkey')
+        );
     });
 });

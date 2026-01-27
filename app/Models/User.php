@@ -31,4 +31,9 @@ class User extends Model
             'password'          => 'hashed',
         ];
     }
+
+    public function passkeys(): MorphMany
+    {
+        return $this->morphMany(Passkey::class, 'owner');
+    }
 }

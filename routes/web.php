@@ -54,6 +54,6 @@ Route::middleware([InertiaAuthenticateMiddleware::class, 'verified'])->group(fun
     Route::put('/settings/password', [PasswordController::class, 'update'])
         ->name('settings.password.update');
 
-    Route::get('/settings/passkeys', [PasskeyController::class, 'index'])
-        ->name('settings.passkey.index');
+    Route::get('/settings/passkeys', [PasskeyController::class, 'edit'])
+        ->name('settings.passkey.edit');
 });

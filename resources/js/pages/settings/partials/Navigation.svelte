@@ -36,10 +36,10 @@
   <li>
     <a
       use:inertia
-      href={PasskeyController.index().url}
+      href={PasskeyController.edit().url}
       class={{
-        "bg-zinc-100": $page.url === PasskeyController.index().url,
-        "hover:bg-zinc-100": $page.url !== PasskeyController.index().url,
+        "bg-zinc-100": $page.url === PasskeyController.edit().url,
+        "hover:bg-zinc-100": $page.url !== PasskeyController.edit().url,
         "block rounded-md px-4 py-2 ": true,
       }}
     >
