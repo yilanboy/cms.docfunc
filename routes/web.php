@@ -18,42 +18,26 @@ Route::middleware([InertiaAuthenticateMiddleware::class, 'verified'])->group(fun
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
-    Route::get('/links', [LinkController::class, 'index'])
-        ->name('links.index');
+    Route::resource('links', LinkController::class)->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('tags', TagController::class)->only(['index', 'store', 'update', 'destroy']);
 
-    Route::post('/links', [LinkController::class, 'store'])
-        ->name('links.store');
+    Route::prefix('settings')->name('settings.')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])
+            ->name('profile.edit');
 
-    Route::patch('/links/{link}', [LinkController::class, 'update'])
-        ->name('links.update');
+        Route::patch('/profile', [ProfileController::class, 'update'])
+            ->name('profile.update');
 
-    Route::delete('/links/{link}', [LinkController::class, 'destroy'])
-        ->name('links.destroy');
+        Route::get('/password', [PasswordController::class, 'edit'])
+            ->name('password.edit');
 
-    Route::get('/tags', [TagController::class, 'index'])
-        ->name('tags.index');
+        Route::put('/password', [PasswordController::class, 'update'])
+            ->name('password.update');
 
-    Route::post('/tags', [TagController::class, 'store'])
-        ->name('tags.store');
+        Route::get('/passkeys', [PasskeyController::class, 'edit'])
+            ->name('passkey.edit');
 
-    Route::patch('/tags/{tag}', [TagController::class, 'update'])
-        ->name('tags.update');
-
-    Route::delete('/tags/{tag}', [TagController::class, 'destroy'])
-        ->name('tags.destroy');
-
-    Route::get('/settings/profile', [ProfileController::class, 'edit'])
-        ->name('settings.profile.edit');
-
-    Route::patch('/settings/profile', [ProfileController::class, 'update'])
-        ->name('settings.profile.update');
-
-    Route::get('/settings/password', [PasswordController::class, 'edit'])
-        ->name('settings.password.edit');
-
-    Route::put('/settings/password', [PasswordController::class, 'update'])
-        ->name('settings.password.update');
-
-    Route::get('/settings/passkeys', [PasskeyController::class, 'edit'])
-        ->name('settings.passkey.edit');
+        Route::post('/passkeys', [PasskeyController::class, 'store'])
+            ->name('passkey.store');
+    });
 });

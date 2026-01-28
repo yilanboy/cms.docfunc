@@ -1,6 +1,20 @@
 <script lang="ts">
   import LayoutMain from "@/components/layouts/main/LayoutMain.svelte";
   import Navigation from "@/pages/settings/partials/Navigation.svelte";
+  import Dialog from "@/components/Dialog.svelte";
+  import { onMount } from "svelte";
+  import { useForm } from "@inertiajs/svelte";
+  import SubmitButton from "@/components/forms/SubmitButton.svelte";
+  import InputWithLabel from "@/components/forms/InputWithLabel.svelte";
+  import GeneratePasskeyRegistrationOptionController from "@/actions/App/Http/Controllers/Api/GeneratePasskeyRegistrationOptionController";
+  import PasskeyController from "@/actions/App/Http/Controllers/Settings/PasskeyController";
+  import {
+    browserSupportsWebAuthn,
+    startRegistration,
+  } from "@simplewebauthn/browser";
+  import { preventDefault } from "@/helpers";
+
+  interface TailwindDialogElement extends HTMLDialogElement {}
 
   interface Passkey {
     id: number;
@@ -13,7 +27,78 @@
     passkeys: Passkey[];
   }
 
+  const PASSKEY_FORM_DIALOG_WRAPPER_ID = "passkey-form-dialog-wrapper";
+  const PASSKEY_FORM_DIALOG_ID = "passkey-form-dialog";
+
+  let formDialog: TailwindDialogElement;
+
   let { title, passkeys }: Props = $props();
+
+  const form = useForm({
+    name: "",
+    passkey: "",
+  });
+
+  async function register() {
+    if (!browserSupportsWebAuthn()) {
+      window.dispatchEvent(
+        new CustomEvent("show-toast", {
+          detail: {
+            type: "danger",
+            message: "WebAuthn is not supported in this browser.",
+          },
+        }),
+      );
+
+      return;
+    }
+
+    if ($form.name === "") {
+      window.dispatchEvent(
+        new CustomEvent("show-toast", {
+          detail: {
+            type: "danger",
+            message: "Please enter a passkey name.",
+          },
+        }),
+      );
+
+      return;
+    }
+
+    const response = await fetch(
+      GeneratePasskeyRegistrationOptionController().url,
+    );
+    const optionsJSON = await response.json();
+
+    try {
+      const registrationResponse = await startRegistration({ optionsJSON });
+
+      $form.passkey = JSON.stringify(registrationResponse);
+
+      $form.submit(PasskeyController.store(), {
+        onSuccess: () => {
+          formDialog.open = false;
+          $form.reset();
+        },
+      });
+    } catch (error) {
+      window.dispatchEvent(
+        new CustomEvent("show-toast", {
+          detail: {
+            type: "danger",
+            message: "Registration failed. Please try again.",
+          },
+        }),
+      );
+    }
+  }
+
+  onMount(() => {
+    formDialog = document.getElementById(
+      PASSKEY_FORM_DIALOG_WRAPPER_ID,
+    ) as TailwindDialogElement;
+  });
 </script>
 
 <svelte:head>
@@ -21,6 +106,51 @@
 </svelte:head>
 
 <LayoutMain>
+  <Dialog
+    dialogWrapperId={PASSKEY_FORM_DIALOG_WRAPPER_ID}
+    dialogId={PASSKEY_FORM_DIALOG_ID}
+  >
+    <form onsubmit={preventDefault(register)}>
+      <div class="sm:flex sm:items-start">
+        <div class="w-full text-center sm:text-left">
+          <InputWithLabel
+            id="passkey-name-input"
+            name="name"
+            type="text"
+            placeholder="New passkey name"
+            label="Name"
+            bind:value={$form.name}
+          />
+
+          {#if $form.errors.name}
+            <div class="mt-2 text-red-500">{$form.errors.name}</div>
+          {/if}
+
+          {#if $form.errors.passkey}
+            <div class="mt-2 text-red-500">{$form.errors.passkey}</div>
+          {/if}
+        </div>
+      </div>
+
+      <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+        <SubmitButton
+          label="Create"
+          processing={$form.processing}
+          className="sm:ml-3 sm:w-auto w-full"
+        />
+
+        <button
+          type="button"
+          command="close"
+          commandfor={PASSKEY_FORM_DIALOG_ID}
+          class="mt-3 inline-flex w-full cursor-pointer justify-center rounded-md bg-white px-3 py-2 font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </Dialog>
+
   <main class="grow py-10">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-4 gap-6">
@@ -40,6 +170,7 @@
                 title="Add passkey"
                 type="button"
                 class="focus:ring-opacity-75 rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                onclick={() => (formDialog.open = true)}
               >
                 Add passkey
               </button>

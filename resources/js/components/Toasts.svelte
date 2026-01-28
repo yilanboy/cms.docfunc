@@ -7,33 +7,13 @@
   import TriangleAlert from "@/components/icons/TriangleAlert.svelte";
   import CircleAlert from "@/components/icons/CircleAlert.svelte";
   import { router } from "@inertiajs/svelte";
-
-  type ToastsPosition =
-    | "top-right"
-    | "top-left"
-    | "top-center"
-    | "bottom-right"
-    | "bottom-left"
-    | "bottom-center";
+  import type {
+    ToastsPosition,
+    messageToastProps,
+    htmlToastProps,
+  } from "@/types/global";
 
   type ToastsLayout = "default" | "expanded";
-
-  type ToastsType = "success" | "info" | "warning" | "danger" | "default";
-
-  interface messageToastProps {
-    id: string;
-    type: ToastsType;
-    message: string;
-    description: string;
-    position?: ToastsPosition;
-  }
-
-  interface htmlToastProps {
-    id: string;
-    type: ToastsType;
-    html: string;
-    position?: ToastsPosition;
-  }
 
   type ToastProps = messageToastProps | htmlToastProps;
 

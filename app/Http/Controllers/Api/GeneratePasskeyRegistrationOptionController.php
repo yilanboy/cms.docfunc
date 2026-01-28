@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Services\Serializer;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -19,9 +18,9 @@ use Webauthn\PublicKeyCredentialCreationOptions;
 use Webauthn\PublicKeyCredentialRpEntity;
 use Webauthn\PublicKeyCredentialUserEntity;
 
-class GeneratePasskeyRegisterOptionsController extends Controller
+class GeneratePasskeyRegistrationOptionController extends Controller
 {
-    public function __invoke(Request $request, Serializer $serializer): JsonResponse|string
+    public function __invoke(Request $request, Serializer $serializer)
     {
         $relatedPartyEntity = new PublicKeyCredentialRpEntity(
             name: config('app.name'),
@@ -41,8 +40,8 @@ class GeneratePasskeyRegisterOptionsController extends Controller
             ]);
 
             return response()->json([
-                'error' => 'Can not create authentication options, please try again later.',
-            ], 500);
+                'error' => 'Can not create user entity, please try again later.',
+            ], 400);
         }
 
         $authenticatorSelectionCriteria = AuthenticatorSelectionCriteria::create(
@@ -65,25 +64,27 @@ class GeneratePasskeyRegisterOptionsController extends Controller
             ]);
 
             return response()->json([
-                'error' => 'Can not create authentication options, please try again later.',
+                'error' => 'Can not create registration options, please try again later.',
             ], 400);
         }
 
         try {
             $optionsJson = $serializer->toJson($options);
+            $optionsArray = $serializer->toArray($options);
         } catch (SerializerExceptionInterface  $e) {
-            Log::error('Can not serialize Webauthn registration options.', [
+            Log::error('Webauthn registration options serialization failed.', [
                 'user_id'   => $request->user()->id,
                 'exception' => $e->getMessage(),
             ]);
 
             return response()->json([
-                'error' => 'Can not serialize authentication options.',
+                'error' => 'failed to serialize registration options.',
             ], 400);
         }
 
         Session::flash('passkey-registration-options', $optionsJson);
 
-        return $optionsJson;
+        return response($optionsArray)
+            ->header('Content-Type', 'application/json');
     }
 }
