@@ -32,11 +32,8 @@ it('can delete tag', function () {
 
     $page = visit('/tags');
 
-    $deleteDialogId = "delete-tag-1";
-    $deleteConfirmationId = "delete-tag-confirmation";
-
-    $page->click($deleteDialogId);
-    $page->click($deleteConfirmationId);
+    $page->click("#delete-tag-1");
+    $page->click("#delete-tag-confirmation");
 
     $page->assertSee('Tag deleted successfully.');
     $this->assertDatabaseMissing('tags', [

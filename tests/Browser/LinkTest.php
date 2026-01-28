@@ -57,11 +57,8 @@ it('can delete link', function () {
 
     $page = visit('/links');
 
-    $deleteDialogId = "delete-link-{$link->id}";
-    $deleteConfirmationId = "delete-link-confirmation";
-
-    $page->click($deleteDialogId);
-    $page->click($deleteConfirmationId);
+    $page->click('#delete-link-'.$link->id);
+    $page->click("#delete-link-confirmation");
 
     $page->assertSee('Link deleted successfully.');
     $this->assertDatabaseMissing('links', [

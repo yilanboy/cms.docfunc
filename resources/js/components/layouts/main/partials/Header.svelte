@@ -46,7 +46,7 @@
 <header class="sticky top-0 z-50 h-16 bg-white">
   <nav
     aria-label="Global"
-    class="flex h-full items-center justify-between border-b border-zinc-200 p-4 lg:px-8"
+    class="flex h-full items-center justify-between border-b border-zinc-200 p-4 lg:px-4"
   >
     <div class="flex items-center gap-x-4 lg:flex-1">
       <button

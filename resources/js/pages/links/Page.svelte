@@ -204,6 +204,7 @@
       </div>
       <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
         <SubmitButton
+          id="delete-link-confirmation"
           label="Delete"
           processing={$destroyForm.processing}
           className="bg-red-600 hover:bg-red-500 sm:ml-3 sm:w-auto w-full"
