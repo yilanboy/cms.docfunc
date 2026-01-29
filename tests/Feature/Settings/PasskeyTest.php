@@ -19,9 +19,12 @@ describe('passkey store', function () {
         $response = $this->post(route('settings.passkey.store'), [
             'name'    => '',
             'passkey' => '',
+        ], [
+            'Accept' => 'application/json',
         ]);
 
-        $response->assertSessionHasErrors(['name', 'passkey']);
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors(['name', 'passkey']);
     });
 
     test('it fails with invalid passkey', function () {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Settings\StorePasskeyRequest;
 use App\Services\Serializer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -28,12 +29,9 @@ class PasskeyController extends Controller
         ]);
     }
 
-    public function store(Request $request, Serializer $serializer): RedirectResponse
+    public function store(StorePasskeyRequest $request, Serializer $serializer): RedirectResponse
     {
-        $data = $request->validate([
-            'name'    => ['required', 'string', 'min:3', 'max:255'],
-            'passkey' => ['required', 'json'],
-        ]);
+        $data = $request->validated();
 
         try {
             $publicKeyCredential = $serializer->fromJson($data['passkey'], PublicKeyCredential::class);

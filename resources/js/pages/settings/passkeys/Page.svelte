@@ -39,7 +39,7 @@
     passkey: "",
   });
 
-  async function register() {
+  function addPasskey() {
     if (!browserSupportsWebAuthn()) {
       window.dispatchEvent(
         new CustomEvent("show-toast", {
@@ -53,15 +53,18 @@
       return;
     }
 
+    formDialog.open = true;
+  }
+
+  async function register() {
     if ($form.name === "") {
-      window.dispatchEvent(
-        new CustomEvent("show-toast", {
-          detail: {
-            type: "danger",
-            message: "Please enter a passkey name.",
-          },
-        }),
-      );
+      $form.setError("name", "Name is required.");
+
+      return;
+    }
+
+    if ($form.name.length < 3) {
+      $form.setError("name", "Name must be at least 3 characters long.");
 
       return;
     }
@@ -80,9 +83,20 @@
         onSuccess: () => {
           formDialog.open = false;
           $form.reset();
+
+          window.dispatchEvent(
+            new CustomEvent("show-toast", {
+              detail: {
+                type: "success",
+                message: "Passkey registered successfully.",
+              },
+            }),
+          );
         },
       });
     } catch (error) {
+      formDialog.open = false;
+
       window.dispatchEvent(
         new CustomEvent("show-toast", {
           detail: {
@@ -122,12 +136,10 @@
             bind:value={$form.name}
           />
 
-          {#if $form.errors.name}
-            <div class="mt-2 text-red-500">{$form.errors.name}</div>
-          {/if}
-
-          {#if $form.errors.passkey}
-            <div class="mt-2 text-red-500">{$form.errors.passkey}</div>
+          {#if $form.hasErrors}
+            <div class="mt-2 text-red-500">
+              {Object.values($form.errors)[0]}
+            </div>
           {/if}
         </div>
       </div>
@@ -170,7 +182,7 @@
                 title="Add passkey"
                 type="button"
                 class="focus:ring-opacity-75 rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                onclick={() => (formDialog.open = true)}
+                onclick={addPasskey}
               >
                 Add passkey
               </button>
