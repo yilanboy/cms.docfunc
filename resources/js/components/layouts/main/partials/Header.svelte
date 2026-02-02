@@ -9,7 +9,7 @@
   import { inertia, page } from "@inertiajs/svelte";
   import AuthenticatedSessionController from "@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController";
   import ProfileController from "@/actions/App/Http/Controllers/Settings/ProfileController";
-  import { sidebar } from "@/shared.svelte";
+  import { sidebar } from "@/shared/sidebar.svelte.js";
 
   let dropdownIsOpen = $state(false);
 

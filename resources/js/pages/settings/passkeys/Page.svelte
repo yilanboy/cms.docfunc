@@ -13,6 +13,7 @@
     startRegistration,
   } from "@simplewebauthn/browser";
   import { preventDefault } from "@/helpers";
+  import { toasts } from "@/shared/toasts.svelte";
 
   interface TailwindDialogElement extends HTMLDialogElement {}
 
@@ -41,14 +42,11 @@
 
   function addPasskey() {
     if (!browserSupportsWebAuthn()) {
-      window.dispatchEvent(
-        new CustomEvent("show-toast", {
-          detail: {
-            type: "danger",
-            message: "WebAuthn is not supported in this browser.",
-          },
-        }),
-      );
+      toasts.add({
+        type: "warning",
+        message: "WebAuthn is not supported in this browser.",
+        description: "Please try again with a different browser.",
+      });
 
       return;
     }
@@ -84,27 +82,19 @@
           formDialog.open = false;
           $form.reset();
 
-          window.dispatchEvent(
-            new CustomEvent("show-toast", {
-              detail: {
-                type: "success",
-                message: "Passkey registered successfully.",
-              },
-            }),
-          );
+          toasts.add({
+            type: "success",
+            message: "Passkey registered successfully.",
+          });
         },
       });
     } catch (error) {
       formDialog.open = false;
 
-      window.dispatchEvent(
-        new CustomEvent("show-toast", {
-          detail: {
-            type: "danger",
-            message: "Registration failed. Please try again.",
-          },
-        }),
-      );
+      toasts.add({
+        type: "danger",
+        message: "Registration failed. Please try again.",
+      });
     }
   }
 

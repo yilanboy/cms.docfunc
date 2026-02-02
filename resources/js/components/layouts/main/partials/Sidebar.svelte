@@ -8,7 +8,7 @@
   import TagController from "@/actions/App/Http/Controllers/TagController";
   import Link from "@/components/icons/Link.svelte";
   import Tag from "@/components/icons/Tag.svelte";
-  import { sidebar } from "@/shared.svelte";
+  import { sidebar } from "@/shared/sidebar.svelte.js";
 
   let slideOffset = $state(0);
 

@@ -3,7 +3,7 @@
   import Sidebar from "@/components/layouts/main/partials/Sidebar.svelte";
   import Header from "@/components/layouts/main/partials/Header.svelte";
   import Toasts from "@/components/Toasts.svelte";
-  import { sidebar } from "@/shared.svelte";
+  import { sidebar } from "@/shared/sidebar.svelte.js";
 
   interface Props {
     children: Snippet;
