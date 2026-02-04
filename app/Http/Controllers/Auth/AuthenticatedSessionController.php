@@ -19,20 +19,28 @@ class AuthenticatedSessionController extends Controller
         return Inertia::render('login/Page');
     }
 
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $request)
     {
         $request->authenticate();
+
+        if ($request->user()->passkeys()->exists()) {
+            Auth::logout();
+
+            return Inertia::flash('toast', [
+                'type'        => 'warning',
+                'message'     => 'You have a passkey.',
+                'description' => 'Please use your passkey to login.',
+            ])->back();
+        }
 
         $request->session()->regenerate();
 
         Inertia::clearHistory();
 
-        Inertia::flash([
-            'toast' => [
-                'type'        => 'success',
-                'message'     => 'Welcome back!',
-                'description' => 'You have successfully logged in.'
-            ]
+        Inertia::flash('toast', [
+            'type'        => 'success',
+            'message'     => 'Welcome back!',
+            'description' => 'You have successfully logged in.',
         ]);
 
         return redirect()->intended(route('dashboard'));
@@ -52,8 +60,8 @@ class AuthenticatedSessionController extends Controller
             'toast' => [
                 'type'        => 'success',
                 'message'     => 'Logged out!',
-                'description' => 'You have successfully logged out.'
-            ]
+                'description' => 'You have successfully logged out.',
+            ],
         ]);
 
         return redirect(route('login'));
