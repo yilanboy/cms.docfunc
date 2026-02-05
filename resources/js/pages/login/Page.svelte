@@ -17,6 +17,7 @@
   import { toasts } from "@/shared/toasts.svelte";
   import GeneratePasskeyAuthenticationOptionsController from "@/actions/App/Http/Controllers/Api/GeneratePasskeyAuthenticationOptionsController";
   import Toasts from "@/components/Toasts.svelte";
+  import LayoutGuest from "@/components/layouts/guest/LayoutGuest.svelte";
 
   interface SlotFormProps {
     errors: Record<string, string>;
@@ -66,9 +67,7 @@
   <title>{title}</title>
 </svelte:head>
 
-<div class="font-source-sans-3 flex min-h-screen w-full flex-col bg-white">
-  <Toasts />
-
+<LayoutGuest>
   <header class="flex w-full items-center justify-start p-4">
     <button
       type="button"
@@ -79,6 +78,7 @@
       <span class="text-lg">Go back</span>
     </button>
   </header>
+
   <main class="flex w-full grow flex-col justify-center p-6">
     <h2
       class="-mt-12 text-center text-2xl font-bold tracking-tight text-gray-900"
@@ -161,4 +161,4 @@
       </div>
     </div>
   </main>
-</div>
+</LayoutGuest>

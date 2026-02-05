@@ -2,6 +2,7 @@
   import LayoutMain from "@/components/layouts/main/LayoutMain.svelte";
   import Link from "@/components/icons/Link.svelte";
   import Tag from "@/components/icons/Tag.svelte";
+  import { toasts } from "@/shared/toasts.svelte";
 
   interface Props {
     title: string;
@@ -10,6 +11,39 @@
   }
 
   let { title, linkCount, tagCount }: Props = $props();
+
+  function triggerSuccessToast() {
+    toasts.add({
+      type: "success",
+      message: "Success!",
+      description:
+        "That's one small step for a man, one giant leap for mankind.",
+    });
+  }
+
+  function triggerInfoToast() {
+    toasts.add({
+      type: "info",
+      message: "Info!",
+      description: "This is some useful information.",
+    });
+  }
+
+  function triggerWarningToast() {
+    toasts.add({
+      type: "warning",
+      message: "Warning!",
+      description: "Better safe than sorry.",
+    });
+  }
+
+  function triggerDangerToast() {
+    toasts.add({
+      type: "danger",
+      message: "Error!",
+      description: "Something went wrong.",
+    });
+  }
 </script>
 
 <svelte:head>
@@ -23,7 +57,7 @@
     >
       <!-- Links Card -->
       <div
-        class="group overflow-hidden rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-blue-100 p-6 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-lg"
+        class="group overflow-hidden rounded-2xl border border-blue-100 bg-linear-to-br from-blue-50 to-blue-100 p-6 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-lg"
       >
         <div class="flex items-center justify-between">
           <div>
@@ -46,7 +80,7 @@
 
       <!-- Tags Card -->
       <div
-        class="group overflow-hidden rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50 to-emerald-100 p-6 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-lg"
+        class="group overflow-hidden rounded-2xl border border-emerald-100 bg-linear-to-br from-emerald-50 to-emerald-100 p-6 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-lg"
       >
         <div class="flex items-center justify-between">
           <div>
@@ -64,6 +98,46 @@
           >
             <Tag className="size-6" />
           </div>
+        </div>
+      </div>
+
+      <!-- Trigger Toast Card -->
+      <div
+        class="col-span-1 flex w-full flex-col gap-4 rounded-xl border border-zinc-200 p-4 md:col-span-2 lg:col-span-4"
+      >
+        <span class="font-semibold">Trigger Toast</span>
+        <div class="flex gap-4">
+          <button
+            type="button"
+            class="cursor-pointer rounded-lg bg-green-500 px-4 py-2 text-white hover:bg-green-600"
+            onclick={triggerSuccessToast}
+          >
+            Success
+          </button>
+
+          <button
+            type="button"
+            class="cursor-pointer rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            onclick={triggerInfoToast}
+          >
+            Info
+          </button>
+
+          <button
+            type="button"
+            class="cursor-pointer rounded-lg bg-yellow-500 px-4 py-2 text-white hover:bg-yellow-600"
+            onclick={triggerWarningToast}
+          >
+            Warning
+          </button>
+
+          <button
+            type="button"
+            class="cursor-pointer rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+            onclick={triggerDangerToast}
+          >
+            Danger
+          </button>
         </div>
       </div>
     </div>

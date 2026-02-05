@@ -8,7 +8,10 @@ export interface ToastProps {
     description?: string;
 }
 
-class ToastState {
+export const TOAST_DURATION = 5000;
+export const MAX_TOASTS = 3;
+
+class Toasts {
     items = $state<ToastProps[]>([]);
 
     get topItems() {
@@ -21,11 +24,11 @@ class ToastState {
 
         this.items.unshift(toast);
 
-        if (this.items.length > 3) {
+        if (this.items.length > MAX_TOASTS) {
             this.destroy(this.items[this.items.length - 1].id);
         }
 
-        setTimeout(() => this.destroy(id), 5000);
+        setTimeout(() => this.destroy(id), TOAST_DURATION);
     }
 
     destroy(id: string) {
@@ -33,4 +36,4 @@ class ToastState {
     }
 }
 
-export const toasts = new ToastState();
+export const toasts = new Toasts();

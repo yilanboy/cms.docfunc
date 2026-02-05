@@ -36,7 +36,9 @@
   </header>
 
   <main class="flex w-full grow flex-col justify-center p-6">
-    <h2 class="text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+    <h2
+      class="-mt-12 text-center text-2xl/9 font-bold tracking-tight text-gray-900"
+    >
       Forgot Your Password?
     </h2>
 

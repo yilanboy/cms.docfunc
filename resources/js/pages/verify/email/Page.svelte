@@ -2,6 +2,7 @@
   import { page, router } from "@inertiajs/svelte";
   import { fly } from "svelte/transition";
   import CircleCheck from "@/components/icons/CircleCheck.svelte";
+  import LayoutMain from "@/components/layouts/main/LayoutMain.svelte";
 
   let title = "Verify Email";
 
@@ -39,9 +40,7 @@
   <title>{title}</title>
 </svelte:head>
 
-<div
-  class="font-source-sans-3 relative flex min-h-screen w-full flex-col bg-white"
->
+<LayoutMain>
   {#if $page.props.flash.success && showCountdown}
     <div
       transition:fly={{ y: -100 }}
@@ -85,4 +84,4 @@
       </div>
     </div>
   </main>
-</div>
+</LayoutMain>

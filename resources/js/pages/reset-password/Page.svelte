@@ -3,6 +3,7 @@
   import { Form } from "@inertiajs/svelte";
   import InputWithLabel from "@/components/forms/InputWithLabel.svelte";
   import SubmitButton from "@/components/forms/SubmitButton.svelte";
+  import LayoutGuest from "@/components/layouts/guest/LayoutGuest.svelte";
 
   interface Props {
     token: string;
@@ -24,7 +25,7 @@
   <title>{title}</title>
 </svelte:head>
 
-<div class="font-source-sans-3 flex min-h-screen w-full flex-col bg-white">
+<LayoutGuest>
   <main class="flex w-full grow flex-col justify-center p-6">
     <h2 class="text-center text-2xl/9 font-bold tracking-tight text-gray-900">
       Reset Your Password
@@ -71,4 +72,4 @@
       </Form>
     </div>
   </main>
-</div>
+</LayoutGuest>

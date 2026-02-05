@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { fade } from "svelte/transition";
   import CircleCheck from "@/components/icons/CircleCheck.svelte";
   import TriangleAlert from "@/components/icons/TriangleAlert.svelte";
   import CircleAlert from "@/components/icons/CircleAlert.svelte";
@@ -10,13 +9,22 @@
   import { onMount } from "svelte";
 
   function getPosition(toast: ToastProps) {
-    const toastElement = document.getElementById(`toast-${toast.id}`);
-    if (!toastElement) return "translateY(0)";
-
     const index = toasts.items.indexOf(toast);
-    const toastHeight = toastElement.getBoundingClientRect().height;
 
-    return `translateY(${toastHeight * index + 16 * index}px)`;
+    if (index === 0) return "translateY(0)";
+
+    let totalOffset = 0;
+
+    for (let i = 0; i < index; i++) {
+      const toast = toasts.items[i];
+      const toastElement = document.getElementById(`toast-${toast.id}`);
+      if (!toastElement) continue;
+      totalOffset += toastElement.getBoundingClientRect().height;
+    }
+
+    totalOffset += index * 16;
+
+    return `translateY(${totalOffset}px)`;
   }
 
   const icons = {
@@ -51,7 +59,6 @@
   {#each toasts.topItems as toast (toast.id)}
     {@const Icon = icons[toast.type]}
     <div
-      transition:fade
       aria-live="assertive"
       id={`toast-${toast.id}`}
       class="pointer-events-none fixed top-4 right-4 z-50 flex min-w-96 items-end transition-all duration-300 ease-in-out sm:items-start"
@@ -80,7 +87,7 @@
                 <button
                   onclick={() => toasts.destroy(toast.id)}
                   type="button"
-                  class="inline-flex rounded-md text-gray-400 hover:text-gray-500 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600"
+                  class="inline-flex cursor-pointer rounded-md text-gray-400 hover:text-gray-500 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600"
                 >
                   <span class="sr-only">Close</span>
                   <X className="size-5" />
