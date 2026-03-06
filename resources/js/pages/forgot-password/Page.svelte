@@ -15,7 +15,7 @@
   function submit(event: SubmitEvent) {
     event.preventDefault();
 
-    $form.submit(ForgotPasswordController.store());
+    form.submit(ForgotPasswordController.store());
   }
 </script>
 
@@ -50,7 +50,7 @@
           </label>
           <div class="mt-2">
             <input
-              bind:value={$form.email}
+              bind:value={form.email}
               type="email"
               name="email"
               id="email"
@@ -61,15 +61,15 @@
           </div>
         </div>
 
-        {#if $form.errors.email}
-          <div class="text-red-500">{$form.errors.email}</div>
+        {#if form.errors.email}
+          <div class="text-red-500">{form.errors.email}</div>
         {/if}
 
         <div>
           <SubmitButton
             label="Send Reset Link"
             className="w-full"
-            processing={$form.processing}
+            processing={form.processing}
           />
         </div>
       </form>

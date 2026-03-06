@@ -44,7 +44,7 @@
     const optionsJSON = await response.json();
 
     try {
-      $passkeyLoginForm.answer = JSON.stringify(
+      passkeyLoginForm.answer = JSON.stringify(
         await startAuthentication({
           optionsJSON,
         }),
@@ -57,7 +57,7 @@
       });
     }
 
-    $passkeyLoginForm.post(PasskeyLoginController().url);
+    passkeyLoginForm.post(PasskeyLoginController().url);
   }
 
   let title = "Login";
@@ -83,7 +83,7 @@
     <h2
       class="-mt-12 text-center text-2xl font-bold tracking-tight text-gray-900"
     >
-      {$page.props.app.name}
+      {page.props.app.name}
     </h2>
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">

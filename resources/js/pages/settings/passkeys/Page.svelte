@@ -55,14 +55,14 @@
   }
 
   async function register() {
-    if ($form.name === "") {
-      $form.setError("name", "Name is required.");
+    if (form.name === "") {
+      form.setError("name", "Name is required.");
 
       return;
     }
 
-    if ($form.name.length < 3) {
-      $form.setError("name", "Name must be at least 3 characters long.");
+    if (form.name.length < 3) {
+      form.setError("name", "Name must be at least 3 characters long.");
 
       return;
     }
@@ -75,12 +75,12 @@
     try {
       const registrationResponse = await startRegistration({ optionsJSON });
 
-      $form.passkey = JSON.stringify(registrationResponse);
+      form.passkey = JSON.stringify(registrationResponse);
 
-      $form.submit(PasskeyController.store(), {
+      form.submit(PasskeyController.store(), {
         onSuccess: () => {
           formDialog.open = false;
-          $form.reset();
+          form.reset();
 
           toasts.add({
             type: "success",
@@ -123,12 +123,12 @@
             type="text"
             placeholder="New passkey name"
             label="Name"
-            bind:value={$form.name}
+            bind:value={form.name}
           />
 
-          {#if $form.hasErrors}
+          {#if form.hasErrors}
             <div class="mt-2 text-red-500">
-              {Object.values($form.errors)[0]}
+              {Object.values(form.errors)[0]}
             </div>
           {/if}
         </div>
@@ -137,7 +137,7 @@
       <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
         <SubmitButton
           label="Create"
-          processing={$form.processing}
+          processing={form.processing}
           className="sm:ml-3 sm:w-auto w-full"
         />
 

@@ -71,11 +71,11 @@
 
       <div class="hidden lg:flex lg:shrink-0 lg:items-center lg:gap-2">
         <img
-          src="{$page.props.asset.url}/icons/logo.svg"
+          src="{page.props.asset.url}/icons/logo.svg"
           alt="logo"
           class="size-8"
         />
-        <span class="text-xl font-semibold">{$page.props.app.name}</span>
+        <span class="text-xl font-semibold">{page.props.app.name}</span>
       </div>
     </div>
 
@@ -103,13 +103,13 @@
           <span
             class="flex size-8 items-center justify-center rounded-full bg-zinc-100 text-zinc-900"
           >
-            {$page.props.auth.user.name.charAt(0).toUpperCase()}
+            {page.props.auth.user.name.charAt(0).toUpperCase()}
           </span>
 
           <span class="hidden lg:flex lg:items-center">
             <span
               class="ml-4 text-base/6 font-semibold text-zinc-900"
-              aria-hidden="true">{$page.props.auth.user.name}</span
+              aria-hidden="true">{page.props.auth.user.name}</span
             >
             <ChevronDown className="ml-2 size-5 text-zinc-400" />
           </span>

@@ -41,7 +41,7 @@
 </svelte:head>
 
 <LayoutMain>
-  {#if $page.props.flash.success && showCountdown}
+  {#if page.props.flash.success && showCountdown}
     <div
       transition:fly={{ y: -100 }}
       class="absolute top-4 right-1/2 left-1/2 -translate-x-1/2 rounded-md bg-green-50 p-4 sm:w-full sm:max-w-sm"
@@ -52,7 +52,7 @@
         </div>
         <div class="ml-3">
           <p class="text-base font-medium text-green-700">
-            {$page.props.flash.success}
+            {page.props.flash.success}
           </p>
         </div>
       </div>

@@ -23,18 +23,18 @@
   function submit(event: SubmitEvent) {
     event.preventDefault();
 
-    $form.submit(PasswordController.update(), {
+    form.submit(PasswordController.update(), {
       preserveScroll: true,
-      onSuccess: () => $form.reset(),
+      onSuccess: () => form.reset(),
       onError: (errors: any) => {
         if (errors.password) {
-          $form.reset("password", "password_confirmation");
+          form.reset("password", "password_confirmation");
 
           passwordInput.focus();
         }
 
         if (errors.current_password) {
-          $form.reset("current_password");
+          form.reset("current_password");
 
           currentPasswordInput.focus();
         }
@@ -75,7 +75,7 @@
                 <div class="mt-2">
                   <input
                     bind:this={currentPasswordInput}
-                    bind:value={$form.current_password}
+                    bind:value={form.current_password}
                     type="password"
                     id="current_password"
                     autocomplete="current-password"
@@ -85,8 +85,8 @@
                 </div>
               </div>
 
-              {#if $form.errors.current_password}
-                <div class="text-red-500">{$form.errors.current_password}</div>
+              {#if form.errors.current_password}
+                <div class="text-red-500">{form.errors.current_password}</div>
               {/if}
 
               <div>
@@ -99,7 +99,7 @@
                 <div class="mt-2">
                   <input
                     bind:this={passwordInput}
-                    bind:value={$form.password}
+                    bind:value={form.password}
                     type="password"
                     id="password"
                     autocomplete="new-password"
@@ -109,8 +109,8 @@
                 </div>
               </div>
 
-              {#if $form.errors.password}
-                <div class="text-red-500">{$form.errors.password}</div>
+              {#if form.errors.password}
+                <div class="text-red-500">{form.errors.password}</div>
               {/if}
 
               <div>
@@ -122,7 +122,7 @@
                 </label>
                 <div class="mt-2">
                   <input
-                    bind:value={$form.password_confirmation}
+                    bind:value={form.password_confirmation}
                     type="password"
                     id="password_confirmation"
                     autocomplete="new-password"
@@ -135,7 +135,7 @@
               <div>
                 <SubmitButton
                   label="Save password"
-                  processing={$form.processing}
+                  processing={form.processing}
                 />
               </div>
             </form>

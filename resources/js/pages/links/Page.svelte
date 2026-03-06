@@ -46,8 +46,8 @@
   function openCreateDialog() {
     linkToEdit = null;
 
-    $form.title = "";
-    $form.url = "";
+    form.title = "";
+    form.url = "";
 
     formDialog.open = true;
   }
@@ -55,8 +55,8 @@
   function openEditDialog(id: number, title: string, url: string) {
     linkToEdit = { id, title, url };
 
-    $form.title = title;
-    $form.url = url;
+    form.title = title;
+    form.url = url;
 
     formDialog.open = true;
   }
@@ -68,11 +68,11 @@
 
   function submit() {
     if (linkToEdit) {
-      if (linkToEdit.title === $form.title && linkToEdit.url === $form.url) {
+      if (linkToEdit.title === form.title && linkToEdit.url === form.url) {
         formDialog.open = false;
       }
 
-      $form.submit(LinkController.update(linkToEdit.id), {
+      form.submit(LinkController.update(linkToEdit.id), {
         preserveScroll: true,
         onSuccess: () => {
           formDialog.open = false;
@@ -81,7 +81,7 @@
 
       return;
     } else {
-      $form.submit(LinkController.store(), {
+      form.submit(LinkController.store(), {
         onSuccess: () => {
           formDialog.open = false;
         },
@@ -91,7 +91,7 @@
 
   function destroySubmit() {
     if (linkToDelete) {
-      $destroyForm.submit(LinkController.destroy(linkToDelete.id), {
+      destroyForm.submit(LinkController.destroy(linkToDelete.id), {
         preserveScroll: true,
         onSuccess: () => {
           deleteDialog.open = false;
@@ -132,13 +132,13 @@
               id="title"
               type="text"
               placeholder="Link title"
-              bind:value={$form.title}
+              bind:value={form.title}
               class="block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
             />
           </div>
 
-          {#if $form.errors.title}
-            <div class="mt-2 text-red-500">{$form.errors.title}</div>
+          {#if form.errors.title}
+            <div class="mt-2 text-red-500">{form.errors.title}</div>
           {/if}
         </div>
 
@@ -149,20 +149,20 @@
               id="url"
               type="text"
               placeholder="Link URL"
-              bind:value={$form.url}
+              bind:value={form.url}
               class="block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
             />
           </div>
 
-          {#if $form.errors.url}
-            <div class="mt-2 text-red-500">{$form.errors.url}</div>
+          {#if form.errors.url}
+            <div class="mt-2 text-red-500">{form.errors.url}</div>
           {/if}
         </div>
       </div>
       <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
         <SubmitButton
           label={submitButtonText}
-          processing={$form.processing}
+          processing={form.processing}
           className="sm:ml-3 sm:w-auto w-full"
         />
         <button
@@ -206,10 +206,10 @@
         <SubmitButton
           id="delete-link-confirmation"
           label="Delete"
-          processing={$destroyForm.processing}
+          processing={destroyForm.processing}
           className="bg-red-600 hover:bg-red-500 sm:ml-3 sm:w-auto w-full"
         >
-          {$destroyForm.processing ? "Deleting..." : "Delete"}
+          {destroyForm.processing ? "Deleting..." : "Delete"}
         </SubmitButton>
         <button
           type="button"

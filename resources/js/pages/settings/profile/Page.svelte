@@ -16,7 +16,7 @@
 
   let { title }: Props = $props();
 
-  const user = $page.props.auth.user;
+  const user = page.props.auth.user;
 </script>
 
 <svelte:head>

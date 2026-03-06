@@ -59,14 +59,14 @@
 
   function openEditDialog(id: number, name: string) {
     tagToEdit = { id, name };
-    $form.name = name;
+    form.name = name;
 
     formDialog.open = true;
   }
 
   function openCreateDialog() {
     tagToEdit = null;
-    $form.name = "";
+    form.name = "";
 
     formDialog.open = true;
   }
@@ -78,7 +78,7 @@
 
   function destroySubmit() {
     if (tagToDelete) {
-      $destroyForm.submit(TagController.destroy(tagToDelete.id), {
+      destroyForm.submit(TagController.destroy(tagToDelete.id), {
         preserveScroll: true,
         onSuccess: () => {
           deleteDialog.open = false;
@@ -90,20 +90,20 @@
 
   function submit() {
     if (tagToEdit) {
-      if (tagToEdit.name === $form.name) {
+      if (tagToEdit.name === form.name) {
         formDialog.open = false;
 
         return;
       }
 
-      $form.submit(TagController.update(tagToEdit.id), {
+      form.submit(TagController.update(tagToEdit.id), {
         preserveScroll: true,
         onSuccess: () => {
           formDialog.open = false;
         },
       });
     } else {
-      $form.submit(TagController.store(), {
+      form.submit(TagController.store(), {
         onSuccess: () => {
           formDialog.open = false;
         },
@@ -148,11 +148,11 @@
             type="text"
             placeholder="New tag name"
             label="Name"
-            bind:value={$form.name}
+            bind:value={form.name}
           />
 
-          {#if $form.errors.name}
-            <div class="mt-2 text-red-500">{$form.errors.name}</div>
+          {#if form.errors.name}
+            <div class="mt-2 text-red-500">{form.errors.name}</div>
           {/if}
         </div>
       </div>
@@ -160,7 +160,7 @@
       <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
         <SubmitButton
           label={submitButtonText}
-          processing={$form.processing}
+          processing={form.processing}
           className="sm:ml-3 sm:w-auto w-full"
         />
         <button
@@ -204,10 +204,10 @@
         <SubmitButton
           id="delete-tag-confirmation"
           label="Delete"
-          processing={$destroyForm.processing}
+          processing={destroyForm.processing}
           className="bg-red-600 hover:bg-red-500 sm:ml-3 sm:w-auto w-full"
         >
-          {$destroyForm.processing ? "Deleting..." : "Delete"}
+          {destroyForm.processing ? "Deleting..." : "Delete"}
         </SubmitButton>
         <button
           type="button"
