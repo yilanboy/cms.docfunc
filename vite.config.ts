@@ -4,6 +4,7 @@ import laravel from "laravel-vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import { wayfinder } from "@laravel/vite-plugin-wayfinder";
 import path from "path";
+import inertia from "@inertiajs/vite";
 
 export default defineConfig({
     plugins: [
@@ -13,6 +14,7 @@ export default defineConfig({
             refresh: true,
         }),
         svelte(),
+        inertia(),
         tailwindcss(),
         wayfinder(),
     ],
