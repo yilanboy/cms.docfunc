@@ -285,7 +285,7 @@
                   </div>
                 </div>
               {:else}
-                <p class="text-zinc-500">No passkeys added yet.</p>
+                <p class="text-zinc-500 w-full bg-zinc-100/50 rounded-xl flex items-center justify-center h-20">No passkeys added yet.</p>
               {/each}
             </div>
           </div>
