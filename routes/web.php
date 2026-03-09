@@ -39,5 +39,8 @@ Route::middleware([InertiaAuthenticateMiddleware::class, 'verified'])->group(fun
 
         Route::post('/passkeys', [PasskeyController::class, 'store'])
             ->name('passkey.store');
+
+        Route::delete('/passkeys/{passkey}', [PasskeyController::class, 'destroy'])
+            ->name('passkey.destroy');
     });
 });

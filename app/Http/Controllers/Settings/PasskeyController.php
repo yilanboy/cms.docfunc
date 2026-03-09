@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\StorePasskeyRequest;
+use App\Models\Passkey;
 use App\Services\Serializer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ use Webauthn\AuthenticatorAttestationResponseValidator;
 use Webauthn\CeremonyStep\CeremonyStepManagerFactory;
 use Webauthn\PublicKeyCredential;
 use Webauthn\PublicKeyCredentialCreationOptions;
+use Illuminate\Support\Facades\Gate;
 
 class PasskeyController extends Controller
 {
@@ -70,6 +72,15 @@ class PasskeyController extends Controller
             'credential_id' => $publicKeyCredentialSourceArray['publicKeyCredentialId'],
             'data'          => $publicKeyCredentialSourceArray,
         ]);
+
+        return back();
+    }
+
+    public function destroy(Passkey $passkey): RedirectResponse
+    {
+        Gate::authorize('delete', $passkey);
+
+        $passkey->delete();
 
         return back();
     }

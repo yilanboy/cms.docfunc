@@ -12,6 +12,7 @@
     browserSupportsWebAuthn,
     startRegistration,
   } from "@simplewebauthn/browser";
+  import TriangleAlert from "@/components/icons/TriangleAlert.svelte";
   import { preventDefault } from "@/helpers";
   import { toasts } from "@/shared/toasts.svelte";
 
@@ -30,15 +31,22 @@
 
   const PASSKEY_FORM_DIALOG_WRAPPER_ID = "passkey-form-dialog-wrapper";
   const PASSKEY_FORM_DIALOG_ID = "passkey-form-dialog";
+  const PASSKEY_DELETE_DIALOG_WRAPPER_ID = "passkey-delete-dialog-wrapper";
+  const PASSKEY_DELETE_DIALOG_ID = "passkey-delete-dialog";
 
   let formDialog: TailwindDialogElement;
+  let deleteDialog: TailwindDialogElement;
 
   let { title, passkeys }: Props = $props();
+
+  let passkeyToDelete: Passkey | null = $state(null);
 
   const form = useForm({
     name: "",
     passkey: "",
   });
+
+  const destroyForm = useForm({});
 
   function addPasskey() {
     if (!browserSupportsWebAuthn()) {
@@ -98,9 +106,35 @@
     }
   }
 
+  function openDeleteDialog(passkey: Passkey) {
+    passkeyToDelete = passkey;
+    deleteDialog.open = true;
+  }
+
+  function destroySubmit() {
+    if (passkeyToDelete) {
+      destroyForm.submit(PasskeyController.destroy(passkeyToDelete.id), {
+        preserveScroll: true,
+        onSuccess: () => {
+          deleteDialog.open = false;
+          passkeyToDelete = null;
+
+          toasts.add({
+            type: "success",
+            message: "Passkey deleted successfully.",
+          });
+        },
+      });
+    }
+  }
+
   onMount(() => {
     formDialog = document.getElementById(
       PASSKEY_FORM_DIALOG_WRAPPER_ID,
+    ) as TailwindDialogElement;
+
+    deleteDialog = document.getElementById(
+      PASSKEY_DELETE_DIALOG_WRAPPER_ID,
     ) as TailwindDialogElement;
   });
 </script>
@@ -153,6 +187,52 @@
     </form>
   </Dialog>
 
+  <Dialog
+    dialogWrapperId={PASSKEY_DELETE_DIALOG_WRAPPER_ID}
+    dialogId={PASSKEY_DELETE_DIALOG_ID}
+  >
+    <form onsubmit={preventDefault(destroySubmit)}>
+      <div class="sm:flex sm:items-start">
+        <div
+          class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10"
+        >
+          <TriangleAlert className="size-6 text-red-600" />
+        </div>
+        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+          <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">
+            Delete Passkey
+          </h3>
+          <div class="mt-2">
+            <p class=" text-gray-500">
+              Are you sure you want to delete the passkey "<span
+                class="font-medium text-gray-900"
+                >{passkeyToDelete ? passkeyToDelete.name : ""}</span
+              >"? This action cannot be undone.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+        <SubmitButton
+          id="delete-passkey-confirmation"
+          label="Delete"
+          processing={destroyForm.processing}
+          className="bg-red-600 hover:bg-red-500 sm:ml-3 sm:w-auto w-full"
+        >
+          {destroyForm.processing ? "Deleting..." : "Delete"}
+        </SubmitButton>
+        <button
+          type="button"
+          command="close"
+          commandfor={PASSKEY_DELETE_DIALOG_ID}
+          class="mt-3 inline-flex w-full cursor-pointer justify-center rounded-md bg-white px-3 py-2 font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </Dialog>
+
   <main class="grow py-10">
     <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-4 gap-6">
@@ -193,6 +273,15 @@
                     {:else}
                       <p class="text-sm text-zinc-500">Never used</p>
                     {/if}
+                  </div>
+
+                  <div class="flex items-center space-x-4">
+                    <button
+                      onclick={() => openDeleteDialog(passkey)}
+                      class="text-red-500 hover:text-red-600 focus:outline-none"
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               {:else}
