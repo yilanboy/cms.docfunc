@@ -8,6 +8,8 @@
   import TagController from "@/actions/App/Http/Controllers/TagController";
   import Link from "@/components/icons/Link.svelte";
   import Tag from "@/components/icons/Tag.svelte";
+  import Settings from "@/components/icons/Settings.svelte";
+  import SettingController from "@/actions/App/Http/Controllers/Blog/SettingController";
   import { sidebar } from "@/shared/sidebar.svelte.js";
 
   let slideOffset = $state(0);
@@ -80,6 +82,23 @@
                 >
                   <Tag className="size-6 shrink-0" />
                   Tags
+                </a>
+              </li>
+
+              <li>
+                <a
+                  use:inertia
+                  href={SettingController.edit().url}
+                  class={{
+                    "bg-zinc-100 text-blue-600":
+                      page.url.startsWith("/blog/settings"),
+                    "text-zinc-700 hover:bg-zinc-100 hover:text-blue-600":
+                      !page.url.startsWith("/blog/settings"),
+                    "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold": true,
+                  }}
+                >
+                  <Settings className="size-6 shrink-0" />
+                  Blog Settings
                 </a>
               </li>
             </ul>

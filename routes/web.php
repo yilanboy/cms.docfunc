@@ -43,4 +43,12 @@ Route::middleware([InertiaAuthenticateMiddleware::class, 'verified'])->group(fun
         Route::delete('/passkeys/{passkey}', [PasskeyController::class, 'destroy'])
             ->name('passkey.destroy');
     });
+
+    Route::prefix('blog')->name('blog.')->group(function () {
+        Route::get('/settings', [\App\Http\Controllers\Blog\SettingController::class, 'edit'])
+            ->name('settings.edit');
+
+        Route::put('/settings', [\App\Http\Controllers\Blog\SettingController::class, 'update'])
+            ->name('settings.update');
+    });
 });
