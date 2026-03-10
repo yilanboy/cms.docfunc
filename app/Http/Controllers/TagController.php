@@ -55,7 +55,6 @@ class TagController extends Controller
 
         $tag->update($validated);
 
-
         return Inertia::flash('toast', [
             'type'    => 'success',
             'message' => 'Tag updated successfully.',

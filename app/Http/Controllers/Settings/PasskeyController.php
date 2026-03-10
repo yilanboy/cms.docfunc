@@ -10,6 +10,7 @@ use App\Models\Passkey;
 use App\Services\Serializer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -19,7 +20,6 @@ use Webauthn\AuthenticatorAttestationResponseValidator;
 use Webauthn\CeremonyStep\CeremonyStepManagerFactory;
 use Webauthn\PublicKeyCredential;
 use Webauthn\PublicKeyCredentialCreationOptions;
-use Illuminate\Support\Facades\Gate;
 
 class PasskeyController extends Controller
 {

@@ -30,12 +30,12 @@ class ForgotPasswordController extends Controller
             ? Inertia::flash('toast', [
                 'type'        => 'success',
                 'message'     => 'Reset link sent',
-                'description' => __($status)
+                'description' => __($status),
             ])->back()
             : Inertia::flash('toast', [
                 'type'        => 'danger',
                 'message'     => 'Failed to send reset link',
-                'description' => __($status)
+                'description' => __($status),
             ])->back();
     }
 }

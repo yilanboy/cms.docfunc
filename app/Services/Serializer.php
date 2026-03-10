@@ -26,8 +26,7 @@ class Serializer
 
     public function __construct(
         protected SerializerInterface|NormalizerInterface $serializer,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws ExceptionInterface

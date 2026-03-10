@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
