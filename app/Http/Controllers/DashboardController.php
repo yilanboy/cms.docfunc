@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Link;
+use App\Models\Post;
 use App\Models\Tag;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -15,11 +16,13 @@ class DashboardController extends Controller
     {
         $linkCount = Link::count();
         $tagCount = Tag::count();
+        $postCount = Post::count();
 
         return Inertia::render('dashboard/Page', [
             'title'     => 'Dashboard',
             'linkCount' => $linkCount,
             'tagCount'  => $tagCount,
+            'postCount' => $postCount,
         ]);
     }
 }

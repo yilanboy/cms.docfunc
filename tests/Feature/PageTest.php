@@ -27,6 +27,12 @@ describe('page test', function () {
         $response = $this->get(route('dashboard'));
 
         $response->assertStatus(200);
+        $response->assertInertia(fn ($page) => $page
+            ->component('dashboard/Page')
+            ->has('linkCount')
+            ->has('tagCount')
+            ->has('postCount')
+        );
     });
 
     test('if the user is not login, he can not visit links page', function () {
@@ -68,7 +74,7 @@ describe('page test', function () {
         $response = $this->get(route('settings.passkey.edit'));
 
         $response->assertStatus(200);
-        $response->assertInertia(fn($page) => $page
+        $response->assertInertia(fn ($page) => $page
             ->component('settings/passkeys/Page')
             ->has('passkeys', 1)
             ->where('passkeys.0.name', 'My Passkey')

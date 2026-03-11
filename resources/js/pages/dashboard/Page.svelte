@@ -1,5 +1,6 @@
 <script lang="ts">
   import LayoutMain from "@/components/layouts/main/LayoutMain.svelte";
+  import FileText from "@/components/icons/FileText.svelte";
   import Link from "@/components/icons/Link.svelte";
   import Tag from "@/components/icons/Tag.svelte";
   import { toasts } from "@/shared/toasts.svelte";
@@ -7,10 +8,11 @@
   interface Props {
     title: string;
     linkCount: number;
+    postCount: number;
     tagCount: number;
   }
 
-  let { title, linkCount, tagCount }: Props = $props();
+  let { title, linkCount, postCount, tagCount }: Props = $props();
 
   function triggerSuccessToast() {
     toasts.add({
@@ -97,6 +99,29 @@
             class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500 text-white shadow-lg transition-transform duration-300 group-hover:scale-110"
           >
             <Tag className="size-6" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Posts Card -->
+      <div
+        class="group overflow-hidden rounded-2xl border border-amber-100 bg-linear-to-br from-amber-50 to-amber-100 p-6 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-lg"
+      >
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="mb-1 text-sm font-medium text-amber-600">
+              Total Posts
+            </div>
+            <div
+              class="text-3xl font-bold text-amber-900 transition-colors duration-300"
+            >
+              {postCount}
+            </div>
+          </div>
+          <div
+            class="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500 text-white shadow-lg transition-transform duration-300 group-hover:scale-110"
+          >
+            <FileText className="size-6" />
           </div>
         </div>
       </div>
