@@ -57,6 +57,11 @@ jobs:
           extensions: redis
           coverage: xdebug
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: latest
+
       - name: Setup node.js
         uses: actions/setup-node@v6
         with:
@@ -79,8 +84,8 @@ jobs:
 
       - name: Generate vite manifest
         run: |
-          npm ci
-          npm run build
+          pnpm install
+          pnpm run build
 
       - name: Prepare the application
         run: |
