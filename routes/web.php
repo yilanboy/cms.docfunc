@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Blog\SettingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\RootController;
@@ -45,10 +46,10 @@ Route::middleware([InertiaAuthenticateMiddleware::class, 'verified'])->group(fun
     });
 
     Route::prefix('blog')->name('blog.')->group(function () {
-        Route::get('/settings', [\App\Http\Controllers\Blog\SettingController::class, 'edit'])
+        Route::get('/settings', [SettingController::class, 'edit'])
             ->name('settings.edit');
 
-        Route::put('/settings', [\App\Http\Controllers\Blog\SettingController::class, 'update'])
+        Route::put('/settings', [SettingController::class, 'update'])
             ->name('settings.update');
     });
 });
