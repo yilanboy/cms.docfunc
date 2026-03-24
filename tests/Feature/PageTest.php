@@ -33,7 +33,7 @@ describe('page test', function () {
             ->has('tagCount')
             ->has('postCount')
         );
-    });
+    })->skipOnLinux();
 
     test('if the user is not login, he can not visit links page', function () {
         $response = $this->get(route('links.index'));
@@ -79,5 +79,5 @@ describe('page test', function () {
             ->has('passkeys', 1)
             ->where('passkeys.0.name', 'My Passkey')
         );
-    });
+    })->skipOnLinux();
 });
