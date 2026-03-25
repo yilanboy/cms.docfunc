@@ -34,6 +34,7 @@ class Admin extends Authenticatable implements CanResetPassword, MustVerifyEmail
         ];
     }
 
+    /** @return MorphMany<Passkey, $this> */
     public function passkeys(): MorphMany
     {
         return $this->morphMany(Passkey::class, 'owner');

@@ -27,7 +27,12 @@ class PasskeyController extends Controller
     {
         return Inertia::render('settings/passkeys/Page', [
             'title'    => 'Manage passkeys',
-            'passkeys' => $request->user()->passkeys,
+            'passkeys' => $request->user()->passkeys->map(fn (Passkey $passkey) => [
+                'id'           => $passkey->id,
+                'name'         => $passkey->name,
+                'created_at'   => $passkey->created_at->diffForHumans(),
+                'last_used_at' => $passkey->last_used_at?->diffForHumans(),
+            ]),
         ]);
     }
 

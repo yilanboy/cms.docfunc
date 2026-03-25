@@ -13,6 +13,7 @@
     startRegistration,
   } from "@simplewebauthn/browser";
   import TriangleAlert from "@/components/icons/TriangleAlert.svelte";
+  import FingerprintPattern from "@/components/icons/FingerprintPattern.svelte";
   import { preventDefault } from "@/helpers";
   import { toasts } from "@/shared/toasts.svelte";
 
@@ -21,6 +22,7 @@
   interface Passkey {
     id: number;
     name: string;
+    created_at: string;
     last_used_at: string | null;
   }
 
@@ -246,48 +248,65 @@
         </div>
 
         <div class="col-span-4 lg:col-span-3">
-          <div class="sm:w-full sm:max-w-sm">
-            <div class="flex w-full items-center justify-end space-x-4">
-              <button
-                title="Add passkey"
-                type="button"
-                class="focus:ring-opacity-75 rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                onclick={addPasskey}
+          <div class="flex items-center justify-between">
+            <p class="text-sm text-zinc-500">
+              {passkeys.length} {passkeys.length === 1 ? "passkey" : "passkeys"} registered
+            </p>
+            <button
+              title="Add passkey"
+              type="button"
+              class="rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              onclick={addPasskey}
+            >
+              Add passkey
+            </button>
+          </div>
+
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            {#each passkeys as passkey (passkey.id)}
+              <div
+                class="group relative rounded-xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:shadow-md"
               >
-                Add passkey
-              </button>
-            </div>
-
-            <!-- list passkeys -->
-            <div class="mt-6 space-y-4">
-              {#each passkeys as passkey (passkey.id)}
-                <div
-                  class="flex items-center justify-between border-b border-zinc-200 py-4"
-                >
-                  <div>
-                    <p class="font-medium">{passkey.name}</p>
-                    {#if passkey.last_used_at}
-                      <p class="text-sm text-zinc-500">
-                        Last used {passkey.last_used_at}
-                      </p>
-                    {:else}
-                      <p class="text-sm text-zinc-500">Never used</p>
-                    {/if}
+                <div class="flex items-start gap-4">
+                  <div
+                    class="flex size-10 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-blue-600"
+                  >
+                    <FingerprintPattern className="size-5" />
                   </div>
-
-                  <div class="flex items-center space-x-4">
-                    <button
-                      onclick={() => openDeleteDialog(passkey)}
-                      class="text-red-500 hover:text-red-600 focus:outline-none"
-                    >
-                      Delete
-                    </button>
+                  <div class="min-w-0 flex-1">
+                    <p class="truncate font-medium text-zinc-900">
+                      {passkey.name}
+                    </p>
+                    <p class="mt-1 text-xs text-zinc-400">
+                      Added {passkey.created_at}
+                    </p>
                   </div>
                 </div>
-              {:else}
-                <p class="text-zinc-500 w-full bg-zinc-100/50 rounded-xl flex items-center justify-center h-20">No passkeys added yet.</p>
-              {/each}
-            </div>
+
+                <div class="mt-4 flex items-center justify-between border-t border-zinc-100 pt-3">
+                  <span class="text-xs text-zinc-500">
+                    {#if passkey.last_used_at}
+                      Last used {passkey.last_used_at}
+                    {:else}
+                      Never used
+                    {/if}
+                  </span>
+                  <button
+                    onclick={() => openDeleteDialog(passkey)}
+                    class="rounded-md px-2 py-1 text-xs font-medium text-red-500 transition hover:bg-red-50 hover:text-red-600 focus:outline-none"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            {:else}
+              <div class="col-span-full flex h-32 items-center justify-center rounded-xl border border-dashed border-zinc-300 bg-zinc-50/50">
+                <div class="text-center">
+                  <FingerprintPattern className="mx-auto size-8 text-zinc-300" />
+                  <p class="mt-2 text-sm text-zinc-500">No passkeys added yet.</p>
+                </div>
+              </div>
+            {/each}
           </div>
         </div>
       </div>
