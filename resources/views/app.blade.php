@@ -8,9 +8,11 @@
     <link rel="icon" href="{{ asset('icons/logo.svg') }}" type="image/svg+xml">
 
     @vite(['resources/css/app.css','resources/js/app.ts'])
-    @inertiaHead
+    <x-inertia::head>
+        <title>{{ config('app.name') }}</title>
+    </x-inertia::head>
 </head>
 <body>
-@inertia
+<x-inertia::app />
 </body>
 </html>
