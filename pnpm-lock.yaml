@@ -9,14 +9,14 @@ importers:
   .:
     devDependencies:
       '@inertiajs/core':
-        specifier: 3.0.0-beta.5
-        version: 3.0.0-beta.5(axios@1.13.6)
+        specifier: ^3.0.0
+        version: 3.0.0(axios@1.13.6)
       '@inertiajs/svelte':
-        specifier: 3.0.0-beta.5
-        version: 3.0.0-beta.5(axios@1.13.6)(svelte@5.55.0)
+        specifier: ^3.0.0
+        version: 3.0.0(axios@1.13.6)(svelte@5.55.0)
       '@inertiajs/vite':
-        specifier: 3.0.0-beta.5
-        version: 3.0.0-beta.5(axios@1.13.6)(vite@8.0.2(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1))
+        specifier: ^3.0.0
+        version: 3.0.0(axios@1.13.6)(vite@8.0.2(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1))
       '@laravel/vite-plugin-wayfinder':
         specifier: ^0.1.7
         version: 0.1.7
@@ -296,21 +296,21 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@inertiajs/core@3.0.0-beta.5':
-    resolution: {integrity: sha512-SeM/BozRceCMsm8cKF75snlQlI+SkvSJglHj6YOGD+LOBzyoxiS+OroaGCnxOVuSw2288Xklm6vS6IAFHv8+ww==}
+  '@inertiajs/core@3.0.0':
+    resolution: {integrity: sha512-LkdXfOXJGLIFQeqirO66lQ401ciO1f7yEiQV7ZWFbt9f2ElgilSkm6aOXLbPwHJF77h27jdtja0OJDS8+l7Svw==}
     peerDependencies:
       axios: ^1.13.2
     peerDependenciesMeta:
       axios:
         optional: true
 
-  '@inertiajs/svelte@3.0.0-beta.5':
-    resolution: {integrity: sha512-Kg4QdU6XhcUhfryzZaIzEgFVGR9ZdM4hLIev6/Yi/qLFMj31OQmIe0rb3iSAa5aa7nNs9Wa5bqirx9s51ayO5g==}
+  '@inertiajs/svelte@3.0.0':
+    resolution: {integrity: sha512-5zA17ANH97zwfVEcVwsxWsGE7eDgmijoRDxi3dAUXJ7AqYRR49vNRAXp16Ac+5ugTH5V2pcmvEMc7wrKDagU7Q==}
     peerDependencies:
       svelte: ^5.0.0
 
-  '@inertiajs/vite@3.0.0-beta.5':
-    resolution: {integrity: sha512-gLZVF3KOELVfQE0VM8ngRHNjcmyIdOcnApkQWt3Nqz6e9KYV2yaJoqAuQZDaH/r6xZ9eWGFDnRwuZpCXx5YKvg==}
+  '@inertiajs/vite@3.0.0':
+    resolution: {integrity: sha512-kF+7wkjVr+itJw4s8eNnJjeW6kMKyO3U2qunOP/s0WXyeP6naXJxhv9NQNOf5qHuXW2SgVDKTXuzC5qcfQXf6g==}
     peerDependencies:
       vite: ^7.0.0 || ^8.0.0
 
@@ -667,8 +667,8 @@ packages:
   brace-expansion@1.1.12:
     resolution: {integrity: sha512-9T9UjW3r0UW5c1Q7GTwllptXwhvYmEzFhzMfZ9H7FQWt+uZePjZPjBP/W1ZEyZ1twGWom5/56TF4lPcqjnDHcg==}
 
-  brace-expansion@5.0.4:
-    resolution: {integrity: sha512-h+DEnpVvxmfVefa4jFbCf5HdH5YMDXRsmKflpf1pILZWRFlTbJpxeU55nJl4Smt5HQaGzg1o6RHFPJaOqnmBDg==}
+  brace-expansion@5.0.5:
+    resolution: {integrity: sha512-VZznLgtwhn+Mact9tfiwx64fA9erHH/MCXEUfB/0bX/6Fz6ny5EGTXYltMocqg4xFAQZtnO3DHWWXi8RiuN7cQ==}
     engines: {node: 18 || 20 || >=22}
 
   call-bind-apply-helpers@1.0.2:
@@ -972,8 +972,8 @@ packages:
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
-  laravel-precognition@2.0.0-beta.5:
-    resolution: {integrity: sha512-m2AYf8nf35kWgrKXJEJfg//PR8Qg0VbnoxAYkon2bEKrZikg+54ubBncm7mpZlnY5crN3zKwoK9P5rI6wXeO4w==}
+  laravel-precognition@2.0.0:
+    resolution: {integrity: sha512-dmA4HGc9m+TsVNsJs9/XQBI8u6j7coilN+qKkBuhuXQzH3HypwS/c5dFQ4UqUGjBbcxIM7zdk91kM/SRZwIvWQ==}
     peerDependencies:
       axios: ^1.4.0
     peerDependenciesMeta:
@@ -1563,26 +1563,26 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@inertiajs/core@3.0.0-beta.5(axios@1.13.6)':
+  '@inertiajs/core@3.0.0(axios@1.13.6)':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       es-toolkit: 1.45.1
-      laravel-precognition: 2.0.0-beta.5(axios@1.13.6)
+      laravel-precognition: 2.0.0(axios@1.13.6)
     optionalDependencies:
       axios: 1.13.6
 
-  '@inertiajs/svelte@3.0.0-beta.5(axios@1.13.6)(svelte@5.55.0)':
+  '@inertiajs/svelte@3.0.0(axios@1.13.6)(svelte@5.55.0)':
     dependencies:
-      '@inertiajs/core': 3.0.0-beta.5(axios@1.13.6)
+      '@inertiajs/core': 3.0.0(axios@1.13.6)
       es-toolkit: 1.45.1
-      laravel-precognition: 2.0.0-beta.5(axios@1.13.6)
+      laravel-precognition: 2.0.0(axios@1.13.6)
       svelte: 5.55.0
     transitivePeerDependencies:
       - axios
 
-  '@inertiajs/vite@3.0.0-beta.5(axios@1.13.6)(vite@8.0.2(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1))':
+  '@inertiajs/vite@3.0.0(axios@1.13.6)(vite@8.0.2(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1))':
     dependencies:
-      '@inertiajs/core': 3.0.0-beta.5(axios@1.13.6)
+      '@inertiajs/core': 3.0.0(axios@1.13.6)
       vite: 8.0.2(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)
     transitivePeerDependencies:
       - axios
@@ -1899,7 +1899,7 @@ snapshots:
       balanced-match: 1.0.2
       concat-map: 0.0.1
 
-  brace-expansion@5.0.4:
+  brace-expansion@5.0.5:
     dependencies:
       balanced-match: 4.0.4
 
@@ -2213,7 +2213,7 @@ snapshots:
     dependencies:
       json-buffer: 3.0.1
 
-  laravel-precognition@2.0.0-beta.5(axios@1.13.6):
+  laravel-precognition@2.0.0(axios@1.13.6):
     dependencies:
       es-toolkit: 1.45.1
     optionalDependencies:
@@ -2304,7 +2304,7 @@ snapshots:
 
   minimatch@10.2.4:
     dependencies:
-      brace-expansion: 5.0.4
+      brace-expansion: 5.0.5
 
   minimatch@3.1.5:
     dependencies:
