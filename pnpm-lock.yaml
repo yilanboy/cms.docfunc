@@ -9,14 +9,14 @@ importers:
   .:
     devDependencies:
       '@inertiajs/core':
-        specifier: ^3.0.1
-        version: 3.0.1(axios@1.14.0)
+        specifier: ^3.0.2
+        version: 3.0.2(axios@1.14.0)
       '@inertiajs/svelte':
-        specifier: ^3.0.1
-        version: 3.0.1(axios@1.14.0)(svelte@5.55.1)
+        specifier: ^3.0.2
+        version: 3.0.2(axios@1.14.0)(svelte@5.55.1)
       '@inertiajs/vite':
-        specifier: ^3.0.1
-        version: 3.0.1(axios@1.14.0)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1))
+        specifier: ^3.0.2
+        version: 3.0.2(axios@1.14.0)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1))
       '@laravel/vite-plugin-wayfinder':
         specifier: ^0.1.7
         version: 0.1.7
@@ -39,14 +39,14 @@ importers:
         specifier: ^1.14.0
         version: 1.14.0
       laravel-vite-plugin:
-        specifier: ^3.0.0
-        version: 3.0.0(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1))
+        specifier: ^3.0.1
+        version: 3.0.1(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1))
       lodash:
-        specifier: ^4.17.23
-        version: 4.17.23
+        specifier: ^4.18.1
+        version: 4.18.1
       playwright:
-        specifier: ^1.58.2
-        version: 1.58.2
+        specifier: ^1.59.1
+        version: 1.59.1
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
@@ -296,21 +296,21 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@inertiajs/core@3.0.1':
-    resolution: {integrity: sha512-Fm6w6t9zfUKAWZuzPYVufo7gx5d3EO3OSMLUgP/3KgxX3H/9UNbuvy6dR+pzrWS7OtW/L3TAZfpCXAAb1FlhEA==}
+  '@inertiajs/core@3.0.2':
+    resolution: {integrity: sha512-ZBfV4HK5zjPC76VQ42WcgFdPmtO8zi+fzdkFBF0uM7EVwC5MSS8UITg8Yon4lb/i0X9bE3Ym16uHzgcPP1lL3Q==}
     peerDependencies:
       axios: ^1.13.2
     peerDependenciesMeta:
       axios:
         optional: true
 
-  '@inertiajs/svelte@3.0.1':
-    resolution: {integrity: sha512-/rIf2g2mzWjIR6BYZUbqW+qui1q3rw2HMUXCMtDlhO4UMa0VXUS9CR59V/dTMAMQwzBTRAiElAQyanoxA9VMbw==}
+  '@inertiajs/svelte@3.0.2':
+    resolution: {integrity: sha512-kCDMcCse/E2z3PgJndTcdr/m4QAPMtz/bkOC6LWB8CtebbHI8Aj02OKRmd1RAfC6UPCQgWcfiCWNrJkiZi/c7A==}
     peerDependencies:
       svelte: ^5.0.0
 
-  '@inertiajs/vite@3.0.1':
-    resolution: {integrity: sha512-SAEMMRnnvm60M/UsPePxzqJ4StkXWS/tS9K3fFY1zTYBJHjqZ7xn4ze/jnIdcnJC/6+wU18aTpjoXVlw8AxWYw==}
+  '@inertiajs/vite@3.0.2':
+    resolution: {integrity: sha512-i/Pg9dprdLRae59Ek2Sf8GtCCmzQSR+bBz1nhbz23UcDC17ZqMzPSlWa37qvzESMbEqTjz+8wuxUz5+sfPlijQ==}
     peerDependencies:
       vite: ^7.0.0 || ^8.0.0
 
@@ -983,8 +983,8 @@ packages:
       axios:
         optional: true
 
-  laravel-vite-plugin@3.0.0:
-    resolution: {integrity: sha512-eO6B/IPH448XNjyA5OmJsFAeJH3MeQGWodNMzejx44+rhV44cs0op05t4yku9ifaRnikDkSHLOLXszJL0tiW3w==}
+  laravel-vite-plugin@3.0.1:
+    resolution: {integrity: sha512-Bx8sVcLIaZT1d0eisABcmjQ1GZdJpaXcV66A8RhXGp9JgR3iL8jDnvakVDXuH87Tn5S9KNx3VOhmJZW1CSexOg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -1078,8 +1078,8 @@ packages:
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
-  lodash@4.17.23:
-    resolution: {integrity: sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==}
+  lodash@4.18.1:
+    resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
@@ -1156,13 +1156,13 @@ packages:
     resolution: {integrity: sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==}
     engines: {node: '>=12'}
 
-  playwright-core@1.58.2:
-    resolution: {integrity: sha512-yZkEtftgwS8CsfYo7nm0KE8jsvm6i/PTgVtB8DL726wNf6H2IMsDuxCpJj59KDaxCtSnrWan2AeDqM7JBaultg==}
+  playwright-core@1.59.1:
+    resolution: {integrity: sha512-HBV/RJg81z5BiiZ9yPzIiClYV/QMsDCKUyogwH9p3MCP6IYjUFu/MActgYAvK0oWyV9NlwM3GLBjADyWgydVyg==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.58.2:
-    resolution: {integrity: sha512-vA30H8Nvkq/cPBnNw4Q8TWz1EJyqgpuinBcHET0YVJVFldr8JDNiU9LaWAE1KqSkRYazuaBhTpB5ZzShOezQ6A==}
+  playwright@1.59.1:
+    resolution: {integrity: sha512-C8oWjPR3F81yljW9o5OxcWzfh6avkVwDD2VYdwIGqTkl+OGFISgypqzfu7dOe4QNLL2aqcWBmI3PMtLIK233lw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -1390,10 +1390,10 @@ packages:
       yaml:
         optional: true
 
-  vitefu@1.1.2:
-    resolution: {integrity: sha512-zpKATdUbzbsycPFBN71nS2uzBUQiVnFoOrr2rvqv34S1lcAgMKKkjWleLGeiJlZ8lwCXvtWaRn7R3ZC16SYRuw==}
+  vitefu@1.1.3:
+    resolution: {integrity: sha512-ub4okH7Z5KLjb6hDyjqrGXqWtWvoYdU3IGm/NorpgHncKoLTCfRIbvlhBm7r0YstIaQRYlp4yEbFqDcKSzXSSg==}
     peerDependencies:
-      vite: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-beta.0
+      vite: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
     peerDependenciesMeta:
       vite:
         optional: true
@@ -1567,7 +1567,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@inertiajs/core@3.0.1(axios@1.14.0)':
+  '@inertiajs/core@3.0.2(axios@1.14.0)':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       es-toolkit: 1.45.1
@@ -1575,18 +1575,19 @@ snapshots:
     optionalDependencies:
       axios: 1.14.0
 
-  '@inertiajs/svelte@3.0.1(axios@1.14.0)(svelte@5.55.1)':
+  '@inertiajs/svelte@3.0.2(axios@1.14.0)(svelte@5.55.1)':
     dependencies:
-      '@inertiajs/core': 3.0.1(axios@1.14.0)
+      '@inertiajs/core': 3.0.2(axios@1.14.0)
       es-toolkit: 1.45.1
       laravel-precognition: 2.0.0(axios@1.14.0)
       svelte: 5.55.1
     transitivePeerDependencies:
       - axios
 
-  '@inertiajs/vite@3.0.1(axios@1.14.0)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1))':
+  '@inertiajs/vite@3.0.2(axios@1.14.0)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1))':
     dependencies:
-      '@inertiajs/core': 3.0.1(axios@1.14.0)
+      '@inertiajs/core': 3.0.2(axios@1.14.0)
+      tinyglobby: 0.2.15
       vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)
     transitivePeerDependencies:
       - axios
@@ -1686,7 +1687,7 @@ snapshots:
       obug: 2.1.1
       svelte: 5.55.1
       vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)
-      vitefu: 1.1.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1))
+      vitefu: 1.1.3(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1))
 
   '@tailwindcss/node@4.2.2':
     dependencies:
@@ -2226,7 +2227,7 @@ snapshots:
     optionalDependencies:
       axios: 1.14.0
 
-  laravel-vite-plugin@3.0.0(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)):
+  laravel-vite-plugin@3.0.1(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)):
     dependencies:
       picocolors: 1.1.1
       tinyglobby: 0.2.15
@@ -2295,7 +2296,7 @@ snapshots:
 
   lodash.merge@4.6.2: {}
 
-  lodash@4.17.23: {}
+  lodash@4.18.1: {}
 
   magic-string@0.30.21:
     dependencies:
@@ -2358,11 +2359,11 @@ snapshots:
 
   picomatch@4.0.4: {}
 
-  playwright-core@1.58.2: {}
+  playwright-core@1.59.1: {}
 
-  playwright@1.58.2:
+  playwright@1.59.1:
     dependencies:
-      playwright-core: 1.58.2
+      playwright-core: 1.59.1
     optionalDependencies:
       fsevents: 2.3.2
 
@@ -2530,7 +2531,7 @@ snapshots:
       - '@emnapi/core'
       - '@emnapi/runtime'
 
-  vitefu@1.1.2(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)):
+  vitefu@1.1.3(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)):
     optionalDependencies:
       vite: 8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)
 
