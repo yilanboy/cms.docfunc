@@ -1,8 +1,6 @@
 <script lang="ts">
   import LayoutMain from "@/components/layouts/main/LayoutMain.svelte";
-  import FileText from "@/components/icons/FileText.svelte";
-  import Link from "@/components/icons/Link.svelte";
-  import Tag from "@/components/icons/Tag.svelte";
+  import { FileText, Link, Tag } from "lucide-svelte";
   import { toasts } from "@/shared/toasts.svelte";
 
   interface Props {
@@ -75,7 +73,7 @@
           <div
             class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500 text-white shadow-lg transition-transform duration-300 group-hover:scale-110"
           >
-            <Link className="size-6" />
+            <Link class="size-6" />
           </div>
         </div>
       </div>
@@ -98,7 +96,7 @@
           <div
             class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-500 text-white shadow-lg transition-transform duration-300 group-hover:scale-110"
           >
-            <Tag className="size-6" />
+            <Tag class="size-6" />
           </div>
         </div>
       </div>
@@ -121,7 +119,7 @@
           <div
             class="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500 text-white shadow-lg transition-transform duration-300 group-hover:scale-110"
           >
-            <FileText className="size-6" />
+            <FileText class="size-6" />
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page, router } from "@inertiajs/svelte";
   import { fly } from "svelte/transition";
-  import CircleCheck from "@/components/icons/CircleCheck.svelte";
+  import { CircleCheck } from "lucide-svelte";
   import LayoutMain from "@/components/layouts/main/LayoutMain.svelte";
 
   let title = "Verify Email";
@@ -48,7 +48,7 @@
     >
       <div class="flex items-center">
         <div class="shrink-0">
-          <CircleCheck className="size-5 text-green-400" />
+          <CircleCheck class="size-5 text-green-400" />
         </div>
         <div class="ml-3">
           <p class="text-base font-medium text-green-700">

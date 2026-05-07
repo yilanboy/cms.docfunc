@@ -1,14 +1,11 @@
 <script lang="ts">
   import { inertia, page } from "@inertiajs/svelte";
-  import Home from "@/components/icons/Home.svelte";
+  import { Home, Link, Tag, Settings } from "lucide-svelte";
   import { fly } from "svelte/transition";
   import DashboardController from "@/actions/App/Http/Controllers/DashboardController";
   import { onMount } from "svelte";
   import LinkController from "@/actions/App/Http/Controllers/LinkController";
   import TagController from "@/actions/App/Http/Controllers/TagController";
-  import Link from "@/components/icons/Link.svelte";
-  import Tag from "@/components/icons/Tag.svelte";
-  import Settings from "@/components/icons/Settings.svelte";
   import SettingController from "@/actions/App/Http/Controllers/Blog/SettingController";
   import { sidebar } from "@/shared/sidebar.svelte.js";
 
@@ -44,7 +41,7 @@
                     "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold": true,
                   }}
                 >
-                  <Home className="size-6 shrink-0" />
+                  <Home class="size-6 shrink-0" />
                   Dashboard
                 </a>
               </li>
@@ -62,7 +59,7 @@
                     "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold": true,
                   }}
                 >
-                  <Link className="size-6 shrink-0" />
+                  <Link class="size-6 shrink-0" />
                   Links
                 </a>
               </li>
@@ -80,7 +77,7 @@
                     "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold": true,
                   }}
                 >
-                  <Tag className="size-6 shrink-0" />
+                  <Tag class="size-6 shrink-0" />
                   Tags
                 </a>
               </li>
@@ -97,7 +94,7 @@
                     "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold": true,
                   }}
                 >
-                  <Settings className="size-6 shrink-0" />
+                  <Settings class="size-6 shrink-0" />
                   Blog Settings
                 </a>
               </li>

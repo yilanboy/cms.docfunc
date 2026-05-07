@@ -1,9 +1,5 @@
 <script lang="ts">
-  import CircleCheck from "@/components/icons/CircleCheck.svelte";
-  import TriangleAlert from "@/components/icons/TriangleAlert.svelte";
-  import CircleAlert from "@/components/icons/CircleAlert.svelte";
-  import Info from "@/components/icons/Info.svelte";
-  import X from "@/components/icons/X.svelte";
+  import { CircleCheck, TriangleAlert, CircleAlert, Info, X } from "lucide-svelte";
   import { toasts, type ToastProps } from "@/shared/toasts.svelte";
   import { router } from "@inertiajs/svelte";
   import { onMount } from "svelte";
@@ -71,7 +67,7 @@
           <div class="p-4">
             <div class="flex items-start">
               <div class="shrink-0">
-                <Icon className={`size-6 ${colors[toast.type]}`} />
+                <Icon class={`size-6 ${colors[toast.type]}`} />
               </div>
               <div class="ml-3 w-0 flex-1 pt-0.5">
                 <p class="text-sm font-medium text-gray-900">
@@ -90,7 +86,7 @@
                   class="inline-flex cursor-pointer rounded-md text-gray-400 hover:text-gray-500 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-600"
                 >
                   <span class="sr-only">Close</span>
-                  <X className="size-5" />
+                  <X class="size-5" />
                 </button>
               </div>
             </div>

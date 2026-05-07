@@ -1,11 +1,13 @@
 <script lang="ts">
-  import SidebarClose from "@/components/icons/SidebarClose.svelte";
-  import SidebarOpen from "@/components/icons/SidebarOpen.svelte";
+  import {
+    PanelLeftClose as SidebarClose,
+    PanelLeftOpen as SidebarOpen,
+    ChevronDown,
+    Settings,
+    LogOut,
+  } from "lucide-svelte";
   import { stopPropagation } from "@/helpers.js";
   import { cubicOut } from "svelte/easing";
-  import ChevronDown from "@/components/icons/ChevronDown.svelte";
-  import Settings from "@/components/icons/Settings.svelte";
-  import LogOut from "@/components/icons/LogOut.svelte";
   import { inertia, page } from "@inertiajs/svelte";
   import AuthenticatedSessionController from "@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController";
   import ProfileController from "@/actions/App/Http/Controllers/Settings/ProfileController";
@@ -111,7 +113,7 @@
               class="ml-4 text-base/6 font-semibold text-zinc-900"
               aria-hidden="true">{page.props.auth.user.name}</span
             >
-            <ChevronDown className="ml-2 size-5 text-zinc-400" />
+            <ChevronDown class="ml-2 size-5 text-zinc-400" />
           </span>
         </button>
 
@@ -133,7 +135,7 @@
               tabindex="-1"
               id="user-menu-item-0"
             >
-              <Settings className="size-4" />
+              <Settings class="size-4" />
               <span>Settings</span>
             </a>
             <button
@@ -147,7 +149,7 @@
               tabindex="-1"
               id="user-menu-item-1"
             >
-              <LogOut className="size-4" />
+              <LogOut class="size-4" />
               <span>Sign out</span>
             </button>
           </div>

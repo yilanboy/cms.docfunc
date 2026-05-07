@@ -3,7 +3,7 @@
   import PasskeyLoginController from "@/actions/App/Http/Controllers/Auth/PasskeyLoginController";
   import ForgotPasswordController from "@/actions/App/Http/Controllers/Auth/ForgotPasswordController";
   import { inertia, page, Form } from "@inertiajs/svelte";
-  import ChevronLeft from "@/components/icons/ChevronLeft.svelte";
+  import { ChevronLeft } from "lucide-svelte";
   import { back } from "@/helpers";
   import InputWithLabel from "@/components/forms/InputWithLabel.svelte";
   import CheckboxWithLabel from "@/components/forms/CheckboxWithLabel.svelte";
@@ -74,7 +74,7 @@
       onclick={back}
       class="flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 transition duration-150 hover:bg-zinc-100"
     >
-      <ChevronLeft className="size-4" />
+      <ChevronLeft class="size-4" />
       <span class="text-lg">Go back</span>
     </button>
   </header>

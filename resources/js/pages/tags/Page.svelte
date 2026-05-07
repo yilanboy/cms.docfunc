@@ -6,10 +6,9 @@
   import { onMount } from "svelte";
   import TagController from "@/actions/App/Http/Controllers/TagController";
   import SubmitButton from "@/components/forms/SubmitButton.svelte";
-  import TriangleAlert from "@/components/icons/TriangleAlert.svelte";
+  import { TriangleAlert, Search } from "lucide-svelte";
   import { preventDefault } from "@/helpers";
   import InputWithLabel from "@/components/forms/InputWithLabel.svelte";
-  import Search from "@/components/icons/Search.svelte";
   import { router } from "@inertiajs/svelte";
 
   interface Props {
@@ -184,7 +183,7 @@
         <div
           class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10"
         >
-          <TriangleAlert className="size-6 text-red-600" />
+          <TriangleAlert class="size-6 text-red-600" />
         </div>
         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
           <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">
@@ -245,7 +244,7 @@
                   class="col-start-1 row-start-1 block w-full rounded-md bg-white py-1.5 pr-3 pl-10 text-base text-zinc-900 outline-1 -outline-offset-1 outline-zinc-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:pl-9"
                 />
                 <Search
-                  className="pointer-events-none col-start-1 row-start-1 ml-3 size-5 self-center text-gray-400 sm:size-4"
+                  class="pointer-events-none col-start-1 row-start-1 ml-3 size-5 self-center text-gray-400 sm:size-4"
                 />
               </div>
             </div>

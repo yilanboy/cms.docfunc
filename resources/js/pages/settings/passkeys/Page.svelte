@@ -12,7 +12,7 @@
     browserSupportsWebAuthn,
     startRegistration,
   } from "@simplewebauthn/browser";
-  import TriangleAlert from "@/components/icons/TriangleAlert.svelte";
+  import { TriangleAlert } from "lucide-svelte";
   import FingerprintPattern from "@/components/icons/FingerprintPattern.svelte";
   import { preventDefault } from "@/helpers";
   import { toasts } from "@/shared/toasts.svelte";
@@ -198,7 +198,7 @@
         <div
           class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10"
         >
-          <TriangleAlert className="size-6 text-red-600" />
+          <TriangleAlert class="size-6 text-red-600" />
         </div>
         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
           <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">
