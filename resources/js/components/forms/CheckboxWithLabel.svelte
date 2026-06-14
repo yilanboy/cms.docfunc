@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Check } from "lucide-svelte";
+  import { Check } from "@lucide/svelte/icons";
   import type { HTMLInputAttributes } from "svelte/elements";
 
   interface Props extends HTMLInputAttributes {
@@ -21,7 +21,7 @@
       />
 
       <Check
-        class="col-start-1 row-start-1 justify-self-center self-center pointer-events-none size-4 text-white group-has-disabled:stroke-gray-950/25"
+        class="pointer-events-none col-start-1 row-start-1 size-4 self-center justify-self-center text-white group-has-disabled:stroke-gray-950/25"
       />
     </div>
   </div>

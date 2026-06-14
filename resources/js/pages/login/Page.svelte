@@ -3,7 +3,7 @@
   import PasskeyLoginController from "@/actions/App/Http/Controllers/Auth/PasskeyLoginController";
   import ForgotPasswordController from "@/actions/App/Http/Controllers/Auth/ForgotPasswordController";
   import { inertia, page, Form } from "@inertiajs/svelte";
-  import { ChevronLeft } from "lucide-svelte";
+  import { ChevronLeft } from "@lucide/svelte/icons";
   import { back } from "@/helpers";
   import InputWithLabel from "@/components/forms/InputWithLabel.svelte";
   import CheckboxWithLabel from "@/components/forms/CheckboxWithLabel.svelte";

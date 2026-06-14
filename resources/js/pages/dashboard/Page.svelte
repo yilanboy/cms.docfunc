@@ -1,6 +1,6 @@
 <script lang="ts">
   import LayoutMain from "@/components/layouts/main/LayoutMain.svelte";
-  import { FileText, Link, Tag } from "lucide-svelte";
+  import { FileText, Link, Tag } from "@lucide/svelte/icons";
   import { toasts } from "@/shared/toasts.svelte";
 
   interface Props {

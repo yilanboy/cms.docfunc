@@ -1,7 +1,7 @@
 <script lang="ts">
   import ForgotPasswordController from "@/actions/App/Http/Controllers/Auth/ForgotPasswordController";
   import { useForm } from "@inertiajs/svelte";
-  import { ChevronLeft } from "lucide-svelte";
+  import { ChevronLeft } from "@lucide/svelte/icons";
   import { back } from "@/helpers";
   import LayoutGuest from "@/components/layouts/guest/LayoutGuest.svelte";
   import SubmitButton from "@/components/forms/SubmitButton.svelte";

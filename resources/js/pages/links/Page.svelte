@@ -4,7 +4,7 @@
   import { onMount } from "svelte";
   import { useForm } from "@inertiajs/svelte";
   import LinkController from "@/actions/App/Http/Controllers/LinkController";
-  import { TriangleAlert } from "lucide-svelte";
+  import { TriangleAlert } from "@lucide/svelte/icons";
   import SubmitButton from "@/components/forms/SubmitButton.svelte";
   import { preventDefault } from "@/helpers";
 

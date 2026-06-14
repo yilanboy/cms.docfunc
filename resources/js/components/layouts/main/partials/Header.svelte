@@ -5,7 +5,7 @@
     ChevronDown,
     Settings,
     LogOut,
-  } from "lucide-svelte";
+  } from "@lucide/svelte/icons";
   import { stopPropagation } from "@/helpers.js";
   import { cubicOut } from "svelte/easing";
   import { inertia, page } from "@inertiajs/svelte";

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { inertia, page } from "@inertiajs/svelte";
-  import { Home, Link, Tag, Settings } from "lucide-svelte";
+  import { Home, Link, Tag, Settings } from "@lucide/svelte/icons";
   import { fly } from "svelte/transition";
   import DashboardController from "@/actions/App/Http/Controllers/DashboardController";
   import { onMount } from "svelte";

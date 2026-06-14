@@ -12,7 +12,7 @@
     browserSupportsWebAuthn,
     startRegistration,
   } from "@simplewebauthn/browser";
-  import { TriangleAlert } from "lucide-svelte";
+  import { TriangleAlert } from "@lucide/svelte/icons";
   import FingerprintPattern from "@/components/icons/FingerprintPattern.svelte";
   import { preventDefault } from "@/helpers";
   import { toasts } from "@/shared/toasts.svelte";
@@ -250,7 +250,8 @@
         <div class="col-span-4 lg:col-span-3">
           <div class="flex items-center justify-between">
             <p class="text-sm text-zinc-500">
-              {passkeys.length} {passkeys.length === 1 ? "passkey" : "passkeys"} registered
+              {passkeys.length}
+              {passkeys.length === 1 ? "passkey" : "passkeys"} registered
             </p>
             <button
               title="Add passkey"
@@ -283,7 +284,9 @@
                   </div>
                 </div>
 
-                <div class="mt-4 flex items-center justify-between border-t border-zinc-100 pt-3">
+                <div
+                  class="mt-4 flex items-center justify-between border-t border-zinc-100 pt-3"
+                >
                   <span class="text-xs text-zinc-500">
                     {#if passkey.last_used_at}
                       Last used {passkey.last_used_at}
@@ -300,10 +303,16 @@
                 </div>
               </div>
             {:else}
-              <div class="col-span-full flex h-32 items-center justify-center rounded-xl border border-dashed border-zinc-300 bg-zinc-50/50">
+              <div
+                class="col-span-full flex h-32 items-center justify-center rounded-xl border border-dashed border-zinc-300 bg-zinc-50/50"
+              >
                 <div class="text-center">
-                  <FingerprintPattern className="mx-auto size-8 text-zinc-300" />
-                  <p class="mt-2 text-sm text-zinc-500">No passkeys added yet.</p>
+                  <FingerprintPattern
+                    className="mx-auto size-8 text-zinc-300"
+                  />
+                  <p class="mt-2 text-sm text-zinc-500">
+                    No passkeys added yet.
+                  </p>
                 </div>
               </div>
             {/each}

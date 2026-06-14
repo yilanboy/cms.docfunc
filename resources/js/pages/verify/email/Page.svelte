@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page, router } from "@inertiajs/svelte";
   import { fly } from "svelte/transition";
-  import { CircleCheck } from "lucide-svelte";
+  import { CircleCheck } from "@lucide/svelte/icons";
   import LayoutMain from "@/components/layouts/main/LayoutMain.svelte";
 
   let title = "Verify Email";

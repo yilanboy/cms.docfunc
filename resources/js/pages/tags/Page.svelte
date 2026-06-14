@@ -6,7 +6,7 @@
   import { onMount } from "svelte";
   import TagController from "@/actions/App/Http/Controllers/TagController";
   import SubmitButton from "@/components/forms/SubmitButton.svelte";
-  import { TriangleAlert, Search } from "lucide-svelte";
+  import { TriangleAlert, Search } from "@lucide/svelte/icons";
   import { preventDefault } from "@/helpers";
   import InputWithLabel from "@/components/forms/InputWithLabel.svelte";
   import { router } from "@inertiajs/svelte";

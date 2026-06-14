@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ArrowLeft, ArrowRight } from "lucide-svelte";
+  import { ArrowLeft, ArrowRight } from "@lucide/svelte/icons";
   import { inertia } from "@inertiajs/svelte";
 
   interface Props {
