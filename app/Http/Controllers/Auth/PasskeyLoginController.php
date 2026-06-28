@@ -18,13 +18,16 @@ use Symfony\Component\Serializer\Exception\ExceptionInterface as SerializerExcep
 use Webauthn\AuthenticatorAssertionResponse;
 use Webauthn\AuthenticatorAssertionResponseValidator;
 use Webauthn\CeremonyStep\CeremonyStepManagerFactory;
+use Webauthn\CredentialRecord;
 use Webauthn\Exception\AuthenticatorResponseVerificationException;
 use Webauthn\PublicKeyCredential;
 use Webauthn\PublicKeyCredentialRequestOptions;
-use Webauthn\PublicKeyCredentialSource;
 
 class PasskeyLoginController extends Controller
 {
+    /**
+     * @throws SerializerExceptionInterface
+     */
     public function __invoke(PasskeyLoginRequest $request, Serializer $serializer)
     {
         $request->ensureIsNotRateLimited();
@@ -56,8 +59,8 @@ class PasskeyLoginController extends Controller
                 ])->back();
             }
 
-            $publicKeyCredentialSource = $serializer->fromJson(json_encode($passkey->data),
-                PublicKeyCredentialSource::class);
+            $credentialRecord = $serializer->fromJson(json_encode($passkey->data),
+                CredentialRecord::class);
 
             $options = Session::get('passkey-authentication-options');
 
@@ -72,14 +75,15 @@ class PasskeyLoginController extends Controller
             $publicKeyCredentialRequestOptions = $serializer->fromJson($options,
                 PublicKeyCredentialRequestOptions::class);
 
-            AuthenticatorAssertionResponseValidator::create(new CeremonyStepManagerFactory()->requestCeremony())
-                ->check(
-                    publicKeyCredentialSource: $publicKeyCredentialSource,
-                    authenticatorAssertionResponse: $publicKeyCredential->response,
-                    publicKeyCredentialRequestOptions: $publicKeyCredentialRequestOptions,
-                    host: request()->getHost(),
-                    userHandle: null
-                );
+            $credentialRecord = AuthenticatorAssertionResponseValidator::create(
+                new CeremonyStepManagerFactory()->requestCeremony()
+            )->check(
+                credentialRecord: $credentialRecord,
+                authenticatorAssertionResponse: $publicKeyCredential->response,
+                publicKeyCredentialRequestOptions: $publicKeyCredentialRequestOptions,
+                host: request()->getHost(),
+                userHandle: null
+            );
         } catch (SerializerExceptionInterface|AuthenticatorResponseVerificationException) {
             return Inertia::flash('toast', [
                 'type'        => 'danger',
@@ -89,6 +93,7 @@ class PasskeyLoginController extends Controller
         }
 
         $passkey->update([
+            'data'         => $serializer->toArray($credentialRecord),
             'last_used_at' => now(),
         ]);
 
