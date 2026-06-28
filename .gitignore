@@ -25,3 +25,7 @@ bootstrap/ssr
 resources/js/actions
 resources/js/wayfinder
 resources/js/routes
+storage/debugbar
+/.agents
+/.junie
+/.ai
