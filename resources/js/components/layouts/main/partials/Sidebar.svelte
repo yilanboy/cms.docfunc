@@ -1,11 +1,12 @@
 <script lang="ts">
   import { inertia, page } from "@inertiajs/svelte";
-  import { Home, Link, Tag, Settings } from "@lucide/svelte/icons";
+  import { Home, Link, Tag, FolderTree, Settings } from "@lucide/svelte/icons";
   import { fly } from "svelte/transition";
   import DashboardController from "@/actions/App/Http/Controllers/DashboardController";
   import { onMount } from "svelte";
   import LinkController from "@/actions/App/Http/Controllers/LinkController";
   import TagController from "@/actions/App/Http/Controllers/TagController";
+  import CategoryController from "@/actions/App/Http/Controllers/CategoryController";
   import SettingController from "@/actions/App/Http/Controllers/Blog/SettingController";
   import { sidebar } from "@/shared/sidebar.svelte.js";
 
@@ -79,6 +80,24 @@
                 >
                   <Tag class="size-6 shrink-0" />
                   Tags
+                </a>
+              </li>
+
+              <li>
+                <a
+                  use:inertia
+                  href={CategoryController.index().url}
+                  class={{
+                    "bg-zinc-100 text-blue-600": page.url.startsWith(
+                      CategoryController.index().url,
+                    ),
+                    "text-zinc-700 hover:bg-zinc-100 hover:text-blue-600":
+                      !page.url.startsWith(CategoryController.index().url),
+                    "flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold": true,
+                  }}
+                >
+                  <FolderTree class="size-6 shrink-0" />
+                  Categories
                 </a>
               </li>
 
