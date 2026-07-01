@@ -77,7 +77,8 @@ describe('category feature', function () {
         // Arrange
         loginAsUser();
         $category = Category::factory()->create([
-            'name' => 'Name',
+            'name'       => 'Name',
+            'is_default' => false,
         ]);
 
         // Act
@@ -87,6 +88,25 @@ describe('category feature', function () {
         $response->assertRedirect();
         $this->assertDatabaseMissing('categories', [
             'id' => $category->id,
+        ]);
+    });
+
+    test('cannot delete default category', function () {
+        // Arrange
+        loginAsUser();
+        $category = Category::factory()->create([
+            'name'       => 'Default Category',
+            'is_default' => true,
+        ]);
+
+        // Act
+        $response = $this->delete(route('categories.destroy', $category));
+
+        // Assert
+        $response->assertRedirect();
+        $this->assertDatabaseHas('categories', [
+            'id'         => $category->id,
+            'is_default' => true,
         ]);
     });
 });

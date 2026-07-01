@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Category;
+
 it('can show add category modal', function () {
     loginAsUser();
 
@@ -29,16 +31,37 @@ it('can add category', function () {
     ]);
 });
 
-it('can delete category', function () {
+it('cannot delete default category', function () {
     loginAsUser();
+
+    $category = Category::factory()->create([
+        'is_default' => true,
+    ]);
 
     $page = visit('/categories');
 
-    $page->click("#delete-category-1");
-    $page->click("#delete-category-confirmation");
+    $page->click("#delete-category-$category->id");
+    $page->click('#delete-category-confirmation');
+
+    $page->assertSee('Default category cannot be deleted.');
+    $this->assertDatabaseHas('categories', [
+        'id'         => $category->id,
+        'is_default' => true,
+    ]);
+});
+
+it('can delete non default category', function () {
+    loginAsUser();
+
+    $category = Category::factory()->create();
+
+    $page = visit('/categories');
+
+    $page->click("#delete-category-$category->id");
+    $page->click('#delete-category-confirmation');
 
     $page->assertSee('Category deleted successfully.');
     $this->assertDatabaseMissing('categories', [
-        'id' => 1,
+        'id' => $category->id,
     ]);
 });

@@ -12,6 +12,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property string $name
  * @property ?string $icon
  * @property ?string $description
+ * @property bool $is_default
  */
 class CategoryResource extends JsonResource
 {
@@ -22,6 +23,7 @@ class CategoryResource extends JsonResource
             'name'        => $this->name,
             'icon'        => $this->icon,
             'description' => $this->description,
+            'is_default'  => $this->is_default,
         ];
     }
 }
