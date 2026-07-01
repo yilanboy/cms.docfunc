@@ -32,11 +32,7 @@
     </h2>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <Form
-        class="space-y-6"
-        method="post"
-        action={ResetPasswordController.update()}
-      >
+      <Form class="space-y-6" method="post" action={ResetPasswordController.update()}>
         {#snippet children({ errors, invalid, validate }: FormSlotProps)}
           <input type="hidden" name="token" value={token} />
 

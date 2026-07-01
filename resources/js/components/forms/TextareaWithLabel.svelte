@@ -7,13 +7,7 @@
     value?: string;
   }
 
-  let {
-    label,
-    id,
-    value = $bindable(""),
-    rows = 3,
-    ...rest
-  }: Props = $props();
+  let { label, id, value = $bindable(""), rows = 3, ...rest }: Props = $props();
 </script>
 
 <div>

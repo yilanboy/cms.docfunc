@@ -12,7 +12,7 @@
   let { children }: Props = $props();
 </script>
 
-<div class="font-source-sans-3 relative min-h-screen w-full">
+<div class="relative min-h-screen w-full font-source-sans-3">
   <Header />
 
   <Sidebar />

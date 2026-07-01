@@ -9,7 +9,7 @@
   let { children }: Props = $props();
 </script>
 
-<div class="font-source-sans-3 flex min-h-screen w-full flex-col">
+<div class="flex min-h-screen w-full flex-col font-source-sans-3">
   {@render children?.()}
 
   <Toasts />

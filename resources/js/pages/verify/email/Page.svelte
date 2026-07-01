@@ -67,8 +67,8 @@
 
       <div class="mt-2 max-w-xl text-base text-zinc-500">
         <p>
-          Please check your email to verify your account. If you didn't receive
-          the verification email, click the button below to resend.
+          Please check your email to verify your account. If you didn't receive the verification
+          email, click the button below to resend.
         </p>
       </div>
 

@@ -6,7 +6,5 @@
         "line_ending": true,
         "binary_operator_spaces": false
     },
-    "exclude": [
-        "tests"
-    ]
+    "exclude": ["tests"]
 }

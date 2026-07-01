@@ -19,9 +19,7 @@
 </script>
 
 {#if meta.last_page > 1}
-  <nav
-    class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0"
-  >
+  <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
     <div class="-mt-px flex w-0 flex-1">
       {#if meta.links[0].url}
         <a

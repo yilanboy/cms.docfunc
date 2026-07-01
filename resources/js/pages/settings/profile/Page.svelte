@@ -38,11 +38,7 @@
 
         <div class="col-span-4 lg:col-span-3">
           <div class="sm:w-full sm:max-w-sm">
-            <Form
-              class="space-y-6"
-              method="post"
-              action={ProfileController.update()}
-            >
+            <Form class="space-y-6" method="post" action={ProfileController.update()}>
               {#snippet children({ errors }: SlotFormProps)}
                 <InputWithLabel
                   label="Name"

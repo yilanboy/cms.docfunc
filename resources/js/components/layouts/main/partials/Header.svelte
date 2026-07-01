@@ -66,17 +66,10 @@
       </button>
 
       <!-- Separator -->
-      <div
-        class="hidden lg:block lg:h-6 lg:w-px lg:bg-zinc-200"
-        aria-hidden="true"
-      ></div>
+      <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-zinc-200" aria-hidden="true"></div>
 
       <div class="hidden lg:flex lg:shrink-0 lg:items-center lg:gap-2">
-        <img
-          src="{page.props.asset.url}/icons/logo.svg"
-          alt="logo"
-          class="size-8"
-        />
+        <img src="{page.props.asset.url}/icons/logo.svg" alt="logo" class="size-8" />
         <span class="text-xl font-semibold">{page.props.app.name}</span>
       </div>
     </div>
@@ -85,10 +78,7 @@
 
     <div class="flex flex-1 items-center justify-end gap-x-4">
       <!-- Separator -->
-      <div
-        class="hidden lg:block lg:h-6 lg:w-px lg:bg-zinc-200"
-        aria-hidden="true"
-      ></div>
+      <div class="hidden lg:block lg:h-6 lg:w-px lg:bg-zinc-200" aria-hidden="true"></div>
 
       <!-- Profile dropdown -->
       <div class="relative">
@@ -109,9 +99,8 @@
           </span>
 
           <span class="hidden lg:flex lg:items-center">
-            <span
-              class="ml-4 text-base/6 font-semibold text-zinc-900"
-              aria-hidden="true">{page.props.auth.user.name}</span
+            <span class="ml-4 text-base/6 font-semibold text-zinc-900" aria-hidden="true"
+              >{page.props.auth.user.name}</span
             >
             <ChevronDown class="ml-2 size-5 text-zinc-400" />
           </span>

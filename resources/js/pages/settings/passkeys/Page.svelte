@@ -8,10 +8,7 @@
   import InputWithLabel from "@/components/forms/InputWithLabel.svelte";
   import GeneratePasskeyRegistrationOptionController from "@/actions/App/Http/Controllers/Api/GeneratePasskeyRegistrationOptionController";
   import PasskeyController from "@/actions/App/Http/Controllers/Settings/PasskeyController";
-  import {
-    browserSupportsWebAuthn,
-    startRegistration,
-  } from "@simplewebauthn/browser";
+  import { browserSupportsWebAuthn, startRegistration } from "@simplewebauthn/browser";
   import { TriangleAlert } from "@lucide/svelte/icons";
   import FingerprintPattern from "@/components/icons/FingerprintPattern.svelte";
   import { preventDefault } from "@/helpers";
@@ -77,9 +74,7 @@
       return;
     }
 
-    const response = await fetch(
-      GeneratePasskeyRegistrationOptionController().url,
-    );
+    const response = await fetch(GeneratePasskeyRegistrationOptionController().url);
     const optionsJSON = await response.json();
 
     try {
@@ -131,9 +126,7 @@
   }
 
   onMount(() => {
-    formDialog = document.getElementById(
-      PASSKEY_FORM_DIALOG_WRAPPER_ID,
-    ) as TailwindDialogElement;
+    formDialog = document.getElementById(PASSKEY_FORM_DIALOG_WRAPPER_ID) as TailwindDialogElement;
 
     deleteDialog = document.getElementById(
       PASSKEY_DELETE_DIALOG_WRAPPER_ID,
@@ -146,10 +139,7 @@
 </svelte:head>
 
 <LayoutMain>
-  <Dialog
-    dialogWrapperId={PASSKEY_FORM_DIALOG_WRAPPER_ID}
-    dialogId={PASSKEY_FORM_DIALOG_ID}
-  >
+  <Dialog dialogWrapperId={PASSKEY_FORM_DIALOG_WRAPPER_ID} dialogId={PASSKEY_FORM_DIALOG_ID}>
     <form onsubmit={preventDefault(register)}>
       <div class="sm:flex sm:items-start">
         <div class="w-full text-center sm:text-left">
@@ -189,10 +179,7 @@
     </form>
   </Dialog>
 
-  <Dialog
-    dialogWrapperId={PASSKEY_DELETE_DIALOG_WRAPPER_ID}
-    dialogId={PASSKEY_DELETE_DIALOG_ID}
-  >
+  <Dialog dialogWrapperId={PASSKEY_DELETE_DIALOG_WRAPPER_ID} dialogId={PASSKEY_DELETE_DIALOG_ID}>
     <form onsubmit={preventDefault(destroySubmit)}>
       <div class="sm:flex sm:items-start">
         <div
@@ -201,13 +188,10 @@
           <TriangleAlert class="size-6 text-red-600" />
         </div>
         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-          <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">
-            Delete Passkey
-          </h3>
+          <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">Delete Passkey</h3>
           <div class="mt-2">
             <p class=" text-gray-500">
-              Are you sure you want to delete the passkey "<span
-                class="font-medium text-gray-900"
+              Are you sure you want to delete the passkey "<span class="font-medium text-gray-900"
                 >{passkeyToDelete ? passkeyToDelete.name : ""}</span
               >"? This action cannot be undone.
             </p>
@@ -284,9 +268,7 @@
                   </div>
                 </div>
 
-                <div
-                  class="mt-4 flex items-center justify-between border-t border-zinc-100 pt-3"
-                >
+                <div class="mt-4 flex items-center justify-between border-t border-zinc-100 pt-3">
                   <span class="text-xs text-zinc-500">
                     {#if passkey.last_used_at}
                       Last used {passkey.last_used_at}
@@ -307,12 +289,8 @@
                 class="col-span-full flex h-32 items-center justify-center rounded-xl border border-dashed border-zinc-300 bg-zinc-50/50"
               >
                 <div class="text-center">
-                  <FingerprintPattern
-                    className="mx-auto size-8 text-zinc-300"
-                  />
-                  <p class="mt-2 text-sm text-zinc-500">
-                    No passkeys added yet.
-                  </p>
+                  <FingerprintPattern className="mx-auto size-8 text-zinc-300" />
+                  <p class="mt-2 text-sm text-zinc-500">No passkeys added yet.</p>
                 </div>
               </div>
             {/each}

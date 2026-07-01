@@ -14,25 +14,12 @@
         "isolatedModules": true,
         "noEmit": true,
         "verbatimModuleSyntax": true,
-        "lib": [
-            "esnext",
-            "dom",
-            "dom.iterable"
-        ],
+        "lib": ["esnext", "dom", "dom.iterable"],
         "paths": {
-            "@inertiajs/svelte/server": [
-                "../../node_modules/@inertiajs/svelte/dist/server"
-            ],
+            "@inertiajs/svelte/server": ["../../node_modules/@inertiajs/svelte/dist/server"],
             "@/*": ["./resources/js/*"]
         },
-        "types": [
-            "vite/client"
-        ]
+        "types": ["vite/client"]
     },
-    "include": [
-        "resources/**/*.d.ts",
-        "resources/**/*.ts",
-        "resources/**/*.svelte",
-        "*.config.js"
-    ]
+    "include": ["resources/**/*.d.ts", "resources/**/*.ts", "resources/**/*.svelte", "*.config.js"]
 }

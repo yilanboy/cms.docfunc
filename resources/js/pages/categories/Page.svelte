@@ -137,17 +137,11 @@
   }
 
   function searchCategories() {
-    router.get(
-      CategoryController.index().url,
-      { search: search },
-      { preserveState: true },
-    );
+    router.get(CategoryController.index().url, { search: search }, { preserveState: true });
   }
 
   onMount(() => {
-    formDialog = document.getElementById(
-      CATEGORY_FORM_DIALOG_WRAPPER_ID,
-    ) as TailwindDialogElement;
+    formDialog = document.getElementById(CATEGORY_FORM_DIALOG_WRAPPER_ID) as TailwindDialogElement;
 
     deleteDialog = document.getElementById(
       CATEGORY_DELETE_DIALOG_WRAPPER_ID,
@@ -160,10 +154,7 @@
 </svelte:head>
 
 <LayoutMain>
-  <Dialog
-    dialogWrapperId={CATEGORY_FORM_DIALOG_WRAPPER_ID}
-    dialogId={CATEGORY_FORM_DIALOG_ID}
-  >
+  <Dialog dialogWrapperId={CATEGORY_FORM_DIALOG_WRAPPER_ID} dialogId={CATEGORY_FORM_DIALOG_ID}>
     <form onsubmit={preventDefault(submit)}>
       <div class="sm:flex sm:items-start">
         <div class="w-full space-y-4 text-center sm:text-left">
@@ -232,10 +223,7 @@
     </form>
   </Dialog>
 
-  <Dialog
-    dialogWrapperId={CATEGORY_DELETE_DIALOG_WRAPPER_ID}
-    dialogId={CATEGORY_DELETE_DIALOG_ID}
-  >
+  <Dialog dialogWrapperId={CATEGORY_DELETE_DIALOG_WRAPPER_ID} dialogId={CATEGORY_DELETE_DIALOG_ID}>
     <form onsubmit={preventDefault(destroySubmit)}>
       <div class="sm:flex sm:items-start">
         <div
@@ -244,13 +232,10 @@
           <TriangleAlert class="size-6 text-red-600" />
         </div>
         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-          <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">
-            Delete Category
-          </h3>
+          <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">Delete Category</h3>
           <div class="mt-2">
             <p class=" text-gray-500">
-              Are you sure you want to delete the category "<span
-                class="font-medium text-gray-900"
+              Are you sure you want to delete the category "<span class="font-medium text-gray-900"
                 >{categoryToDelete ? categoryToDelete.name : ""}</span
               >"? This action cannot be undone.
             </p>
@@ -279,9 +264,7 @@
   </Dialog>
 
   <main class="flex min-h-[calc(100vh-4rem)] bg-white py-10">
-    <div
-      class="flex w-full grow flex-col justify-between gap-8 px-4 sm:px-6 lg:px-8"
-    >
+    <div class="flex w-full grow flex-col justify-between gap-8 px-4 sm:px-6 lg:px-8">
       <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
           <h1 class="text-lg font-semibold text-gray-900">Categories</h1>
@@ -291,8 +274,7 @@
         <div class="mt-4 flex gap-4 sm:mt-0 sm:ml-16 sm:flex-none">
           <form onsubmit={preventDefault(searchCategories)}>
             <div>
-              <label for="search-category" class="hidden">Search Category</label
-              >
+              <label for="search-category" class="hidden">Search Category</label>
               <div class="grid grid-cols-1">
                 <input
                   id="search-category"
@@ -321,9 +303,7 @@
 
       <div class="flow-root grow">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div
-            class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
-          >
+          <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
             <table class="min-w-full divide-y divide-gray-300">
               <thead>
                 <tr>
@@ -333,22 +313,13 @@
                   >
                     ID
                   </th>
-                  <th
-                    scope="col"
-                    class="px-3 py-3.5 text-left font-semibold text-gray-900"
-                  >
+                  <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
                     Icon
                   </th>
-                  <th
-                    scope="col"
-                    class="px-3 py-3.5 text-left font-semibold text-gray-900"
-                  >
+                  <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
                     Name
                   </th>
-                  <th
-                    scope="col"
-                    class="px-3 py-3.5 text-left font-semibold text-gray-900"
-                  >
+                  <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
                     Description
                   </th>
                   <th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-0">
@@ -374,14 +345,10 @@
                         <span class="text-gray-300">—</span>
                       {/if}
                     </td>
-                    <td
-                      class="max-w-16 truncate px-3 py-4 whitespace-nowrap text-gray-900"
-                    >
+                    <td class="max-w-16 truncate px-3 py-4 whitespace-nowrap text-gray-900">
                       {category.name}
                     </td>
-                    <td
-                      class="max-w-xs truncate px-3 py-4 whitespace-nowrap text-gray-500"
-                    >
+                    <td class="max-w-xs truncate px-3 py-4 whitespace-nowrap text-gray-500">
                       {category.description ?? ""}
                     </td>
                     <td
@@ -395,10 +362,9 @@
                       </button>
                       <button
                         id={`delete-category-${category.id}`}
-                        onclick={() =>
-                          openDeleteDialog(category.id, category.name)}
+                        onclick={() => openDeleteDialog(category.id, category.name)}
                         disabled={category.is_default}
-                        class="cursor-pointer text-red-600 hover:text-red-900 disabled:opacity-50 disabled:cursor-not-allowed"
+                        class="cursor-pointer text-red-600 hover:text-red-900 disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         Delete
                       </button>
