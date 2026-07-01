@@ -17,6 +17,7 @@
     name: string;
     icon: string | null;
     description: string | null;
+    is_default: boolean;
   }
 
   interface Props {
@@ -44,6 +45,7 @@
   const CATEGORY_DELETE_DIALOG_ID = "category-delete-dialog";
 
   let { title, categories }: Props = $props();
+
   let formDialog: TailwindDialogElement;
   let categoryToEdit: {
     id: number;
@@ -289,7 +291,8 @@
         <div class="mt-4 flex gap-4 sm:mt-0 sm:ml-16 sm:flex-none">
           <form onsubmit={preventDefault(searchCategories)}>
             <div>
-              <label for="search-category" class="hidden">Search Category</label>
+              <label for="search-category" class="hidden">Search Category</label
+              >
               <div class="grid grid-cols-1">
                 <input
                   id="search-category"
@@ -394,7 +397,8 @@
                         id={`delete-category-${category.id}`}
                         onclick={() =>
                           openDeleteDialog(category.id, category.name)}
-                        class="cursor-pointer text-red-600 hover:text-red-900"
+                        disabled={category.is_default}
+                        class="cursor-pointer text-red-600 hover:text-red-900 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Delete
                       </button>
