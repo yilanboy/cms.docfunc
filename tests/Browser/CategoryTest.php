@@ -2,6 +2,30 @@
 
 use App\Models\Category;
 
+test('the delete button will be disabled if the category is default', function () {
+    loginAsUser();
+
+    $category = Category::factory()->create([
+        'is_default' => true,
+    ]);
+
+    $page = visit('/categories');
+
+    $page->assertAttribute("#delete-category-$category->id", 'disabled', '');
+});
+
+test('the delete button will be enabled on not default category', function () {
+    loginAsUser();
+
+    $category = Category::factory()->create([
+        'is_default' => false,
+    ]);
+
+    $page = visit('/categories');
+
+    $page->assertAttributeMissing("#delete-category-$category->id", 'disabled', '');
+});
+
 it('can show add category modal', function () {
     loginAsUser();
 
@@ -28,25 +52,6 @@ it('can add category', function () {
 
     $this->assertDatabaseHas('categories', [
         'name' => 'New Category',
-    ]);
-});
-
-it('cannot delete default category', function () {
-    loginAsUser();
-
-    $category = Category::factory()->create([
-        'is_default' => true,
-    ]);
-
-    $page = visit('/categories');
-
-    $page->click("#delete-category-$category->id");
-    $page->click('#delete-category-confirmation');
-
-    $page->assertSee('Default category cannot be deleted.');
-    $this->assertDatabaseHas('categories', [
-        'id'         => $category->id,
-        'is_default' => true,
     ]);
 });
 

@@ -2,6 +2,7 @@
 
 use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Inertia\Support\SessionKey;
 
 uses(RefreshDatabase::class);
 
@@ -104,6 +105,9 @@ describe('category feature', function () {
 
         // Assert
         $response->assertRedirect();
+        $response->assertSessionHas(SessionKey::FLASH_DATA, function (array $flash) {
+            return $flash['toast']['message'] === 'Default category cannot be deleted.';
+        });
         $this->assertDatabaseHas('categories', [
             'id'         => $category->id,
             'is_default' => true,
