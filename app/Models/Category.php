@@ -14,4 +14,11 @@ class Category extends Model
     public $timestamps = false;
 
     protected $fillable = ['name', 'icon', 'description'];
+
+    protected function casts(): array
+    {
+        return [
+            'is_default' => 'boolean',
+        ];
+    }
 }
