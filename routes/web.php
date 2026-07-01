@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Blog\SettingController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\RootController;
@@ -21,6 +22,7 @@ Route::middleware([InertiaAuthenticateMiddleware::class, 'verified'])->group(fun
 
     Route::resource('links', LinkController::class)->only(['index', 'store', 'update', 'destroy']);
     Route::resource('tags', TagController::class)->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('categories', CategoryController::class)->only(['index', 'store', 'update', 'destroy']);
 
     Route::prefix('settings')->name('settings.')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])
