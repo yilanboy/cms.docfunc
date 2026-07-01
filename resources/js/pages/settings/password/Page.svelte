@@ -66,10 +66,7 @@
           <div class="sm:w-full sm:max-w-sm">
             <form class="space-y-6" onsubmit={submit}>
               <div>
-                <label
-                  for="current_password"
-                  class="block text-base font-medium text-gray-900"
-                >
+                <label for="current_password" class="block text-base font-medium text-gray-900">
                   Current password
                 </label>
                 <div class="mt-2">
@@ -90,10 +87,7 @@
               {/if}
 
               <div>
-                <label
-                  for="password"
-                  class="block text-base font-medium text-gray-900"
-                >
+                <label for="password" class="block text-base font-medium text-gray-900">
                   New password
                 </label>
                 <div class="mt-2">
@@ -133,10 +127,7 @@
               </div>
 
               <div>
-                <SubmitButton
-                  label="Save password"
-                  processing={form.processing}
-                />
+                <SubmitButton label="Save password" processing={form.processing} />
               </div>
             </form>
           </div>

@@ -111,21 +111,13 @@
   }
 
   function searchTags() {
-    router.get(
-      TagController.index().url,
-      { search: search },
-      { preserveState: true },
-    );
+    router.get(TagController.index().url, { search: search }, { preserveState: true });
   }
 
   onMount(() => {
-    formDialog = document.getElementById(
-      TAG_FORM_DIALOG_WRAPPER_ID,
-    ) as TailwindDialogElement;
+    formDialog = document.getElementById(TAG_FORM_DIALOG_WRAPPER_ID) as TailwindDialogElement;
 
-    deleteDialog = document.getElementById(
-      TAG_DELETE_DIALOG_WRAPPER_ID,
-    ) as TailwindDialogElement;
+    deleteDialog = document.getElementById(TAG_DELETE_DIALOG_WRAPPER_ID) as TailwindDialogElement;
   });
 </script>
 
@@ -134,10 +126,7 @@
 </svelte:head>
 
 <LayoutMain>
-  <Dialog
-    dialogWrapperId={TAG_FORM_DIALOG_WRAPPER_ID}
-    dialogId={TAG_FORM_DIALOG_ID}
-  >
+  <Dialog dialogWrapperId={TAG_FORM_DIALOG_WRAPPER_ID} dialogId={TAG_FORM_DIALOG_ID}>
     <form onsubmit={preventDefault(submit)}>
       <div class="sm:flex sm:items-start">
         <div class="w-full text-center sm:text-left">
@@ -174,10 +163,7 @@
     </form>
   </Dialog>
 
-  <Dialog
-    dialogWrapperId={TAG_DELETE_DIALOG_WRAPPER_ID}
-    dialogId={TAG_DELETE_DIALOG_ID}
-  >
+  <Dialog dialogWrapperId={TAG_DELETE_DIALOG_WRAPPER_ID} dialogId={TAG_DELETE_DIALOG_ID}>
     <form onsubmit={preventDefault(destroySubmit)}>
       <div class="sm:flex sm:items-start">
         <div
@@ -186,13 +172,10 @@
           <TriangleAlert class="size-6 text-red-600" />
         </div>
         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-          <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">
-            Delete Tag
-          </h3>
+          <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">Delete Tag</h3>
           <div class="mt-2">
             <p class=" text-gray-500">
-              Are you sure you want to delete the tag "<span
-                class="font-medium text-gray-900"
+              Are you sure you want to delete the tag "<span class="font-medium text-gray-900"
                 >{tagToDelete ? tagToDelete.name : ""}</span
               >"? This action cannot be undone.
             </p>
@@ -221,9 +204,7 @@
   </Dialog>
 
   <main class="flex min-h-[calc(100vh-4rem)] bg-white py-10">
-    <div
-      class="flex w-full grow flex-col justify-between gap-8 px-4 sm:px-6 lg:px-8"
-    >
+    <div class="flex w-full grow flex-col justify-between gap-8 px-4 sm:px-6 lg:px-8">
       <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
           <h1 class="text-lg font-semibold text-gray-900">Tags</h1>
@@ -262,9 +243,7 @@
 
       <div class="flow-root grow">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div
-            class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
-          >
+          <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
             <table class="min-w-full divide-y divide-gray-300">
               <thead>
                 <tr>
@@ -274,10 +253,7 @@
                   >
                     ID
                   </th>
-                  <th
-                    scope="col"
-                    class="px-3 py-3.5 text-left font-semibold text-gray-900"
-                  >
+                  <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
                     Name
                   </th>
                   <th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-0">
@@ -293,9 +269,7 @@
                     >
                       {tag.id}
                     </td>
-                    <td
-                      class="max-w-16 truncate px-3 py-4 whitespace-nowrap text-gray-500"
-                    >
+                    <td class="max-w-16 truncate px-3 py-4 whitespace-nowrap text-gray-500">
                       {tag.name}
                     </td>
                     <td

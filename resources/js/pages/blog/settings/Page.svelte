@@ -27,9 +27,7 @@
       <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
           <h1 class="text-lg font-semibold text-gray-900">Blog Settings</h1>
-          <p class="mt-2 text-gray-700">
-            Manage your blog configuration and preferences.
-          </p>
+          <p class="mt-2 text-gray-700">Manage your blog configuration and preferences.</p>
         </div>
       </div>
 
@@ -37,9 +35,7 @@
         {#snippet children({ errors, processing }: SlotFormProps)}
           <div class="mt-8 flow-root">
             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div
-                class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
-              >
+              <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                 <table class="min-w-full divide-y divide-gray-300">
                   <thead>
                     <tr>
@@ -55,10 +51,7 @@
                       >
                         Description
                       </th>
-                      <th
-                        scope="col"
-                        class="px-3 py-3.5 text-left font-semibold text-gray-900"
-                      >
+                      <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
                         Value
                       </th>
                     </tr>
@@ -70,17 +63,11 @@
                       >
                         Allow Registration
                       </td>
-                      <td
-                        class="hidden px-3 py-4 text-gray-500 sm:table-cell"
-                      >
+                      <td class="hidden px-3 py-4 text-gray-500 sm:table-cell">
                         Allow guests to register an account on the blog.
                       </td>
                       <td class="px-3 py-4 whitespace-nowrap">
-                        <input
-                          type="hidden"
-                          name="allow_register"
-                          value="0"
-                        />
+                        <input type="hidden" name="allow_register" value="0" />
                         <CheckboxWithLabel
                           label="Enabled"
                           name="allow_register"

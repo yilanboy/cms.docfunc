@@ -28,8 +28,7 @@
 
   let { title, links }: Props = $props();
   let formDialog: TailwindDialogElement;
-  let linkToEdit: { id: number; title: string; url: string } | null =
-    $state(null);
+  let linkToEdit: { id: number; title: string; url: string } | null = $state(null);
   let deleteDialog: TailwindDialogElement;
   let linkToDelete: { id: number; title: string } | null = $state(null);
 
@@ -102,13 +101,9 @@
   }
 
   onMount(() => {
-    formDialog = document.getElementById(
-      LINK_FORM_DIALOG_WRAPPER_ID,
-    ) as TailwindDialogElement;
+    formDialog = document.getElementById(LINK_FORM_DIALOG_WRAPPER_ID) as TailwindDialogElement;
 
-    deleteDialog = document.getElementById(
-      LINK_DELETE_DIALOG_WRAPPER_ID,
-    ) as TailwindDialogElement;
+    deleteDialog = document.getElementById(LINK_DELETE_DIALOG_WRAPPER_ID) as TailwindDialogElement;
   });
 </script>
 
@@ -117,16 +112,11 @@
 </svelte:head>
 
 <LayoutMain>
-  <Dialog
-    dialogWrapperId={LINK_FORM_DIALOG_WRAPPER_ID}
-    dialogId={LINK_FORM_DIALOG_ID}
-  >
+  <Dialog dialogWrapperId={LINK_FORM_DIALOG_WRAPPER_ID} dialogId={LINK_FORM_DIALOG_ID}>
     <form onsubmit={preventDefault(submit)}>
       <div class="flex flex-col items-start gap-2">
         <div class="w-full text-center sm:text-left">
-          <label for="title" class="block font-medium text-gray-900">
-            Title
-          </label>
+          <label for="title" class="block font-medium text-gray-900"> Title </label>
           <div class="mt-2">
             <input
               id="title"
@@ -177,10 +167,7 @@
     </form>
   </Dialog>
 
-  <Dialog
-    dialogWrapperId={LINK_DELETE_DIALOG_WRAPPER_ID}
-    dialogId={LINK_DELETE_DIALOG_ID}
-  >
+  <Dialog dialogWrapperId={LINK_DELETE_DIALOG_WRAPPER_ID} dialogId={LINK_DELETE_DIALOG_ID}>
     <form onsubmit={preventDefault(destroySubmit)}>
       <div class="sm:flex sm:items-start">
         <div
@@ -189,13 +176,10 @@
           <TriangleAlert class="size-6 text-red-600" />
         </div>
         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-          <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">
-            Delete Link
-          </h3>
+          <h3 id="dialog-title" class="text-lg font-semibold text-gray-900">Delete Link</h3>
           <div class="mt-2">
             <p class=" text-gray-500">
-              Are you sure you want to delete the link "<span
-                class="font-medium text-gray-900"
+              Are you sure you want to delete the link "<span class="font-medium text-gray-900"
                 >{linkToDelete ? linkToDelete.title : ""}</span
               >"? This action cannot be undone.
             </p>
@@ -243,9 +227,7 @@
       </div>
       <div class="mt-8 flow-root">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div
-            class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
-          >
+          <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
             <table class="min-w-full divide-y divide-gray-300">
               <thead>
                 <tr>
@@ -255,16 +237,10 @@
                   >
                     ID
                   </th>
-                  <th
-                    scope="col"
-                    class="px-3 py-3.5 text-left font-semibold text-gray-900"
-                  >
+                  <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
                     Title
                   </th>
-                  <th
-                    scope="col"
-                    class="px-3 py-3.5 text-left font-semibold text-gray-900"
-                  >
+                  <th scope="col" class="px-3 py-3.5 text-left font-semibold text-gray-900">
                     URL
                   </th>
                   <th scope="col" class="relative py-3.5 pr-4 pl-3 sm:pr-0">
@@ -280,22 +256,17 @@
                     >
                       {link.id}
                     </td>
-                    <td
-                      class="max-w-16 truncate px-3 py-4 whitespace-nowrap text-gray-500"
-                    >
+                    <td class="max-w-16 truncate px-3 py-4 whitespace-nowrap text-gray-500">
                       {link.title}
                     </td>
-                    <td
-                      class="max-w-16 truncate px-3 py-4 whitespace-nowrap text-gray-500"
-                    >
+                    <td class="max-w-16 truncate px-3 py-4 whitespace-nowrap text-gray-500">
                       {link.url}
                     </td>
                     <td
                       class="relative flex justify-end gap-2 py-4 pr-4 pl-3 font-medium whitespace-nowrap sm:pr-0"
                     >
                       <button
-                        onclick={() =>
-                          openEditDialog(link.id, link.title, link.url)}
+                        onclick={() => openEditDialog(link.id, link.title, link.url)}
                         class="cursor-pointer text-blue-600 hover:text-blue-900"
                       >
                         Edit

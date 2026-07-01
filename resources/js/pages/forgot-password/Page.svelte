@@ -36,9 +36,7 @@
   </header>
 
   <main class="flex w-full grow flex-col justify-center p-6">
-    <h2
-      class="-mt-12 text-center text-2xl/9 font-bold tracking-tight text-gray-900"
-    >
+    <h2 class="-mt-12 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
       Forgot Your Password?
     </h2>
 
@@ -66,11 +64,7 @@
         {/if}
 
         <div>
-          <SubmitButton
-            label="Send Reset Link"
-            className="w-full"
-            processing={form.processing}
-          />
+          <SubmitButton label="Send Reset Link" className="w-full" processing={form.processing} />
         </div>
       </form>
     </div>

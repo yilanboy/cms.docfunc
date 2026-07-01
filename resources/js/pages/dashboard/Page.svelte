@@ -16,8 +16,7 @@
     toasts.add({
       type: "success",
       message: "Success!",
-      description:
-        "That's one small step for a man, one giant leap for mankind.",
+      description: "That's one small step for a man, one giant leap for mankind.",
     });
   }
 
@@ -52,21 +51,15 @@
 
 <LayoutMain>
   <main class="py-10">
-    <div
-      class="grid w-full grid-cols-1 gap-6 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8"
-    >
+    <div class="grid w-full grid-cols-1 gap-6 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
       <!-- Links Card -->
       <div
         class="group overflow-hidden rounded-2xl border border-blue-100 bg-linear-to-br from-blue-50 to-blue-100 p-6 shadow-sm transition-all duration-300 hover:scale-105 hover:shadow-lg"
       >
         <div class="flex items-center justify-between">
           <div>
-            <div class="mb-1 text-sm font-medium text-blue-600">
-              Total Links
-            </div>
-            <div
-              class="text-3xl font-bold text-blue-900 transition-colors duration-300"
-            >
+            <div class="mb-1 text-sm font-medium text-blue-600">Total Links</div>
+            <div class="text-3xl font-bold text-blue-900 transition-colors duration-300">
               {linkCount}
             </div>
           </div>
@@ -84,12 +77,8 @@
       >
         <div class="flex items-center justify-between">
           <div>
-            <div class="mb-1 text-sm font-medium text-emerald-600">
-              Total Tags
-            </div>
-            <div
-              class="text-3xl font-bold text-emerald-900 transition-colors duration-300"
-            >
+            <div class="mb-1 text-sm font-medium text-emerald-600">Total Tags</div>
+            <div class="text-3xl font-bold text-emerald-900 transition-colors duration-300">
               {tagCount}
             </div>
           </div>
@@ -107,12 +96,8 @@
       >
         <div class="flex items-center justify-between">
           <div>
-            <div class="mb-1 text-sm font-medium text-amber-600">
-              Total Posts
-            </div>
-            <div
-              class="text-3xl font-bold text-amber-900 transition-colors duration-300"
-            >
+            <div class="mb-1 text-sm font-medium text-amber-600">Total Posts</div>
+            <div class="text-3xl font-bold text-amber-900 transition-colors duration-300">
               {postCount}
             </div>
           </div>

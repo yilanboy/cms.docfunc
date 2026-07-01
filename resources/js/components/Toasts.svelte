@@ -1,11 +1,5 @@
 <script lang="ts">
-  import {
-    CircleCheck,
-    TriangleAlert,
-    CircleAlert,
-    Info,
-    X,
-  } from "@lucide/svelte/icons";
+  import { CircleCheck, TriangleAlert, CircleAlert, Info, X } from "@lucide/svelte/icons";
   import { toasts, type ToastProps } from "@/shared/toasts.svelte";
   import { router } from "@inertiajs/svelte";
   import { onMount } from "svelte";

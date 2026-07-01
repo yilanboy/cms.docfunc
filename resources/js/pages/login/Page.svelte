@@ -10,13 +10,9 @@
   import SubmitButton from "@/components/forms/SubmitButton.svelte";
   import FingerprintPattern from "@/components/icons/FingerprintPattern.svelte";
   import { useForm } from "@inertiajs/svelte";
-  import {
-    browserSupportsWebAuthn,
-    startAuthentication,
-  } from "@simplewebauthn/browser";
+  import { browserSupportsWebAuthn, startAuthentication } from "@simplewebauthn/browser";
   import { toasts } from "@/shared/toasts.svelte";
   import GeneratePasskeyAuthenticationOptionsController from "@/actions/App/Http/Controllers/Api/GeneratePasskeyAuthenticationOptionsController";
-  import Toasts from "@/components/Toasts.svelte";
   import LayoutGuest from "@/components/layouts/guest/LayoutGuest.svelte";
 
   interface SlotFormProps {
@@ -38,9 +34,7 @@
       return;
     }
 
-    const response = await fetch(
-      GeneratePasskeyAuthenticationOptionsController().url,
-    );
+    const response = await fetch(GeneratePasskeyAuthenticationOptionsController().url);
     const optionsJSON = await response.json();
 
     try {
@@ -80,9 +74,7 @@
   </header>
 
   <main class="flex w-full grow flex-col justify-center p-6">
-    <h2
-      class="-mt-12 text-center text-2xl font-bold tracking-tight text-gray-900"
-    >
+    <h2 class="-mt-12 text-center text-2xl font-bold tracking-tight text-gray-900">
       {page.props.app.name}
     </h2>
 
@@ -116,11 +108,7 @@
           {/if}
 
           <div class="flex items-center justify-between">
-            <CheckboxWithLabel
-              label="Remember me"
-              name="remember"
-              id="remember"
-            />
+            <CheckboxWithLabel label="Remember me" name="remember" id="remember" />
 
             <div class="text-base">
               <a
