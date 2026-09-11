@@ -1,4 +1,4 @@
-import { type ToastProps } from "@/shared/toasts.svelte";
+import { type ToastProps } from '@/shared/toasts.svelte';
 
 export interface Auth {
     user: User;
@@ -18,7 +18,7 @@ export interface Asset {
     url: string;
 }
 
-declare module "@inertiajs/core" {
+declare module '@inertiajs/core' {
     export interface InertiaConfig {
         sharedPageProps: {
             app: App;
@@ -26,13 +26,13 @@ declare module "@inertiajs/core" {
             asset: Asset;
         };
         flashDataType: {
-            toast?: Omit<ToastProps, "id">;
+            toast?: Omit<ToastProps, 'id'>;
         };
     }
 }
 
-declare module "svelte/elements" {
+declare module 'svelte/elements' {
     export interface DOMAttributes {
-        "onset-toasts-layout"?: (event: CustomEvent) => void;
+        'onset-toasts-layout'?: (event: CustomEvent) => void;
     }
 }

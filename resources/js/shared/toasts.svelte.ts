@@ -1,5 +1,5 @@
 // Toast notification system state management
-export type ToastType = "success" | "info" | "warning" | "danger";
+export type ToastType = 'success' | 'info' | 'warning' | 'danger';
 
 export interface ToastProps {
     id: string;
@@ -18,7 +18,7 @@ class Toasts {
         return this.items.slice(0, 3);
     }
 
-    add(props: Omit<ToastProps, "id">) {
+    add(props: Omit<ToastProps, 'id'>) {
         const id = crypto.randomUUID();
         const toast = { id, ...props };
 

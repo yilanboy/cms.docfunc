@@ -1,30 +1,30 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
-  import Sidebar from "@/components/layouts/main/partials/Sidebar.svelte";
-  import Header from "@/components/layouts/main/partials/Header.svelte";
-  import Toasts from "@/components/Toasts.svelte";
-  import { sidebar } from "@/shared/sidebar.svelte.js";
+    import type { Snippet } from 'svelte';
+    import Sidebar from '@/components/layouts/main/partials/Sidebar.svelte';
+    import Header from '@/components/layouts/main/partials/Header.svelte';
+    import Toasts from '@/components/Toasts.svelte';
+    import { sidebar } from '@/shared/sidebar.svelte.js';
 
-  interface Props {
-    children: Snippet;
-  }
+    interface Props {
+        children: Snippet;
+    }
 
-  let { children }: Props = $props();
+    let { children }: Props = $props();
 </script>
 
-<div class="relative min-h-screen w-full font-source-sans-3">
-  <Header />
+<div class="font-source-sans-3 relative min-h-screen w-full">
+    <Header />
 
-  <Sidebar />
+    <Sidebar />
 
-  <div
-    class={{
-      "lg:pl-72": sidebar.isOpen,
-      "text-base transition-all duration-300 ease-in-out": true,
-    }}
-  >
-    {@render children?.()}
-  </div>
+    <div
+        class={{
+            'lg:pl-72': sidebar.isOpen,
+            'text-base transition-all duration-300 ease-in-out': true,
+        }}
+    >
+        {@render children?.()}
+    </div>
 
-  <Toasts />
+    <Toasts />
 </div>

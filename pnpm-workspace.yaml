@@ -1,2 +1,5 @@
-allowBuilds:
-  esbuild: false
+packages:
+    - '.'
+
+publicHoistPattern:
+    - '@inertiajs/core'

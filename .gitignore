@@ -26,6 +26,12 @@ resources/js/actions
 resources/js/wayfinder
 resources/js/routes
 storage/debugbar
+
+# AI
 /.agents
 /.junie
 /.ai
+/.claude
+.mcp.json
+boost.json
+CLAUDE.md

@@ -1,31 +1,31 @@
 <script lang="ts">
-  import { Check } from "@lucide/svelte/icons";
-  import type { HTMLInputAttributes } from "svelte/elements";
+    import { Check } from '@lucide/svelte/icons';
+    import type { HTMLInputAttributes } from 'svelte/elements';
 
-  interface Props extends HTMLInputAttributes {
-    label: string;
-    id: string;
-  }
+    interface Props extends HTMLInputAttributes {
+        label: string;
+        id: string;
+    }
 
-  let { label, id, ...rest }: Props = $props();
+    let { label, id, ...rest }: Props = $props();
 </script>
 
 <div class="flex gap-3">
-  <div class="flex h-6 shrink-0 items-center">
-    <div class="group grid size-5 grid-cols-1">
-      <input
-        {id}
-        {...rest}
-        type="checkbox"
-        class="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-blue-600 checked:bg-blue-600 indeterminate:border-blue-600 indeterminate:bg-blue-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
-      />
+    <div class="flex h-6 shrink-0 items-center">
+        <div class="group grid size-5 grid-cols-1">
+            <input
+                {id}
+                {...rest}
+                type="checkbox"
+                class="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-blue-600 checked:bg-blue-600 indeterminate:border-blue-600 indeterminate:bg-blue-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
+            />
 
-      <Check
-        class="pointer-events-none col-start-1 row-start-1 size-4 self-center justify-self-center text-white group-has-disabled:stroke-gray-950/25"
-      />
+            <Check
+                class="pointer-events-none col-start-1 row-start-1 size-4 self-center justify-self-center text-white group-has-disabled:stroke-gray-950/25"
+            />
+        </div>
     </div>
-  </div>
-  <label for={id} class="block text-base text-gray-900">
-    {label}
-  </label>
+    <label for={id} class="block text-base text-gray-900">
+        {label}
+    </label>
 </div>

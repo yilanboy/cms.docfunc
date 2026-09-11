@@ -7,6 +7,7 @@ namespace App\Providers;
 use App\Services\Serializer;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\DevCommands;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\ServiceProvider;
@@ -20,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        DevCommands::except('server');
+
         $this->app->bind(Serializer::class, function () {
             return Serializer::make();
         });

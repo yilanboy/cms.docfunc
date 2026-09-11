@@ -1,138 +1,154 @@
 <script lang="ts">
-  import LayoutMain from "@/components/layouts/main/LayoutMain.svelte";
-  import Navigation from "@/pages/settings/partials/Navigation.svelte";
-  import PasswordController from "@/actions/App/Http/Controllers/Settings/PasswordController";
-  import { useForm } from "@inertiajs/svelte";
-  import SubmitButton from "@/components/forms/SubmitButton.svelte";
+    import LayoutMain from '@/components/layouts/main/LayoutMain.svelte';
+    import Navigation from '@/pages/settings/partials/Navigation.svelte';
+    import PasswordController from '@/actions/App/Http/Controllers/Settings/PasswordController';
+    import { useForm } from '@inertiajs/svelte';
+    import SubmitButton from '@/components/forms/SubmitButton.svelte';
 
-  interface Props {
-    title: string;
-  }
+    interface Props {
+        title: string;
+    }
 
-  let { title }: Props = $props();
+    let { title }: Props = $props();
 
-  let currentPasswordInput: HTMLInputElement;
-  let passwordInput: HTMLInputElement;
+    // oxlint-disable-next-line no-unassigned-vars
+    let currentPasswordInput: HTMLInputElement;
+    // oxlint-disable-next-line no-unassigned-vars
+    let passwordInput: HTMLInputElement;
 
-  const form = useForm({
-    current_password: "",
-    password: "",
-    password_confirmation: "",
-  });
-
-  function submit(event: SubmitEvent) {
-    event.preventDefault();
-
-    form.submit(PasswordController.update(), {
-      preserveScroll: true,
-      onSuccess: () => form.reset(),
-      onError: (errors: any) => {
-        if (errors.password) {
-          form.reset("password", "password_confirmation");
-
-          passwordInput.focus();
-        }
-
-        if (errors.current_password) {
-          form.reset("current_password");
-
-          currentPasswordInput.focus();
-        }
-      },
+    const form = useForm({
+        current_password: '',
+        password: '',
+        password_confirmation: '',
     });
-  }
+
+    function submit(event: SubmitEvent) {
+        event.preventDefault();
+
+        form.submit(PasswordController.update(), {
+            preserveScroll: true,
+            onSuccess: () => form.reset(),
+            onError: (errors: any) => {
+                if (errors.password) {
+                    form.reset('password', 'password_confirmation');
+
+                    passwordInput.focus();
+                }
+
+                if (errors.current_password) {
+                    form.reset('current_password');
+
+                    currentPasswordInput.focus();
+                }
+            },
+        });
+    }
 </script>
 
 <svelte:head>
-  <title>{title}</title>
+    <title>{title}</title>
 </svelte:head>
 
 <LayoutMain>
-  <main class="grow py-10">
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-4 gap-6">
-        <div class="col-span-4">
-          <h2 class="text-2xl font-semibold">Update password</h2>
-          <p class="text-zinc-500">
-            Ensure your account is using a long, random password to stay secure
-          </p>
-        </div>
-
-        <div class="col-span-4 lg:col-span-1">
-          <Navigation />
-        </div>
-
-        <div class="col-span-4 lg:col-span-3">
-          <div class="sm:w-full sm:max-w-sm">
-            <form class="space-y-6" onsubmit={submit}>
-              <div>
-                <label for="current_password" class="block text-base font-medium text-gray-900">
-                  Current password
-                </label>
-                <div class="mt-2">
-                  <input
-                    bind:this={currentPasswordInput}
-                    bind:value={form.current_password}
-                    type="password"
-                    id="current_password"
-                    autocomplete="current-password"
-                    required
-                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
-                  />
+    <main class="grow py-10">
+        <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-4 gap-6">
+                <div class="col-span-4">
+                    <h2 class="text-2xl font-semibold">Update password</h2>
+                    <p class="text-zinc-500">
+                        Ensure your account is using a long, random password to
+                        stay secure
+                    </p>
                 </div>
-              </div>
 
-              {#if form.errors.current_password}
-                <div class="text-red-500">{form.errors.current_password}</div>
-              {/if}
-
-              <div>
-                <label for="password" class="block text-base font-medium text-gray-900">
-                  New password
-                </label>
-                <div class="mt-2">
-                  <input
-                    bind:this={passwordInput}
-                    bind:value={form.password}
-                    type="password"
-                    id="password"
-                    autocomplete="new-password"
-                    required
-                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
-                  />
+                <div class="col-span-4 lg:col-span-1">
+                    <Navigation />
                 </div>
-              </div>
 
-              {#if form.errors.password}
-                <div class="text-red-500">{form.errors.password}</div>
-              {/if}
+                <div class="col-span-4 lg:col-span-3">
+                    <div class="sm:w-full sm:max-w-sm">
+                        <form class="space-y-6" onsubmit={submit}>
+                            <div>
+                                <label
+                                    for="current_password"
+                                    class="block text-base font-medium text-gray-900"
+                                >
+                                    Current password
+                                </label>
+                                <div class="mt-2">
+                                    <input
+                                        bind:this={currentPasswordInput}
+                                        bind:value={form.current_password}
+                                        type="password"
+                                        id="current_password"
+                                        autocomplete="current-password"
+                                        required
+                                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
+                                    />
+                                </div>
+                            </div>
 
-              <div>
-                <label
-                  for="password_confirmation"
-                  class="block text-base font-medium text-gray-900"
-                >
-                  Confirm password
-                </label>
-                <div class="mt-2">
-                  <input
-                    bind:value={form.password_confirmation}
-                    type="password"
-                    id="password_confirmation"
-                    autocomplete="new-password"
-                    required
-                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
-                  />
+                            {#if form.errors.current_password}
+                                <div class="text-red-500">
+                                    {form.errors.current_password}
+                                </div>
+                            {/if}
+
+                            <div>
+                                <label
+                                    for="password"
+                                    class="block text-base font-medium text-gray-900"
+                                >
+                                    New password
+                                </label>
+                                <div class="mt-2">
+                                    <input
+                                        bind:this={passwordInput}
+                                        bind:value={form.password}
+                                        type="password"
+                                        id="password"
+                                        autocomplete="new-password"
+                                        required
+                                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
+                                    />
+                                </div>
+                            </div>
+
+                            {#if form.errors.password}
+                                <div class="text-red-500">
+                                    {form.errors.password}
+                                </div>
+                            {/if}
+
+                            <div>
+                                <label
+                                    for="password_confirmation"
+                                    class="block text-base font-medium text-gray-900"
+                                >
+                                    Confirm password
+                                </label>
+                                <div class="mt-2">
+                                    <input
+                                        bind:value={form.password_confirmation}
+                                        type="password"
+                                        id="password_confirmation"
+                                        autocomplete="new-password"
+                                        required
+                                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600"
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <SubmitButton
+                                    label="Save password"
+                                    processing={form.processing}
+                                />
+                            </div>
+                        </form>
+                    </div>
                 </div>
-              </div>
-
-              <div>
-                <SubmitButton label="Save password" processing={form.processing} />
-              </div>
-            </form>
-          </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </main>
+    </main>
 </LayoutMain>
