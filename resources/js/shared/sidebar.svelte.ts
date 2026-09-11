@@ -15,12 +15,13 @@ class Sidebar {
     isOpen: boolean | null = $state(null);
 
     toggle(): void {
-        this.isOpen = !this.isOpen;
+        const current = this.isOpen ?? isDesktop.current;
+        this.isOpen = !current;
     }
 
     /** Back to the viewport default. */
     reset(): void {
-        this.isOpen = isDesktop.current;
+        this.isOpen = null;
     }
 }
 

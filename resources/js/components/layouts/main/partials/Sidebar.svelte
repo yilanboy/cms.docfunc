@@ -2,7 +2,7 @@
     import { inertia, page } from '@inertiajs/svelte';
     import { Home, Link, Tag, FolderTree, Settings, X } from '@lucide/svelte';
     import { fade } from 'svelte/transition';
-    import { onMount, untrack } from 'svelte';
+    import { untrack } from 'svelte';
     import DashboardController from '@/actions/App/Http/Controllers/DashboardController';
     import LinkController from '@/actions/App/Http/Controllers/LinkController';
     import TagController from '@/actions/App/Http/Controllers/TagController';
@@ -11,6 +11,7 @@
     import { isDesktop, sidebar } from '@/shared/sidebar.svelte.js';
 
     let activePath = $derived(page.url.split('?')[0]);
+    let previousDesktop = isDesktop.current;
 
     // Auto-close sidebar on mobile when route path changes (closed is the mobile default)
     $effect(() => {
@@ -26,13 +27,11 @@
     // Snap back to the viewport default when the breakpoint is crossed, so a
     // manual open/close on one side of the breakpoint doesn't leak to the other.
     $effect(() => {
-        if (isDesktop.current !== undefined) {
+        const currentDesktop = isDesktop.current;
+        if (currentDesktop !== previousDesktop) {
+            previousDesktop = currentDesktop;
             untrack(() => sidebar.reset());
         }
-    });
-
-    onMount(() => {
-        sidebar.isOpen = isDesktop.current;
     });
 </script>
 
@@ -53,7 +52,7 @@
   3rem clears the close button that overhangs the right edge. -->
 <aside
     id="sidebar"
-    inert={!sidebar.isOpen}
+    inert={!(sidebar.isOpen ?? isDesktop.current)}
     class={{
         'fixed inset-y-0 top-16 z-40 flex w-72 flex-col transition-transform duration-300': true,
         '-translate-x-[calc(100%+3rem)] lg:translate-x-0':
