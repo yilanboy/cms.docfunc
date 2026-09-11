@@ -11,13 +11,11 @@
     import { inertia, page } from '@inertiajs/svelte';
     import AuthenticatedSessionController from '@/actions/App/Http/Controllers/Auth/AuthenticatedSessionController';
     import ProfileController from '@/actions/App/Http/Controllers/Settings/ProfileController';
+    import { onMount } from 'svelte';
     import { sidebar } from '@/shared/sidebar.svelte.js';
 
+    let mounted = $state(false);
     let dropdownIsOpen = $state(false);
-
-    function toggleSidebar() {
-        sidebar.isOpen = !sidebar.isOpen;
-    }
 
     function toggleDropdown() {
         dropdownIsOpen = !dropdownIsOpen;
@@ -26,6 +24,10 @@
     function closeDropdown() {
         dropdownIsOpen = false;
     }
+
+    onMount(() => {
+        mounted = true;
+    });
 
     function scaleFromTopRight(
         node: HTMLElement,
@@ -52,16 +54,20 @@
     >
         <div class="flex items-center gap-x-4 lg:flex-1">
             <button
-                onclick={toggleSidebar}
+                onclick={() => sidebar.toggle()}
                 type="button"
-                class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:bg-gray-100"
+                class="inline-flex size-10 cursor-pointer items-center justify-center rounded-lg text-zinc-500 transition-colors duration-200 hover:bg-zinc-200/50 hover:text-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-200"
+                aria-label="Toggle Sidebar"
             >
                 <span class="sr-only">Toggle Sidebar</span>
 
-                {#if sidebar.isOpen}
-                    <SidebarClose />
+                {#if !mounted}
+                    <SidebarOpen class="size-5 lg:hidden" />
+                    <SidebarClose class="hidden size-5 lg:block" />
+                {:else if sidebar.isOpen}
+                    <SidebarClose class="size-5" />
                 {:else}
-                    <SidebarOpen />
+                    <SidebarOpen class="size-5" />
                 {/if}
             </button>
 
